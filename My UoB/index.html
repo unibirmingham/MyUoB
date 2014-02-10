@@ -5,16 +5,14 @@
     <meta charset="utf-8" />
     <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
     <link href="styles/main.css" rel="stylesheet" />
-
     <script src="cordova.js"></script>
     <script src="kendo/js/jquery.min.js"></script>
     <script src="kendo/js/kendo.mobile.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
-    <script src="scripts/templateLoader.js"></script>
+    <script type="text/javascript" src="Plugins/GAPlugin-master/www/GAPlugin.js"></script>
     <script src="scripts/app.js"></script>
     
 </head>
-<body <!--onload="initialize();"--> onunload="goingAway();">
+<body onload="initialize();" onunload="goingAway();">
     <!--Home-->
     <div id="tabstrip-home" data-role="view" data-title="Home">
         <div class="view-content">
@@ -25,9 +23,14 @@
     </div>
     
     <!--Settings view-->
-    <div id="tabstrip-settings" data-role="view" data-title="Settings">
+    <div id="tabstrip-settings" data-init="settingsInit" data-role="view" data-title="Settings">
         <div class="view-content">
-            
+            <h2 class="settings-title">App Settings</h2>
+        <h3>Privacy settings</h3>
+        <p>This app tracks usage, using Google Analytics so that we can learn from user behaviour and provide a better app in the future. No personal or user identifiable data will be collected, but if you would prefer for the app not to collect such data please select deny below.</p>    
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>Usage tracking <input type="checkbox" id="usage-tracking-switch" data-role="switch" data-change="onTrackingChange" /></li>
+        </ul>
         </div>
     </div>
     
@@ -62,6 +65,20 @@
             </div>
         </div>
     </div>
+    <!-- Layout End -->
+    
+    <script src="scripts/templateLoader.js"></script>
+    <script>
+        //load templates
+        templateLoader.loadExtTemplate("templates/news.tmpl.html");
+    </script>
+    
+    <script>
+            app.application = new kendo.mobile.Application(document.body, { 
+            layout: "tabstrip-layout"
+        });
+
+    </script>
     
 </body>
 </html>

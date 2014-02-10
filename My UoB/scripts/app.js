@@ -1,22 +1,20 @@
 (function (global) {
-    app = global.app = global.app || {};
-
+    
+ var app = global.app = global.app || {};
+ var gaPlugin;
+    
+    })(window);
+                
+function initialize() {
     document.addEventListener("deviceready", onDeviceReady, true);
-
-    app.application = new kendo.mobile.Application(document.body, { layout: "tabstrip-layout"});
     
-    //load templates
-    templateLoader.loadExtTemplate("templates/news.tmpl.html");
+}
    
-    
-})(window);
 
 function onDeviceReady() {
     
-    navigator.splashscreen.hide();
-    $(document.body).height(window.innerHeight);
-    
-    var gaPlugin = window.plugins.gaPlugin;
+ 
+    gaPlugin = window.plugins.gaPlugin;
     log("stored:" + localStorage.getItem('allowUsageTracking'));
                                 
     //if no variable stored locally, create one and set value as undefined
@@ -26,7 +24,7 @@ function onDeviceReady() {
     console.log("AllowUsageTracking: " + localStorage.getItem('allowUsageTracking'));
                             
     if (localStorage.getItem('allowUsageTracking')!="deny") {
-        gaPlugin.init(nativePluginResultHandler, nativePluginErrorHandler, "UA-47250154-1", 5);
+        gaPlugin.init(nativePluginResultHandler, nativePluginErrorHandler, "UA-47250154-2", 5);
         log('gaPlugin initialised');
     }
 
@@ -59,15 +57,35 @@ function goingAway() {
 
 //VIEW Init/Change Events
 
-
-//INFO Screen
+//INFO view
 function infoInit() {
     ScreenButtonClicked("info");
     log("stored:" + localStorage.getItem('allowUsageTracking'));
 }
 
+//Guide view
+function guideChange() {
+    ScreenButtonClicked("pocket-guide");
+    log("stored:" + localStorage.getItem('allowUsageTracking'));    
+}
+
+//SETTINGS screen
+function settingsInit() {
+    var switchVal = true;
+    if (localStorage.getItem('allowUsageTracking')==="deny") {
+        switchVal = false;    
+    }
+    $("#usage-tracking-switch").kendoMobileSwitch({
+        checked: switchVal,
+        onLabel: "Allow",
+        offLabel: "Deny"
+    });
+    ScreenButtonClicked("settings");
+    log("stored:" + localStorage.getItem('allowUsageTracking'));
+}
+
+
 //LOGGING    
 function log(msg) {
     $('#log').val($('#log').val() + msg + '\n');
 }
-
