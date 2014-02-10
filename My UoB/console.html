@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My UoB</title>
+    <title>My UoB: Pocket Guide</title>
     <meta charset="utf-8" />
     <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
     <link href="styles/main.css" rel="stylesheet" />
@@ -10,34 +10,28 @@
     <script src="kendo/js/jquery.min.js"></script>
     <script src="kendo/js/kendo.mobile.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
-    <script src="scripts/templateLoader.js"></script>
+
     <script src="scripts/app.js"></script>
-    
+
 </head>
 <body>
     <!--Home-->
-    <div id="tabstrip-home" data-role="view" data-title="Home">
-        <div class="view-content">
-            <ul data-role="listview" datatype="group">
-                <li><a data-icon="organize" href="guide.html" data-transition="slide">Pocket Guide</a></li>
-            </ul>
+    <div id="tabstrip-console" data-role="view" data-title="Console">
+
+        <h3>Console</h3>
+        <div data-role="content">
+            <div class="logArea">
+                <a id="clearLog" href="#" class="btn"><i class="icon-remove"></i> Clear Log</a>
+                <textarea id="log" style="width:99%" rows="12"></textarea>
+            </div>
         </div>
     </div>
+
     
-    <!--Settings-->
-    <div id="tabstrip-settings" data-role="view" data-title="Settings">
-        <div class="view-content">
-            
-        </div>
-    </div>
     
-    <!--Info-->
-    <div id="tabstrip-info" data-role="view" data-title="About My UoB">
-        <div class="view-content">
-            
-        </div>
-    </div>
+
     
+
     <!--Layout-->
     <div data-role="layout" data-id="tabstrip-layout">
 
@@ -46,7 +40,6 @@
             <div data-role="navbar">
                 <a class="nav-button" data-align="left" data-role="backbutton">Back</a>
                 <span data-role="view-title"></span>
-                <a data-align="right" data-role="button" class="nav-button" href="console.html">Console</a>
             </div>
         </div>
 
@@ -56,9 +49,9 @@
                 <a href="#tabstrip-home" data-icon="home">Home</a>
                 <a href="#tabstrip-settings" data-icon="settings" data-transition="slide">Settings</a>
                 <a href="#tabstrip-info" data-icon="info" data-transition="slide">Info</a>
+
             </div>
         </div>
     </div>
-    
 </body>
 </html>

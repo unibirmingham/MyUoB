@@ -1,0 +1,35 @@
+<!--News template-->
+    <script type="text/x-kendo-tmpl" id="news-template">
+        <div class="news-item">
+                
+                <span class="news-image" style="background-image: url('http://www.birmingham.ac.uk#:ImageUrl#')"></span>
+                <div class="news-text">
+                    <span class="news-title">#:Title#</span>
+                </div>
+                
+                <a class="news-link" href="\#singleNewsView?contentId=#:ContentId#" data-role="detailbutton" data-style="detaildisclose" data-contentId="#:ContentId#"></a>
+    
+        </div>
+    </script>
+
+<!-- news item template -->
+<script type="text/x-kendo-template" id="news-item-template">
+    <div class="newsViewItem">
+        <div class="news-field news-title">#: Title #</div>
+        
+        <div class="news-field news-article">
+            <div class="news-field-label">Article</div>
+            <div class="news-field-data">#: htmlDecode(Article) #</div>
+        </div>
+        <div class="news-field news-keywords">
+            <div class="news-field-label">Keywords</div>
+            <div class="news-field-data">#: Keywords #</div>
+        </div>
+        <div class="news-field news-information">
+            <div class="news-field-label">More Information</div>
+            <div class="news-field-data"><a href="\#singleNewsView?contentId=#:ContentId#" onClick="window.open('#: NewsFullUrl #', '_system')">#: NewsUrl #</a></div> 
+            
+        </div>
+        <div class="news-img"><img src="#: ImageFullUrl #" alt="news image: #: Title#" /></div>
+    </div>
+</script>

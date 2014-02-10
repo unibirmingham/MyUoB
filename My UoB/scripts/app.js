@@ -7,6 +7,8 @@
     }, false);
 
     app.application = new kendo.mobile.Application(document.body, { layout: "tabstrip-layout"});
-
+    
+    //load templates
+    templateLoader.loadExtTemplate("templates/news.tmpl.html");
     
 })(window);

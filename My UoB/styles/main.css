@@ -102,3 +102,8 @@ body, html {
 }
 
 
+/* Display android title */
+.km-android .km-navbar .km-view-title /* After Q2 2012 SP1 */
+{
+    visibility: visible;   
+}
