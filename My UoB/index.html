@@ -14,7 +14,7 @@
     <script src="scripts/app.js"></script>
     
 </head>
-<body>
+<body <!--onload="initialize();"--> onunload="goingAway();">
     <!--Home-->
     <div id="tabstrip-home" data-role="view" data-title="Home">
         <div class="view-content">
@@ -24,17 +24,20 @@
         </div>
     </div>
     
-    <!--Settings-->
+    <!--Settings view-->
     <div id="tabstrip-settings" data-role="view" data-title="Settings">
         <div class="view-content">
             
         </div>
     </div>
     
-    <!--Info-->
-    <div id="tabstrip-info" data-role="view" data-title="About My UoB">
+    <!--Info view-->
+    <div id="tabstrip-info" data-role="view" data-init="infoInit" data-title="About My UoB">
         <div class="view-content">
-            
+            <h2>My UoB Mobile App</h2>
+            <p>My UoB is one of a number of official mobile apps from the University of Birmingham, replacing UoB Student.<br/>A full list of University apps is availble on our app store page @ <a href="http://www.birmingham.ac.uk/contact/app-store.aspx">www.birmingham.ac.uk/contact/app-store.aspx</a></p>
+            <h3>Get in touch</h3>
+            <p>If you have an feedback on this app, please contact...</p>        
         </div>
     </div>
     
