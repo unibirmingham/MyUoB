@@ -20,6 +20,7 @@
             <ul data-role="listview" datatype="group">
                 <li><a data-icon="organize" href="guide.html" data-transition="slide">Pocket Guide</a></li>
                 <li><a data-icon="cal" href="#tabstrip-events" data-transition="slide">Events</a></li>
+                <li><a data-icon="justify" href="#tabstrip-news" data-transition="slide">News</a></li>
             </ul>
         </div>
     </div>
@@ -64,6 +65,19 @@
         </div>
     </div>
     
+    <!--News screen-->
+    <div id="tabstrip-news" data-role="view" data-title="News"><!--data-init="newsListViewPullWithEndless"-->
+        <div class="news-title">UoB News</div>
+        <ul id="pull-newslistview" class="news-list"></ul>
+        <p>News goes here...</p>
+    </div>
+    
+    <!--News item screen-->
+    <div id="singleNewsView" data-role="view" data-title="News Item" data-show="newsItemView">
+        <div id="news-detail">
+        </div>
+    </div>            
+                
     <!--Layout-->
     <div data-role="layout" data-id="tabstrip-layout">
 

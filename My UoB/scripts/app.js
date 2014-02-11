@@ -123,6 +123,72 @@ function eventItemView(e) {
     log("stored:" + localStorage.getItem('allowUsageTracking') + ": EVENTITEM");
 }
 
+//NEWS
+function newsListViewPullWithEndless(e) {
+
+    app.application.showLoading();
+    var dataSource = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "http://www.birminghamdev.bham.ac.uk/web_services/News.svc/?noOfItems=40",
+                dataType: "json"
+            }
+        },
+        serverPaging: true,
+        pageSize: 10,
+        change: function (data) {
+            app.application.hideLoading();
+        }
+    });
+
+    $("#pull-newslistview").kendoMobileListView({
+        dataSource: dataSource,
+        template: $("#news-template").text(),
+        pullToRefresh: true
+    });
+    
+   
+    ScreenButtonClicked("news");
+    log("stored:" + localStorage.getItem('allowUsageTracking'));
+    
+}
+
+//News Item
+function newsItemView(e) {
+    $("#news-detail").html('');
+    app.application.showLoading();
+    var contentId = parseInt(e.view.params.contentId);
+    log(contentId);
+    
+    var newsSource = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "http://www.birminghamdev1.bham.ac.uk/web_services/News.svc/" + contentId,   
+                dataType: "json"
+            }
+        },
+        
+        schema: {
+            data: function (data)
+            {
+                return [data];
+            }
+        },
+        change: function (data) {
+            var template = kendo.template($("#news-item-template").text());
+            var newsitem = kendo.render(template, this.view());
+            log(newsitem);
+            $("#news-detail").html(newsitem);
+            app.application.hideLoading();
+        }
+    });
+    
+    newsSource.read();
+    
+    ScreenButtonClicked("news item:");
+    log("stored:" + localStorage.getItem('allowUsageTracking') + ": NEWSITEM");
+}
+
 //HOME view
 function homeInit() {
     

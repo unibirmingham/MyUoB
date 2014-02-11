@@ -249,3 +249,9 @@ div.news-img img {
 {
     content: "\e089";
 }
+
+.km-justify:after,
+.km-justify:before
+{
+    content: "\e0f1";
+}
