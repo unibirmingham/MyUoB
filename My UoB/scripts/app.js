@@ -123,6 +123,14 @@ function eventItemView(e) {
     log("stored:" + localStorage.getItem('allowUsageTracking') + ": EVENTITEM");
 }
 
+//HOME view
+function homeInit() {
+    
+}
+function homeShow() {
+
+}
+
 //INFO view
 function infoShow() {
     ScreenButtonClicked("info");
@@ -152,7 +160,10 @@ function settingsShow() {
 //Guide view
 function guideShow() {
     ScreenButtonClicked("pocket-guide");
-    log("stored:" + localStorage.getItem('allowUsageTracking'));    
+    log("stored:" + localStorage.getItem('allowUsageTracking'));
+}
+function guideInit() {
+    
 }
 function guideAdviceShow() {
     ScreenButtonClicked("AdviceAndGuidanceIndex");

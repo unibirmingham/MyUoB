@@ -15,7 +15,7 @@
 </head>
 <body onload="initialize();" onunload="goingAway();">
     <!--Home-->
-    <div id="tabstrip-home" data-role="view" data-title="Home">
+    <div id="tabstrip-home" data-role="view" data-title="Home" data-after-show="homeShow" data-init="homeInit" >
         <div class="view-content">
             <ul data-role="listview" datatype="group">
                 <li><a data-icon="organize" href="guide.html" data-transition="slide">Pocket Guide</a></li>
