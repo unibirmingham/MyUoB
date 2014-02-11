@@ -38,7 +38,7 @@
         
     </div>
 
-    
+    <!-- Section One -->
     <!--Advice and Guidance Section-->
     <div data-role="view" id="guide-advice" data-after-show="guideAdviceShow" class="guide-view">
         <div data-role="navbar">
@@ -46,16 +46,17 @@
                 <span data-role="view-title" class="drawer-view-title">Advice and Guidance Index</span>
         </div>
         <ul data-role="listview" id="advice-guide-index" class="pocket-guide-index">
+                <li data-icon="sent"><a href="guide.html" data-transition="slide">Pocket guide index</a></li>
                 <li data-icon="about"><a href="#guide-advice-and-representation" data-transition="slide">Advice and representation</a></li>
                 <li data-icon="about"><a href="#guide-counselling" data-transition="slide">Counselling and guidance</a></li>
-                <li data-icon="about"><a href="#guide-advice-and-representation" data-transition="slide">Student funding</a></li>
-                <li data-icon="about"><a href="#guide-advice-and-representation" data-transition="slide">Disability and learning support</a></li>
-                <li data-icon="about"><a href="#guide-advice-and-representation" data-transition="slide">Multi-faith Chaplaincy</a></li>
-                <li data-icon="about"><a href="#guide-advice-and-representation" data-transition="slide">Nightline</a></li>
-                <li data-icon="about"><a href="#guide-advice-and-representation" data-transition="slide">Doctors</a></li>
-                <li data-icon="about"><a href="#guide-advice-and-representation" data-transition="slide">Dentists</a></li>
-                <li data-icon="about"><a href="#guide-advice-and-representation" data-transition="slide">Campus Security</a></li>
-                <li data-icon="about"><a href="#guide-advice-and-representation" data-transition="slide">Lost property</a></li>
+                <li data-icon="about"><a href="#guide-funding" data-transition="slide">Student funding</a></li>
+                <li data-icon="about"><a href="#guide-disability" data-transition="slide">Disability and learning support</a></li>
+                <li data-icon="about"><a href="#guide-chaplaincy" data-transition="slide">Multi-faith Chaplaincy</a></li>
+                <li data-icon="about"><a href="#guide-nightline" data-transition="slide">Nightline</a></li>
+                <li data-icon="about"><a href="#guide-doctors" data-transition="slide">Doctors</a></li>
+                <li data-icon="about"><a href="#guide-dentists" data-transition="slide">Dentists</a></li>
+                <li data-icon="about"><a href="#guide-security" data-transition="slide">Campus Security</a></li>
+                <li data-icon="about"><a href="#guide-lost" data-transition="slide">Lost property</a></li>
         </ul>
     </div>
 
@@ -100,8 +101,209 @@
 	    Vacation: Monday&ndash;Friday, 9am&ndash;12.30pm and 1.30pm&ndash;5pm</p>
 
     </div>
+    
+    <div data-role="view" id="guide-funding" data-init="guideAdviceFundingShow" class="guide-view">
+        <div data-role="navbar" class="guide-page-nav">
+            <a data-role="button" data-rel="drawer" href="#my-drawer-advice" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Student Funding</span>
+        </div>
+    </div>
 
-
+    <div data-role="view" id="guide-disability" data-init="guideAdviceDisabilityShow" class="guide-view">
+        <div data-role="navbar" class="guide-page-nav">
+            <a data-role="button" data-rel="drawer" href="#my-drawer-advice" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Disability and learning support</span>
+        </div>
+    </div>
+    
+    <div data-role="view" id="guide-chaplaincy" data-init="guideAdviceChaplaincyShow" class="guide-view">
+        <div data-role="navbar" class="guide-page-nav">
+            <a data-role="button" data-rel="drawer" href="#my-drawer-advice" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Multifaith Chaplaincy</span>
+        </div>
+    </div>
+    
+    <div data-role="view" id="guide-nightline" data-init="guideAdviceNightlineShow" class="guide-view">
+        <div data-role="navbar" class="guide-page-nav">
+            <a data-role="button" data-rel="drawer" href="#my-drawer-advice" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Nightline</span>
+        </div>
+    </div>
+    
+    <div data-role="view" id="guide-doctors" data-init="guideAdviceDoctorsShow" class="guide-view">
+        <div data-role="navbar" class="guide-page-nav">
+            <a data-role="button" data-rel="drawer" href="#my-drawer-advice" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Doctors</span>
+        </div>
+    </div>
+    
+    <div data-role="view" id="guide-dentists" data-init="guideAdviceDentistsShow" class="guide-view">
+        <div data-role="navbar" class="guide-page-nav">
+            <a data-role="button" data-rel="drawer" href="#my-drawer-advice" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Dentists</span>
+        </div>
+    </div>
+    
+    <div data-role="view" id="guide-security" data-init="guideAdviceSecurityShow" class="guide-view">
+        <div data-role="navbar" class="guide-page-nav">
+            <a data-role="button" data-rel="drawer" href="#my-drawer-advice" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Campus Security</span>
+        </div>
+    </div>
+    
+    <div data-role="view" id="guide-lost" data-init="guideAdviceLostShow" class="guide-view">
+        <div data-role="navbar" class="guide-page-nav">
+            <a data-role="button" data-rel="drawer" href="#my-drawer-advice" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Lost property</span>
+        </div>
+    </div>
+    <!-- End Section One -->
+    
+    <!-- Section Two -->
+    <!-- Retail Facilities Section-->
+    <div data-role="view" id="guide-retail" data-after-show="guideRetailShow" class="guide-view">
+        <div data-role="navbar">
+            <a data-role="button" data-rel="drawer" href="#my-drawer" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Retail Facilities Index</span>
+        </div>
+        <ul data-role="listview" id="retail-guide-index" class="pocket-guide-index">
+                <li data-icon="sent"><a href="guide.html" data-transition="slide">Pocket guide index</a></li>
+                <li data-icon="cart"><a href="#guide-food" data-transition="slide">Food and drink</a></li>
+                <li data-icon="cart"><a href="#guide-shops" data-transition="slide">Shops and banks</a></li>
+        </ul>
+    </div>
+    
+    <div data-role="view" id="guide-food" data-init="guideRetailFoodShow" class="guide-view">
+        <div data-role="navbar" class="guide-page-nav">
+            <a data-role="button" data-rel="drawer" href="#my-drawer-retail" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Food and drink</span>
+        </div>
+    </div>
+    
+    <div data-role="view" id="guide-shops" data-init="guideRetailShopsShow" class="guide-view">
+        <div data-role="navbar" class="guide-page-nav">
+            <a data-role="button" data-rel="drawer" href="#my-drawer-retail" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Shops and banks</span>
+        </div>
+    </div>
+    <!-- End Section Two -->
+    
+    <!-- Section Three -->
+    <!-- Transport Section-->
+    <div data-role="view" id="guide-transport" data-after-show="guideTransportShow" class="guide-view">
+        <div data-role="navbar">
+            <a data-role="button" data-rel="drawer" href="#my-drawer" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Transport Index</span>
+        </div>
+        <ul data-role="listview" id="transport-guide-index" class="pocket-guide-index">
+                <li data-icon="sent"><a href="guide.html" data-transition="slide">Pocket guide index</a></li>
+        </ul>
+    </div>
+    <!-- End Section Three -->
+    
+    <!-- Section Four -->
+    <!-- Libraries Section-->
+    <div data-role="view" id="guide-libraries" data-after-show="guideLibrariesShow" class="guide-view">
+        <div data-role="navbar">
+            <a data-role="button" data-rel="drawer" href="#my-drawer" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Libraries Index</span>
+        </div>
+        <ul data-role="listview" id="libraries-guide-index" class="pocket-guide-index">
+                <li data-icon="sent"><a href="guide.html" data-transition="slide">Pocket guide index</a></li>
+        </ul>
+    </div>
+    <!-- End Section Four -->
+    
+    <!-- Section Five -->
+    <!-- Computing Section-->
+    <div data-role="view" id="guide-computing" data-after-show="guideComputingShow" class="guide-view">
+        <div data-role="navbar">
+            <a data-role="button" data-rel="drawer" href="#my-drawer" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Computing and Support Index</span>
+        </div>
+        <ul data-role="listview" id="computing-guide-index" class="pocket-guide-index">
+                <li data-icon="sent"><a href="guide.html" data-transition="slide">Pocket guide index</a></li>
+        </ul>
+    </div>
+    <!-- End Section Five -->
+    
+    <!-- Section Six -->
+    <!-- Going Out Section-->
+    <div data-role="view" id="guide-going-out" data-after-show="guideGoingOutShow" class="guide-view">
+        <div data-role="navbar">
+            <a data-role="button" data-rel="drawer" href="#my-drawer" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Going Out Index</span>
+        </div>
+        <ul data-role="listview" id="going-out-guide-index" class="pocket-guide-index">
+                <li data-icon="sent"><a href="guide.html" data-transition="slide">Pocket guide index</a></li>
+        </ul>
+    </div>
+    <!-- End Section Six -->
+    
+    <!-- Section Seven -->
+    <!-- Sport Section-->
+    <div data-role="view" id="guide-sport" data-after-show="guideSportShow" class="guide-view">
+        <div data-role="navbar">
+            <a data-role="button" data-rel="drawer" href="#my-drawer" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Sport Index</span>
+        </div>
+        <ul data-role="listview" id="sport-guide-index" class="pocket-guide-index">
+            <li data-icon="sent"><a href="guide.html" data-transition="slide">Pocket guide index</a></li>
+        </ul>
+    </div>
+    <!-- End Section Seven -->
+    
+    <!-- Section Eight -->
+    <!-- Accommodation Section-->
+    <div data-role="view" id="guide-sport" data-after-show="guideSportShow" class="guide-view">
+        <div data-role="navbar">
+            <a data-role="button" data-rel="drawer" href="#my-drawer" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Accommodation Index</span>
+        </div>
+        <ul data-role="listview" id="sport-guide-index" class="pocket-guide-index">
+            <li data-icon="sent"><a href="guide.html" data-transition="slide">Pocket guide index</a></li>
+    8    </ul>
+    </div>
+    <!-- End Section Eight -->
+    
+    <!-- Section Nine -->
+    <!-- Accommodation Section-->
+    <div data-role="view" id="guide-accommodation" data-after-show="guideAccommodationShow" class="guide-view">
+        <div data-role="navbar">
+            <a data-role="button" data-rel="drawer" href="#my-drawer" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Accommodation Index</span>
+        </div>
+        <ul data-role="listview" id="accommodation-guide-index" class="pocket-guide-index">
+            <li data-icon="sent"><a href="guide.html" data-transition="slide">Pocket guide index</a></li>
+        </ul>
+    </div>
+    <!-- End Section Nine -->
+    
+    <!-- Section Ten -->
+    <!-- Guild of Students Section-->
+    <div data-role="view" id="guide-guild" data-after-show="guideGuildShow" class="guide-view">
+        <div data-role="navbar">
+            <a data-role="button" data-rel="drawer" href="#my-drawer" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Guild of Students Index</span>
+        </div>
+        <ul data-role="listview" id="guild-guide-index" class="pocket-guide-index">
+            <li data-icon="sent"><a href="guide.html" data-transition="slide">Pocket guide index</a></li>
+        </ul>
+    </div>
+    <!-- End Section Ten -->
+    
+    <!-- Section Eleven -->
+    <!-- Guild of Feedback Section-->
+    <div data-role="view" id="guide-feedback" data-after-show="guideFeedbackShow" class="guide-view">
+        <div data-role="navbar">
+            <a data-role="button" data-rel="drawer" href="#my-drawer" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Feedback Index</span>
+        </div>
+        <ul data-role="listview" id="feedback-guide-index" class="pocket-guide-index">
+            <li data-icon="sent"><a href="guide.html" data-transition="slide">Pocket guide index</a></li>
+        </ul>
+    </div>
+    <!-- End Section Ten -->
     
     <!---------------------- DRAWERS --------------------------------->
     
@@ -114,7 +316,7 @@
                 <li data-icon="transport"><a href="#guide-transport" data-transition="none">Transport</a></li>
                 <li data-icon="bookmarks"><a href="#guide-libraries" data-transition="none">Libraries</a></li>
                 <li data-icon="computing"><a href="#guide-computing" data-transition="none">Computing and support</a></li>
-                <li data-icon="action"><a href="#guide-goingout" data-transition="none">Going out</a></li>
+                <li data-icon="action"><a href="#guide-going-out" data-transition="none">Going out</a></li>
                 <li data-icon="cup"><a href="#guide-sport" data-transition="none">Sport and fitness</a></li>
                 <li data-icon="home"><a href="#guide-accommodation" data-transition="none">Accommodation</a></li>
                 <li data-icon="contacts"><a href="#guide-guild" data-transition="none">Guild of students</a></li>
@@ -124,7 +326,8 @@
     </ul>
     </div>
     
-    <div class="myUoBDrawer" data-role="drawer" id="my-drawer-advice" style="width: 240px" data-views='["guide-advice-and-representation","guide-counselling"]'>
+    <div class="myUoBDrawer" data-role="drawer" id="my-drawer-advice" style="width: 240px" data-views='["guide-advice-and-representation","guide-counselling",
+        "guide-funding","guide-disability","guide-chaplaincy","guide-doctors","guide-nightline","guide-dentists","guide-security","guide-lost"]'>
     <ul data-role="listview" data-type="group">
         <li>Advice and Guidance Index
             <ul id="pocket-guide-advice-index">
@@ -139,6 +342,18 @@
                 <li data-icon="about"><a href="#guide-dentists" data-transition="none">Dentists</a></li>
                 <li data-icon="about"><a href="#guide-security" data-transition="none">Campus Security</a></li>
                 <li data-icon="about"><a href="#guide-lost" data-transition="none">Lost property</a></li>
+            </ul>
+        </li>
+    </ul>
+    </div>
+    
+    <div class="myUoBDrawer" data-role="drawer" id="my-drawer-retail" style="width: 240px" data-views='["guide-shops","guide-food"]'>
+    <ul data-role="listview" data-type="group">
+        <li>Retail Facilities Index
+            <ul id="pocket-guide-retail-index">
+                <li data-icon="sent"><a href="guide.html" data-transition="none">Pocket guide index</a></li>
+                <li data-icon="cart"><a href="#guide-food" data-transition="slide">Food and drink</a></li>
+                <li data-icon="cart"><a href="#guide-shops" data-transition="slide">Shops and banks</a></li>
             </ul>
         </li>
     </ul>
