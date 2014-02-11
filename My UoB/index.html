@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
     <link href="styles/main.css" rel="stylesheet" />
+    <link href="styles/guide.css" rel="stylesheet" />
     <script src="cordova.js"></script>
     <script src="kendo/js/jquery.min.js"></script>
     <script src="kendo/js/kendo.mobile.min.js"></script>
@@ -23,24 +24,30 @@
     </div>
     
     <!--Settings view-->
-    <div id="tabstrip-settings" data-init="settingsInit" data-role="view" data-title="Settings">
+    <div id="tabstrip-settings" data-after-show="settingsShow" data-init="settingsInit" data-role="view" data-title="Settings">
         <div class="view-content">
             <h2 class="settings-title">App Settings</h2>
         <h3>Privacy settings</h3>
-        <p>This app tracks usage, using Google Analytics so that we can learn from user behaviour and provide a better app in the future. No personal or user identifiable data will be collected, but if you would prefer for the app not to collect such data please select deny below.</p>    
-        <ul data-role="listview" data-style="inset" data-type="group">
-            <li>Usage tracking <input type="checkbox" id="usage-tracking-switch" data-role="switch" data-change="onTrackingChange" /></li>
+        <p>This app tracks usage, using Google Analytics so that we can learn from user behaviour and provide a better app in the future. No personal or user identifiable data will be collected, but if you would prefer for the app not to collect such data please select OFF below.</p>    
+        <ul data-role="listview" data-style="inset" >
+            <!--<li>Usage tracking <input type="checkbox" id="usage-tracking-switch" data-role="switch" data-change="onTrackingChange"/>-->
+            <li>Usage tracking <input id="usage-tracking-switch" />
         </ul>
         </div>
     </div>
     
     <!--Info view-->
-    <div id="tabstrip-info" data-role="view" data-init="infoInit" data-title="About My UoB">
+    <div id="tabstrip-info" data-role="view" data-after-show="infoShow" data-title="About My UoB">
         <div class="view-content">
             <h2>My UoB Mobile App</h2>
-            <p>My UoB is one of a number of official mobile apps from the University of Birmingham, replacing UoB Student.<br/>A full list of University apps is availble on our app store page @ <a href="http://www.birmingham.ac.uk/contact/app-store.aspx">www.birmingham.ac.uk/contact/app-store.aspx</a></p>
+            <p>My UoB is one of a number of official mobile apps from the University of Birmingham, replacing UoB Student.<br/>A full list of University apps is availble on our app store page:</p>
+            <ul><li><a onClick="window.open('http://www.birmingham.ac.uk/contact/app-store.aspx', '_system')" href="#tabstrip-info">www.birmingham.ac.uk/contact/app-store.aspx</a></li></ul>
             <h3>Get in touch</h3>
-            <p>If you have an feedback on this app, please contact...</p>        
+            <p>If you have any feedback on the UoB Student app or need help then please visit:</p>
+
+                <ul><li><a onClick="window.open('https://universityofbirmingham.service-now.com', '_system')" href="#tabstrip-info">universityofbirmingham.service-now.com</a></li></ul>
+
+            <p>Select ‘Find an answer’ and search for UoB Student.</p>        
         </div>
     </div>
     

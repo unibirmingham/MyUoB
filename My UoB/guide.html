@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
     <link href="styles/main.css" rel="stylesheet" />
+    <link href="styles/guide.css" rel="stylesheet" />
 
     <script src="cordova.js"></script>
     <script src="kendo/js/jquery.min.js"></script>
@@ -16,18 +17,136 @@
 </head>
 <body>
     <!--Home-->
-    <div id="tabstrip-pocket-guide" data-init="guideChange" data-role="view" data-title="Pocket Guide">
+    <div id="tabstrip-pocket-guide" data-after-show="guideShow" data-init="guideInit" data-role="view" data-title="Pocket Guide" class="guide-view">
 
-        <div class="view-content">
-            
-        </div>
+        <ul data-role="listview" data-type="group">
+        <li>Pocket Guide Index
+            <ul id="pocket-guide-index" class="pocket-guide-index">
+                <li data-icon="about"><a href="#guide-advice" data-transition="slide">Advice and guidance</a></li>
+                <li data-icon="cart"><a href="#guide-retail" data-transition="none">Retail facilities</a></li>
+                <li data-icon="transport"><a href="#guide-transport" data-transition="none">Transport</a></li>
+                <li data-icon="bookmarks"><a href="#guide-libraries" data-transition="slide">Libraries</a></li>
+                <li data-icon="computing"><a href="#guide-computing" data-transition="none">Computing and support</a></li>
+                <li data-icon="action"><a href="#guide-going-out" data-transition="none">Going out</a></li>
+                <li data-icon="cup"><a href="#guide-sport" data-transition="none">Sport and fitness</a></li>
+                <li data-icon="home"><a href="#guide-accommodation" data-transition="none">Accommodation</a></li>
+                <li data-icon="contacts"><a href="#guide-guild" data-transition="none">Guild of students</a></li>
+                <li data-icon="reply"><a href="#guide-feedback" data-transition="none">Feedback</a></li>
+            </ul>
+        </li>
+        </ul>
+        
     </div>
 
     
+    <!--Advice and Guidance Section-->
+    <div data-role="view" id="guide-advice" data-after-show="guideAdviceShow" class="guide-view">
+        <div data-role="navbar">
+            <a data-role="button" data-rel="drawer" href="#my-drawer" data-icon="drawer-button" data-align="left"></a>
+                <span data-role="view-title" class="drawer-view-title">Advice and Guidance Index</span>
+        </div>
+        <ul data-role="listview" id="advice-guide-index" class="pocket-guide-index">
+                <li data-icon="about"><a href="#guide-advice-and-representation" data-transition="slide">Advice and representation</a></li>
+                <li data-icon="about"><a href="#guide-counselling" data-transition="slide">Counselling and guidance</a></li>
+                <li data-icon="about"><a href="#guide-advice-and-representation" data-transition="slide">Student funding</a></li>
+                <li data-icon="about"><a href="#guide-advice-and-representation" data-transition="slide">Disability and learning support</a></li>
+                <li data-icon="about"><a href="#guide-advice-and-representation" data-transition="slide">Multi-faith Chaplaincy</a></li>
+                <li data-icon="about"><a href="#guide-advice-and-representation" data-transition="slide">Nightline</a></li>
+                <li data-icon="about"><a href="#guide-advice-and-representation" data-transition="slide">Doctors</a></li>
+                <li data-icon="about"><a href="#guide-advice-and-representation" data-transition="slide">Dentists</a></li>
+                <li data-icon="about"><a href="#guide-advice-and-representation" data-transition="slide">Campus Security</a></li>
+                <li data-icon="about"><a href="#guide-advice-and-representation" data-transition="slide">Lost property</a></li>
+        </ul>
+    </div>
+
+    <div data-role="view" id="guide-advice-and-representation" data-after-show="guideAdviceRepShow" class="guide-view">
+        <div data-role="navbar" class="guide-page-nav">
+            <a data-role="button" data-rel="drawer" href="#my-drawer-advice" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Advice and <br/>Representation Centre (ARC)</span>
+        </div>
+        <p>The ARC provides free, impartial and confidential information, advice and representation on a wide range of issues to all students.</p>
+        <p>Whatever the question &ndash; or difficulty &ndash; we&rsquo;ll always try to help and if we can&rsquo;t we&rsquo;re sure to know someone who can, within or outside the Guild or University.</p>
+        <p>
+	        Location:&nbsp;<a href="uniloc://?posCode=18548">Ground Floor, Guild of Students</a><br />
+	        Email: <a href="mailto:thearc@guild.bham.ac.uk">thearc@guild.bham.ac.uk</a>&nbsp;<br />
+	        <span class="Apple-style-span" style="color: rgb(0,0,0); -webkit-text-decorations-in-effect: none">Tel: <a href="tel:+44 121 251 2400">+44 (0)121 251 2400</a></span><br />
+	        Find out more: <a href="http://www.guildofstudents.com/content/788793/">ARC website</a>
+        </p>
+        <h2>Opening hours</h2>
+        <p>
+	        <span class="Apple-style-span" style="font-weight: normal; font-size: medium">Term Time: Monday&ndash;Friday, 10am&ndash;4pm<br />
+	        Vacation: Monday&ndash;Friday, 12noon&ndash;2pm</span>
+        </p>
+    </div>
     
+    <div data-role="view" id="guide-counselling" data-init="guideAdviceCounsellingShow" class="guide-view">
+        <div data-role="navbar" class="guide-page-nav">
+            <a data-role="button" data-rel="drawer" href="#my-drawer-advice" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title" class="drawer-view-title">Counselling and Guidance</span>
+        </div>
+        <p>
+	    The Counselling and Guidance Service&nbsp;provides counselling for all registered students in order to help you engage more effectively in your academic and social environment and to be sufficiently free from psychological distress to achieve your full potential. The service also runs groups and workshops to help students adjust to life at university.&nbsp;</p>
+        <p>
+	    Apart from issues associated with settling in to a new environment we also help with other problems such as depression, anxiety, flat mate issues, eating problems, and relationship difficulties.</p>
+        <p>
+	    Location:&nbsp;<a href="uniloc://?posCode=18555">3 Elms Road</a><br />
+	    Tel: <a href="tel:+44 121 414 5130">+44 (0)121 414 5130.</a><br />
+	    <a href="https://intranet.birmingham.ac.uk/as/studentservices/counselling/index.aspx">Counselling and Guidance Service website</a></p>
+        <h2>
+	    Opening hours</h2>
+        <h2>
+	    <span class="Apple-style-span" style="font-weight: normal; font-size: medium">Term-time: Monday&ndash;Friday, 9am&ndash;5pm (Evening appointments also available during term time)</span></h2>
+        <p>
+	    Vacation: Monday&ndash;Friday, 9am&ndash;12.30pm and 1.30pm&ndash;5pm</p>
+
+    </div>
+
 
     
-
+    <!---------------------- DRAWERS --------------------------------->
+    
+    <div class="myUoBDrawer" data-role="drawer" id="my-drawer" style="width: 240px" data-views='["tabstrip-pocket-guide","guide-libraries","guide-advice"]'>
+    <ul data-role="listview" data-type="group">
+        <li>Pocket Guide Index
+            <ul id="pocket-guide-index">
+                <li data-icon="about"><a href="#guide-advice" data-transition="none">Advice and guidance</a></li>
+                <li data-icon="cart"><a href="#guide-facilities" data-transition="none">Retail facilities</a></li>
+                <li data-icon="transport"><a href="#guide-transport" data-transition="none">Transport</a></li>
+                <li data-icon="bookmarks"><a href="#guide-libraries" data-transition="none">Libraries</a></li>
+                <li data-icon="computing"><a href="#guide-computing" data-transition="none">Computing and support</a></li>
+                <li data-icon="action"><a href="#guide-goingout" data-transition="none">Going out</a></li>
+                <li data-icon="cup"><a href="#guide-sport" data-transition="none">Sport and fitness</a></li>
+                <li data-icon="home"><a href="#guide-accommodation" data-transition="none">Accommodation</a></li>
+                <li data-icon="contacts"><a href="#guide-guild" data-transition="none">Guild of students</a></li>
+                <li data-icon="reply"><a href="#guide-feedback" data-transition="none">Feedback</a></li>
+            </ul>
+        </li>
+    </ul>
+    </div>
+    
+    <div class="myUoBDrawer" data-role="drawer" id="my-drawer-advice" style="width: 240px" data-views='["guide-advice-and-representation","guide-counselling"]'>
+    <ul data-role="listview" data-type="group">
+        <li>Advice and Guidance Index
+            <ul id="pocket-guide-advice-index">
+                <li data-icon="sent"><a href="guide.html" data-transition="none">Pocket guide index</a></li>
+                <li data-icon="about"><a href="#guide-advice-and-representation" data-transition="none">Advice and representation</a></li>
+                <li data-icon="about"><a href="#guide-counselling" data-transition="none">Counselling and guidance</a></li>
+                <li data-icon="about"><a href="#guide-funding" data-transition="none">Student funding</a></li>
+                <li data-icon="about"><a href="#guide-disability" data-transition="none">Disability and learning support</a></li>
+                <li data-icon="about"><a href="#guide-chaplaincy" data-transition="none">Multi-faith Chaplaincy</a></li>
+                <li data-icon="about"><a href="#guide-nightline" data-transition="none">Nightline</a></li>
+                <li data-icon="about"><a href="#guide-doctors" data-transition="none">Doctors</a></li>
+                <li data-icon="about"><a href="#guide-dentists" data-transition="none">Dentists</a></li>
+                <li data-icon="about"><a href="#guide-security" data-transition="none">Campus Security</a></li>
+                <li data-icon="about"><a href="#guide-lost" data-transition="none">Lost property</a></li>
+            </ul>
+        </li>
+    </ul>
+    </div>
+    
+    
+    <!---------------------- DRAWERS END --------------------------------->
+    
     <!--Layout-->
     <div data-role="layout" data-id="tabstrip-layout">
 

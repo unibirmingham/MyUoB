@@ -58,16 +58,11 @@ function goingAway() {
 //VIEW Init/Change Events
 
 //INFO view
-function infoInit() {
+function infoShow() {
     ScreenButtonClicked("info");
     log("stored:" + localStorage.getItem('allowUsageTracking'));
 }
 
-//Guide view
-function guideChange() {
-    ScreenButtonClicked("pocket-guide");
-    log("stored:" + localStorage.getItem('allowUsageTracking'));    
-}
 
 //SETTINGS screen
 function settingsInit() {
@@ -77,13 +72,57 @@ function settingsInit() {
     }
     $("#usage-tracking-switch").kendoMobileSwitch({
         checked: switchVal,
-        onLabel: "Allow",
-        offLabel: "Deny"
+        change: onTrackingChange
     });
-    ScreenButtonClicked("settings");
+    
+}
+
+function settingsShow() {
+        ScreenButtonClicked("settings");
     log("stored:" + localStorage.getItem('allowUsageTracking'));
 }
 
+
+//Guide view
+function guideShow() {
+    ScreenButtonClicked("pocket-guide");
+    log("stored:" + localStorage.getItem('allowUsageTracking'));    
+}
+function guideAdviceShow() {
+    ScreenButtonClicked("AdviceAndGuidanceIndex");
+    log("stored:" + localStorage.getItem('allowUsageTracking'));    
+}
+function guideAdviceRepShow() {
+    ScreenButtonClicked("AdviceAndRepresentation");
+    log("stored:" + localStorage.getItem('allowUsageTracking'));
+}
+function guideAdviceCounsellingShow() {
+    ScreenButtonClicked("CounsellingAndGuidance");
+    log("stored:" + localStorage.getItem('allowUsageTracking'));
+}
+
+
+
+//Manage change of user preferences (GA tracking)
+function onTrackingChange(e) {
+    log("Change");
+    var allowTrackingVal;
+    if (e.checked) {
+        allowTrackingVal = "allow";
+    }
+    else {
+        allowTrackingVal = "deny";
+    }
+    localStorage.setItem('allowUsageTracking', allowTrackingVal);
+    if (allowTrackingVal=="deny"){
+        gaPlugin.exit(nativePluginResultHandler, nativePluginErrorHandler);
+        log("stop");
+    }
+    else {
+        gaPlugin.init(nativePluginResultHandler, nativePluginErrorHandler, "UA-47250154-2", 5);
+        log("start");
+    }
+}
 
 //LOGGING    
 function log(msg) {

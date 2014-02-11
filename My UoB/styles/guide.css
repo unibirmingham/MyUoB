@@ -1,0 +1,86 @@
+/* POCKET GUIDE */
+
+div.guide-view ul.pocket-guide-index li {
+    font-size: 1em;
+}
+
+.km-ios7 .km-listgroup .km-group-title, .km-ios7 .km-listgroupinset .km-group-title {
+       border-top: 1em solid #efeff4
+}
+
+span.drawer-view-title {
+    font-size: 0.9em;
+}
+
+
+.km-android .km-navbar .km-view-title /* After Q2 2012 SP1 */
+{
+    visibility: visible;
+    
+}
+
+.guide-page-nav .km-view-title {
+    line-height:1.2em;
+}
+
+div.km-content div.guide-page-nav {
+    padding: 0.4em;
+}
+
+ div.guide-view h2 {
+     font-size:1.2em;
+ }
+
+.km-ios .myUoBDrawer .km-content, .km-android .myUoBDrawer .km-content, .km-blackberry .myUoBDrawer .km-content,
+    .km-ios .myUoBDrawer .km-list > li, .km-android .myUoBDrawer .km-list > li, .km-blackberry .myUoBDrawer .km-list > li,
+    .km-ios .myUoBDrawer .km-listview-link > .km-icon, .km-android .myUoBDrawer .km-listview-link > .km-icon, .km-blackberry .myUoBDrawer .km-listview-link > .km-icon,
+    .km-ios .myUoBDrawer .km-list li > .km-icon, .km-android .myUoBDrawer .km-list li > .km-icon, .km-blackberry .myUoBDrawer .km-list li > .km-icon
+    {
+        background-color: #4e4e4e;
+        color: #fff;
+        font-size:1em;
+    }
+
+    .km-ios .myUoBDrawer .km-group-title,
+    .km-blackberry .myUoBDrawer .km-group-title
+    {
+        background-color: #6e6e6e;
+        color: #fff;
+    }
+
+    .km-drawer-button:before, .km-drawer-button:after  { content: "\E077"; }
+    .km-inbox:before, .km-inbox:after { content: "\E0B0"; }
+    .km-sent:before, .km-sent:after { content: "\E0C6"; }
+    .km-trash:before, .km-trash:after { content: "\E0C3"; }
+    .km-spam:before, .km-spam:after { content: "\E0C5"; }
+    .km-star:before, .km-star:after { content: "\E0D7"; }
+    .km-settings:before, .km-settings:after { content: "\E0DA"; }
+    .km-off:before, .km-off:after { content: "\E0B9"; }
+    .km-transport:after, .km-transport:before { content: "\E0BB"; }
+    .km-computing:after, .km-computing:before { content: "\E102"; }
+    .km-cup:after, .km-cup:before { content: "\e0c4"; }
+
+    .inboxList
+    {
+        font-size: .8em;
+    }
+
+    .inboxList p,
+    .inboxList h2,
+    .inboxList h3
+    {
+        margin: 5px 2px;
+    }
+
+    .inboxList p,
+    .inboxList h3
+    {
+        color: #777;
+    }
+
+    .inboxList h3.time
+    {
+        color: #369;
+        float: left;
+        margin-right: 10px;
+    }
