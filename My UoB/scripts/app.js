@@ -57,6 +57,72 @@ function goingAway() {
 
 //VIEW Init/Change Events
 
+//EVENTS
+function eventListViewPullWithEndless(e) {
+
+    app.application.showLoading();
+    var dataSource = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "http://www.birmingham.ac.uk/web_services/Events.svc/?folderPath=/events",
+                dataType: "json"
+            }
+        },
+        serverPaging: true,
+        pageSize: 10,
+        change: function (data) {
+            app.application.hideLoading();
+        }
+    });
+
+    $("#pull-eventslistview").kendoMobileListView({
+        dataSource: dataSource,
+        template: $("#events-template").text(),
+        pullToRefresh: true
+    });
+    
+   
+    ScreenButtonClicked("events");
+    log("stored:" + localStorage.getItem('allowUsageTracking'));
+}
+
+
+//Event Item
+function eventItemView(e) {
+    $("#event-detail").html('');
+    app.application.showLoading();
+    var contentId = parseInt(e.view.params.contentId);
+    log(contentId);
+    
+    var eventSource = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "http://www.birmingham.ac.uk/web_services/Events.svc/" + contentId,   
+                dataType: "json"
+            }
+        },
+        
+        schema: {
+            data: function (data)
+            {
+                return [data];
+            }
+        },
+        change: function (data) {
+            var template = kendo.template($("#event-template").text());
+            var event = kendo.render(template, this.view());
+            log(event);
+            $("#event-detail").html(event);
+            app.application.hideLoading();
+        }
+    });
+    
+    eventSource.read();
+    
+    ScreenButtonClicked("event item:");
+    log("stored:" + localStorage.getItem('allowUsageTracking') + ": EVENTITEM");
+}
+
 //INFO view
 function infoShow() {
     ScreenButtonClicked("info");
@@ -127,4 +193,17 @@ function onTrackingChange(e) {
 //LOGGING    
 function log(msg) {
     $('#log').val($('#log').val() + msg + '\n');
+}
+
+function cleanOutHtmlTags(content) {
+
+    var myString =  content.replace("&lt;p&gt;","<p>").replace("&lt;/p&gt;","</p>");
+    myString =  content.replace("&amp;","&");
+    
+    log("here")
+    return myString;
+}
+
+function htmlDecode(value){
+  return $('<div/>').html(value).text();
 }

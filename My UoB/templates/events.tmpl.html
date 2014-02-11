@@ -1,0 +1,49 @@
+<!--Events template-->
+    <script type="text/x-kendo-tmpl" id="events-template">
+        <div class="event-item">
+                
+                <span class="event-image" style="background-image: url('http://www.birmingham.ac.uk#:EventImageUrl#')"></span>
+                <div class="event-text">
+                    <span class="event-title">#:Title#</span>
+                    <span class="event-date">#:DateDescription#</span>
+                </div>
+                
+                <a class="event-link" href="\#singleEventView?contentId=#:ContentId#" data-role="detailbutton" data-style="detaildisclose" data-contentId="#:ContentId#"></a>
+        
+            
+        </div>
+    </script>
+    
+<!-- event template -->
+<script type="text/x-kendo-template" id="event-template">
+    <div class="eventViewItem">
+        <div class="event-field event-title">#: Title #</div>
+        
+        <div class="event-field event-date">
+            <div class="event-field-label">Date</div>
+            <div class="event-field-data">#: DateDescription #</div>
+        </div>
+        <div class="event-field event-location">
+            <div class="event-field-label">Location</div>
+            <div class="event-field-data">#: Location #</div>
+        </div>
+        <div class="event-field event-contact">
+            <div class="event-field-label">Contact</div>
+            <div class="event-field-data">#: htmlDecode(Contact) #</div>
+        </div>
+        <div class="event-field event-article">
+            <div class="event-field-label">Details</div>
+            <div class="event-field-data">#: htmlDecode(Article) #</div>
+        </div>
+        <div class="event-field event-category">
+            <div class="event-field-label">Categories</div>
+            <div class="event-field-data">#: Category #</div>           
+        </div>
+        <div class="event-field event-information">
+            <div class="event-field-label">More Information</div>
+            <div class="event-field-data"><a href="\#singleEventView?contentId=#:ContentId#" onClick="window.open('#: EventFullUrl #', '_system')">#: EventUrl #</a></div> 
+            
+        </div>
+        <div class="event-img"><img src="#: EventImageFullUrl #" alt="event image: #: Title#" /></div>
+    </div>
+</script>

@@ -107,3 +107,145 @@ body, html {
 {
     visibility: visible;   
 }
+
+/*NEWS & EVENTS */
+
+div.events-title,
+div.news-title {
+    margin: 0.6em 0.8em 0.2em 0.9em;
+    font-size: 1.3em;
+}
+
+div.event-item,
+li.news-item {
+    padding:0px;
+    margin:0px;
+    font-size:1em;
+}
+
+ul#pull-eventslistview li,
+ul#pull-newslistview li {
+    padding: .4em .2em;
+    
+}
+
+div.news-item a,
+div.event-item a {
+    font-weight:normal;
+    text-decoration: none;
+}
+
+
+div.event-field,
+div.news-field
+ {
+    padding: 0.4em 0.6em;
+    font-size: 1em;
+}
+
+div.news-title {
+    padding: 1.2em 0.2em 0.4em 0.2em;
+    margin: 0;
+    font-size: 1.3em;
+}
+
+div#event-detail p,
+div#news-detail p {
+    
+    margin-left:0px;
+    margin-right:0px;
+}
+
+div.event-field-label,
+div.news-field-label {
+    border-bottom: 1px solid;
+    padding-bottom:2px;
+}
+
+div.event-field-data,
+div.news-field-data {
+    padding-top:2px;
+}
+
+div.event-category div.event-field-label,
+div.news-category div.news-field-label {
+    display:none;
+}
+
+div.event-category div.event-field-data,
+div.news-category div.news-field-data {
+    color: #F0F8FF;
+}
+
+div.event-item span.event-title,
+div.event-item span.event-date,
+div.news-item span.news-title {
+    
+    padding-right: 16px;
+    display:block;
+}
+
+div.event-item span.event-link,
+div.news-item span.news-link {
+    padding-right:0;
+    margin-right:0;
+}
+
+/* news/event image */
+
+#pull-eventslistview .event-image,
+#pull-newslistview .news-image {
+        width: 4em;
+        height: 4.4em;
+        margin: 0.5em 0;
+        border: 1px solid rgba(0,0,0,.2);
+        /*-webkit-border-radius: 4em;*/
+        /*border-radius: 4em;*/
+        display: inline-block;
+        -webkit-background-size: auto 100%;
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        -webkit-transform: translatez(0);
+        vertical-align: top;
+    }
+
+#pull-eventslistview div.event-text,
+#pull-newslistview div.news-text {
+        display: inline-block;
+        margin: .5em;
+        font-size: 0.8em;
+        width: 12em;
+    }
+    
+    .km-android #hierarchical-listview .parent:after {
+        display: inline-block;
+        border-color: #ffffff;
+    }
+    .km-wp8 #hierarchical-listview .parent:after {
+        display: inline-block;
+        border-color: #000000;
+    }
+
+div.event-img img,
+div.news-img img {
+    margin:1em;
+    padding:0em;
+    border: 1px solid;
+    
+    display: block;
+        height: 230px;
+        /*background: url(../../content/mobile/shared/titanic1.jpg) no-repeat center center;*/
+        -webkit-background-size: 100% auto;
+        background-size: 100% auto;
+        margin: 1em auto;
+    
+}
+
+/* ICONS */
+
+.km-cal:after,
+.km-cal:before
+{
+    content: "\e089";
+}

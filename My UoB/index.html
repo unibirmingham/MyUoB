@@ -19,6 +19,7 @@
         <div class="view-content">
             <ul data-role="listview" datatype="group">
                 <li><a data-icon="organize" href="guide.html" data-transition="slide">Pocket Guide</a></li>
+                <li><a data-icon="cal" href="#tabstrip-events" data-transition="slide">Events</a></li>
             </ul>
         </div>
     </div>
@@ -50,6 +51,18 @@
             <p>Select ‘Find an answer’ and search for UoB Student.</p>        
         </div>
     </div>
+                
+    <!--Events screen-->
+    <div id="tabstrip-events" data-role="view" data-init="eventListViewPullWithEndless" data-title="Events">
+        <div class="events-title">UoB Events</div>
+        <ul id="pull-eventslistview" class="events-list"></ul>
+    </div>
+    
+    <!--Events item screen-->
+    <div id="singleEventView" data-role="view" data-title="Event" data-show="eventItemView">
+        <div id="event-detail">
+        </div>
+    </div>
     
     <!--Layout-->
     <div data-role="layout" data-id="tabstrip-layout">
@@ -78,6 +91,7 @@
     <script>
         //load templates
         templateLoader.loadExtTemplate("templates/news.tmpl.html");
+        templateLoader.loadExtTemplate("templates/events.tmpl.html");
     </script>
     
     <script>
