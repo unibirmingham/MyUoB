@@ -130,7 +130,7 @@ function newsListViewPullWithEndless(e) {
     var dataSource = new kendo.data.DataSource({
         transport: {
             read: {
-                url: "http://www.birminghamdev.bham.ac.uk/web_services/News.svc/?noOfItems=40",
+                url: "http://www.birmingham.ac.uk/web_services/News.svc/?noOfItems=40",
                 dataType: "json"
             }
         },
@@ -163,7 +163,7 @@ function newsItemView(e) {
     var newsSource = new kendo.data.DataSource({
         transport: {
             read: {
-                url: "http://www.birminghamdev1.bham.ac.uk/web_services/News.svc/" + contentId,   
+                url: "http://www.birmingham.ac.uk/web_services/News.svc/" + contentId,   
                 dataType: "json"
             }
         },
@@ -201,6 +201,12 @@ function homeShow() {
 function infoShow() {
     ScreenButtonClicked("info");
     log("stored:" + localStorage.getItem('allowUsageTracking'));
+}
+
+//MAP view
+function mapInit() {
+        ScreenButtonClicked("map");
+        log("stored:" + localStorage.getItem('allowUsageTracking'));
 }
 
 
