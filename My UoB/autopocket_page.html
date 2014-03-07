@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My UoB: Pocket Guide</title>
+    <meta charset="utf-8" />
+    <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+    <link href="styles/main.css" rel="stylesheet" />
+    <link href="styles/guide.css" rel="stylesheet" />
+
+    <script src="cordova.js"></script>
+    <script src="kendo/js/jquery.min.js"></script>
+    <script src="kendo/js/kendo.mobile.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+    <script src="scripts/app.js"></script>
+    
+</head>
+<body>
+    <!-- Page -->
+    <div data-role="view" id="guide-page" data-after-show="guidePageShow" class="guide-view" data-title="Pocket Guide Page">
+        <ul data-role="listview" id="section-guide-page" class="guide-list guide-item pocket-guide-index"
+                    data-source="guide"
+                    data-click="onGuidePageClick"
+                    data-template="guide-page-template">
+        </ul>
+        <a class="nav-button" data-align="left" data-role="backbutton">Back</a>       
+    </div>
+    
+    
+   
+    <!--Layout-->
+    <div data-role="layout" data-id="tabstrip-layout">
+
+        <!--Header-->
+        <div data-role="header">
+            <div data-role="navbar">
+                
+                <span data-role="view-title"></span>
+                <a data-align="right" data-role="button" class="nav-button" href="console.html">Console</a>
+            </div>
+        </div>
+
+        <!--Footer-->
+        <div data-role="footer">
+            <div data-role="tabstrip">
+                <a href="#tabstrip-home" data-icon="home">Home</a>
+                <a href="#tabstrip-settings" data-icon="settings" data-transition="slide">Settings</a>
+                <a href="#tabstrip-info" data-icon="info" data-transition="slide">Info</a>
+
+            </div>
+        </div>
+    </div>
+    
+    <!-- page specific scripts -->
+    <script src="scripts/guide.js"></script>
+    
+    <!-- templates -->
+
+    <!--guide page template-->
+    <script type="text/x-kendo-tmpl" id="guide-page-template">
+        <div>
+            <p class="guide-page-title">#: PageTitle #</p>
+            <div class="guide-page-content">#= PageContent #</div>
+        </div>
+    </script>
+ 
+</body>
+</html>

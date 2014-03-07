@@ -3,7 +3,7 @@
   <PropertyGroup>
     <ProjectGuid>0b65d60d-a1c5-4863-9fac-f86932a08edb</ProjectGuid>
     <ProjectTypeGuids>{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}</ProjectTypeGuids>
-    <AppIdentifier>com.telerik.MyUoB</AppIdentifier>
+    <AppIdentifier>uk.ac.birmingham.m.MyUoB</AppIdentifier>
     <ProjectName>My UoB</ProjectName>
     <IsRunnable>true</IsRunnable>
     <FrameworkVersion>3.2.0</FrameworkVersion>
@@ -13,7 +13,7 @@
     <iOSStatusBarStyle>Default</iOSStatusBarStyle>
     <AndroidHardwareAcceleration>false</AndroidHardwareAcceleration>
     <BundleVersion>1.0</BundleVersion>
-    <iOSDisplayName />
+    <iOSDisplayName>My UoB</iOSDisplayName>
     <iOSDeviceFamily>1;2</iOSDeviceFamily>
     <iOSBackgroundMode />
     <AndroidVersionCode>2</AndroidVersionCode>
