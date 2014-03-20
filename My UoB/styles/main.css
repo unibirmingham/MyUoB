@@ -255,3 +255,13 @@ div.news-img img {
 {
     content: "\e0f1";
 }
+
+/* settings */
+
+ul#settingsOptions li.info {
+    font-size: 1em;
+    line-height: normal;
+    margin-left: 0.2rem;
+	margin-right: 0.2rem;
+    color:#2e5968;
+}

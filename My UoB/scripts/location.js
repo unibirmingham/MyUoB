@@ -116,7 +116,7 @@
             app.locationService.viewModel.onNavigateHome.apply(app.locationService.viewModel, []);
         },
 
-        show: function () {
+        show: function (e) {
             if (!app.locationService.viewModel.get("isGoogleMapsInitialized")) {
                 return;
             }
@@ -127,6 +127,10 @@
 
             //resize the map in case the orientation has been changed while showing other tab
             google.maps.event.trigger(map, "resize");
+            //alert(e.dataItem);
+            
+            
+            
         },
 
         hide: function () {

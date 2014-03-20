@@ -34,12 +34,46 @@
     <div id="tabstrip-settings" data-after-show="settingsShow" data-init="settingsInit" data-role="view" data-title="Settings">
         <div class="view-content">
             <h2 class="settings-title">App Settings</h2>
+        <!--
         <h3>Privacy settings</h3>
         <p>This app tracks usage, using Google Analytics so that we can learn from user behaviour and provide a better app in the future. No personal or user identifiable data will be collected, but if you would prefer for the app not to collect such data please select OFF below.</p>    
         <ul data-role="listview" data-style="inset" >
-            <!--<li>Usage tracking <input type="checkbox" id="usage-tracking-switch" data-role="switch" data-change="onTrackingChange"/>-->
-            <li>Usage tracking <input id="usage-tracking-switch" />
+        	<li>Usage tracking <input id="usage-tracking-switch" />
         </ul>
+        -->
+            
+            
+            <ul id="settingsOptions" data-role="listview" data-style="inset" data-type="group">
+                <li id="privacySettings">Privacy Settings
+                    <!--<ul>
+                        <li>This app tracks usage, using Google Analytics so that we can learn from user behaviour and provide a better app in the future. No personal or user identifiable data will be collected, but if you would prefer for the app not to collect such data please select OFF below.</li>
+        					<ul data-role="listview" >-->
+                    		<ul>
+        						<li class="info">This app tracks usage, using Google Analytics so that we can learn from user behaviour and provide a better app in the future. No personal or user identifiable data will be collected, but if you would prefer for the app not to collect such data please select OFF below.</li>
+                                <li>Usage tracking <input id="usage-tracking-switch" /></li>
+        					</ul>
+        			<!--	</li>
+                    </ul>-->
+                </li>
+                <li id="newsSettings">News
+                	<ul>
+                        <li><label><input id="student-news-switch" />Student News</label></li>
+                        <li><label><input id="research-news-switch" />Research News</label></li>
+                        <li><label><input id="sport-news-switch" />Sport News</label></li>
+                    </ul>
+                </li>
+                <li id="eventsSettings">Events
+                	<ul>
+                        <li><label><input id="student-events-switch" />Student Events</label></li>
+                        <li><label><input id="sport-events-switch" />Sport Events</label></li>
+                        <li><label><input id="performance-events-switch" />Performance</label></li>                        
+                        <li><label><input id="exhibition-events-switch" />Exhibitions</label></li>
+                        <li><label><input id="lecture-events-switch" />Lectures & Talks</label></li>                        
+                    </ul>
+                </li>
+            </ul>
+            
+                                    
         </div>
     </div>
     
@@ -59,7 +93,7 @@
     </div>
                 
     <!--Events screen-->
-    <div id="tabstrip-events" data-role="view" data-init="eventListViewPullWithEndless" data-title="Events">
+    <div id="tabstrip-events" data-role="view" data-show="eventListViewPullWithEndless" data-title="Events">
         <div class="events-title">UoB Events</div>
         <ul id="pull-eventslistview" class="events-list"></ul>
     </div>
@@ -71,7 +105,7 @@
     </div>
     
     <!--News screen-->
-    <div id="tabstrip-news" data-role="view" data-title="News" data-init="newsListViewPullWithEndless">
+    <div id="tabstrip-news" data-role="view" data-title="News" data-show="newsListViewPullWithEndless">
         <div class="news-title">UoB News</div>
         <ul id="pull-newslistview" class="news-list"></ul>
         <!--<p>News goes here...</p>-->
@@ -138,10 +172,12 @@
     </script>
     
     <script>
-            app.application = new kendo.mobile.Application(document.body, { 
+        app.application = new kendo.mobile.Application(document.body, { 
             layout: "tabstrip-layout"
         });
-
+		$(document).ready(function () {
+        	$("#panelBar").kendoPanelBar();
+    });
     </script>
     
 </body>

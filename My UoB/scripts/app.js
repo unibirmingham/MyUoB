@@ -27,10 +27,29 @@ function onDeviceReady() {
         gaPlugin.init(nativePluginResultHandler, nativePluginErrorHandler, "UA-47250154-2", 5);
         log('gaPlugin initialised');
     }
+    
+    
+    //News and Events preferences
+    if (!localStorage.getItem('newspreferences')) {
+        	localStorage.setItem('student-news',true);
+        	localStorage.setItem('research-news',false);
+        	localStorage.setItem('sport-news',false);
+        	localStorage.setItem('newspreferences','set');
+	}
+    if (!localStorage.getItem('eventspreferences')) {
+        	localStorage.setItem('performance-events',false);
+        	localStorage.setItem('exhibition-events',false);
+        	localStorage.setItem('lecture-events',false);
+        	localStorage.setItem('sport-events',false);
+        	localStorage.setItem('student-events',true);
+        	localStorage.setItem('eventspreferences','set');
+	}
 
     $('#clearLog').on('click', function() {
         $('#log').val('');
     });
+    
+    
                         
 }
 
@@ -57,30 +76,54 @@ function goingAway() {
 
 //VIEW Init/Change Events
 
+
+
+
 //EVENTS
 function eventListViewPullWithEndless(e) {
+    
+    var ekeyStr = "";
+    var eventsurl = "http://www.birmingham.ac.uk/web_services/Events.svc/";
+    if (localStorage.getItem('student-events')==='true') {
+        ekeyStr += "students,"
+    }
+    if (localStorage.getItem('sport-events')==='true') {
+        ekeyStr += "sport,"
+    }
+    
 
     app.application.showLoading();
-    var dataSource = new kendo.data.DataSource({
-        transport: {
-            read: {
-                url: "http://www.birmingham.ac.uk/web_services/Events.svc/?folderPath=/events",
-                dataType: "json"
-            }
-        },
-        serverPaging: true,
-        pageSize: 10,
-        change: function (data) {
-            app.application.hideLoading();
-        }
-    });
-
-    $("#pull-eventslistview").kendoMobileListView({
-        dataSource: dataSource,
-        template: $("#events-template").text(),
-        pullToRefresh: true
-    });
+    var dataSource = null;
     
+    if (ekeyStr.length>1) {
+		ekeyStr = ekeyStr.substring(0,ekeyStr.length-1);
+        
+        eventsurl += "?keywords=" + ekeyStr;
+    
+    	dataSource = new kendo.data.DataSource({
+    	    transport: {
+    	        read: {
+    	            url: eventsurl,
+    	            dataType: "json"
+    	        }
+    	    },
+    	    serverPaging: true,
+    	    pageSize: 10,
+    	    change: function (data) {
+    	        app.application.hideLoading();
+    	    }
+    	});
+	
+	    $("#pull-eventslistview").kendoMobileListView({
+	        dataSource: dataSource,
+	        template: $("#events-template").text(),
+	        pullToRefresh: true
+	    });
+    }
+    else {
+        $("#pull-eventslistview").kendoMobileListView().html("<li><div class='news-item'>No events currently available - have you disabled all events sources in your <a href='#tabstrip-settings'>settings</a>?</div></li>");
+        app.application.hideLoading();
+    }
    
     ScreenButtonClicked("events");
     log("stored:" + localStorage.getItem('allowUsageTracking'));
@@ -125,29 +168,50 @@ function eventItemView(e) {
 
 //NEWS
 function newsListViewPullWithEndless(e) {
-
-    app.application.showLoading();
-    var dataSource = new kendo.data.DataSource({
-        transport: {
-            read: {
-                url: "http://www.birmingham.ac.uk/web_services/News.svc/?noOfItems=40",
-                dataType: "json"
-            }
-        },
-        serverPaging: true,
-        pageSize: 10,
-        change: function (data) {
-            app.application.hideLoading();
-        }
-    });
-
-    $("#pull-newslistview").kendoMobileListView({
-        dataSource: dataSource,
-        template: $("#news-template").text(),
-        pullToRefresh: true
-    });
     
-   
+    //determine what's required: limit needed as is order by
+    var keyStr = "";
+    var newsurl = "http://www.birmingham.ac.uk/web_services/News.svc/";
+    if (localStorage.getItem('student-news')==='true') {
+        keyStr += "students,"
+    }
+    if (localStorage.getItem('research-news')==='true') {
+        keyStr += "research,"
+    }
+    if (localStorage.getItem('sport-news')==='true') {
+        keyStr += "sport,"
+    }
+    
+    app.application.showLoading();
+    var dataSource = null;
+    
+    if (keyStr.length>1) {
+        newsurl += "?keywords=" + keyStr;
+    	dataSource = new kendo.data.DataSource({
+        	transport: {
+            	read: {
+            	    url: newsurl,
+            	    dataType: "json"
+            	}
+        	},
+        	serverPaging: true,
+        	pageSize: 10,
+        	change: function (data) {
+            	app.application.hideLoading();
+        	}
+    	});
+
+    	$("#pull-newslistview").kendoMobileListView({
+    	    dataSource: dataSource,
+    	    template: $("#news-template").text(),
+    	    pullToRefresh: true
+    	});
+    
+    }
+    else {
+        $("#pull-newslistview").kendoMobileListView().html("<li><div class='news-item'>No news currently available - have you disabled all news sources in your <a href='#tabstrip-settings'>settings</a>?</div></li>");
+        app.application.hideLoading();
+    }
     ScreenButtonClicked("news");
     log("stored:" + localStorage.getItem('allowUsageTracking'));
     
@@ -221,10 +285,77 @@ function settingsInit() {
         change: onTrackingChange
     });
     
+    //news
+    var studentNewsVal = false;
+    if (localStorage.getItem('student-news')==='true') {
+        studentNewsVal = true;
+    }
+    var researchNewsVal = false;
+    if (localStorage.getItem('research-news')==='true') {
+        researchNewsVal = true;
+    }
+    var sportNewsVal = false;
+    if (localStorage.getItem('sport-news')==='true') {
+        sportNewsVal = true;
+    }
+    $("#research-news-switch").kendoMobileSwitch({
+        checked: researchNewsVal,
+        change: onNewsPrefChange
+    });
+    $("#student-news-switch").kendoMobileSwitch({
+        checked: studentNewsVal,
+        change: onNewsPrefChange
+    });
+    $("#sport-news-switch").kendoMobileSwitch({
+        checked: sportNewsVal,
+        change: onNewsPrefChange
+    });
+    
+    //events
+    var studentEventsVal = false;
+    if (localStorage.getItem('student-events')==='true') {
+        studentEventsVal=true;
+    }
+    var performanceEventsVal = false;
+    if (localStorage.getItem('performance-events')==='true') {
+        performanceEventsVal = true;
+    }
+    var sportEventsVal = false;
+    if (localStorage.getItem('sport-events')==='true') {
+        sportEventsVal = true;
+    }
+    var lectureEventsVal = false;
+    if (localStorage.getItem('lecture-events')==='true') {
+        lectureEventsVal = true;
+    }
+    var exhibitionEventsVal = false;
+    if (localStorage.getItem('exhibition-events')==='true') {
+        exhibitionEventsVal = true;
+    }
+    $("#performance-events-switch").kendoMobileSwitch({
+        checked: performanceEventsVal,
+        change: onNewsPrefChange
+    });
+    $("#student-events-switch").kendoMobileSwitch({
+        checked: studentEventsVal,
+        change: onNewsPrefChange
+    });
+    $("#sport-events-switch").kendoMobileSwitch({
+        checked: sportEventsVal,
+        change: onNewsPrefChange
+    });
+    $("#lecture-events-switch").kendoMobileSwitch({
+        checked: lectureEventsVal,
+        change: onNewsPrefChange
+    });
+    $("#exhibition-events-switch").kendoMobileSwitch({
+        checked: exhibitionEventsVal,
+        change: onNewsPrefChange
+    });
 }
 
 function settingsShow() {
-        ScreenButtonClicked("settings");
+    ScreenButtonClicked("settings");
     log("stored:" + localStorage.getItem('allowUsageTracking'));
 }
 
@@ -271,6 +402,21 @@ function onTrackingChange(e) {
         gaPlugin.init(nativePluginResultHandler, nativePluginErrorHandler, "UA-47250154-2", 5);
         log("start");
     }
+}
+
+function onNewsPrefChange(e) {
+    
+    //alert(e + ": " + e.target + ": " + e.checked + ": " + this.element.attr("id") )
+    var newsVar = this.element.attr("id");
+    var newsVal = e.checked;
+    var localStor = newsVar.replace("-switch", "");
+    log(localStor + " : " + newsVal);
+    localStorage.setItem(localStor, newsVal);
+    
+}
+
+function onEventsPrefChange(e) {
+    
 }
 
 //LOGGING    
