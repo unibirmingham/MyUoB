@@ -1,14 +1,48 @@
 (function (global) {
+    
+    if (navigator.onLine) {
+        guideUrl = "http://www.butler.bham.ac.uk/pocket_guides/index.json";
+    }
+    else {
+        if (!localStorage.getItem('pocketguide')) {
+            guideUrl = "data/pocket-guide.json";
+        }
+    }
+    
     guide = new kendo.data.DataSource({
+    	/*
         transport: { 
-            read: { 
-                //url: "data/pocket-guide.json", 
-                url: "http://www.butler.bham.ac.uk/pocket_guides/index.json",
+        	read: { 
+            	url: guideUrl,
                 dataType: "json"
-                
             }
         }
+        */
+		transport: {
+            read: function(operation) {
+	            var cachedData = localStorage.getItem("pocketGuide");
+				//var cachedDate = localStorage.getItem("lastCached");
+            	if((cachedData != null || cachedData != undefined) && (!navigator.onLine)) {
+                	//if local data exists and we're offline, load from it
+                	operation.success(JSON.parse(cachedData));
+            	} else {
+                	$.ajax({ 
+                   	 url: guideUrl,
+                   	 dataType: "json",
+                   	 success: function(response) {
+                   	     //store response, if online 
+                   	     if (navigator.onLine) {
+                                localStorage.setItem("pocketGuide", JSON.stringify(response));
+                            }
+                   	     //pass the pass response to the DataSource
+                   	     operation.success(response);
+                   	 }
+                	});
+            	}
+        	}
+        }   
     })
+        
 })(window);
 
 function guideShow(e) {

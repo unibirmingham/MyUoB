@@ -2,6 +2,7 @@
     
  var app = global.app = global.app || {};
  var gaPlugin;
+ var offLine;
     
     })(window);
                 
@@ -13,7 +14,29 @@ function initialize() {
 
 function onDeviceReady() {
     
- 
+ 	window.addEventListener("offline", function() {        
+        $(".offlineMessage").show();
+        hideNetworkDependentItems();
+        offLine = true;
+    });
+    window.addEventListener("online", function() {
+        $(".offlineMessage").hide();
+        showNetworkDependentItems();
+		offLine = false;
+    });
+    
+    
+    
+    if (navigator.onLine) {
+    	$(".offlineMessage").hide();
+        offLine = false;
+    	showNetworkDependentItems();    
+    } else {
+    	$(".offlineMessage").show();
+    	hideNetworkDependentItems();    
+        offLine = true;
+    }
+   
     gaPlugin = window.plugins.gaPlugin;
     log("stored:" + localStorage.getItem('allowUsageTracking'));
                                 
@@ -27,7 +50,6 @@ function onDeviceReady() {
         gaPlugin.init(nativePluginResultHandler, nativePluginErrorHandler, "UA-47250154-2", 5);
         log('gaPlugin initialised');
     }
-    
     
     //News and Events preferences
     if (!localStorage.getItem('newspreferences')) {
@@ -74,6 +96,21 @@ function goingAway() {
 }
     
 
+function hideNetworkDependentItems() {
+    $("li a.networkDependent").removeAttr("data-role").click(function(e) {
+        	//e.preventDefault();
+        	//return false;
+    	}).parent().addClass("itemUnavailable");
+}
+
+function showNetworkDependentItems() {
+    $("li a.networkDependent").attr("data-role");
+    $("li a.networkDependent").click(function(e) {
+        	//return true;
+    	}).parent().removeClass("itemUnavailable");
+}
+
+
 //VIEW Init/Change Events
 
 
@@ -90,43 +127,49 @@ function eventListViewPullWithEndless(e) {
     if (localStorage.getItem('sport-events')==='true') {
         ekeyStr += "sport,"
     }
-    
-
-    app.application.showLoading();
-    var dataSource = null;
-    
-    if (ekeyStr.length>1) {
-		ekeyStr = ekeyStr.substring(0,ekeyStr.length-1);
+    //alert (offLine);    
+	if (!offLine) {
+        app.application.showLoading();
+        var dataSource = null;
         
-        eventsurl += "?keywords=" + ekeyStr;
-    
-    	dataSource = new kendo.data.DataSource({
-    	    transport: {
-    	        read: {
-    	            url: eventsurl,
-    	            dataType: "json"
-    	        }
-    	    },
-    	    serverPaging: true,
-    	    pageSize: 10,
-    	    change: function (data) {
-    	        app.application.hideLoading();
-    	    }
-    	});
-	
-	    $("#pull-eventslistview").kendoMobileListView({
-	        dataSource: dataSource,
-	        template: $("#events-template").text(),
-	        pullToRefresh: true
-	    });
+        if (ekeyStr.length>1) {
+    		ekeyStr = ekeyStr.substring(0,ekeyStr.length-1);
+            
+            eventsurl += "?keywords=" + ekeyStr;
+        
+        	dataSource = new kendo.data.DataSource({
+        	    transport: {
+        	        read: {
+        	            url: eventsurl,
+        	            dataType: "json"
+        	        }
+        	    },
+        	    serverPaging: true,
+        	    pageSize: 10,
+        	    change: function (data) {
+        	        app.application.hideLoading();
+        	    }
+        	});
+    	
+    	    $("#pull-eventslistview").kendoMobileListView({
+    	        dataSource: dataSource,
+    	        template: $("#events-template").text(),
+    	        pullToRefresh: true
+    	    });
+        }
+        else {
+            $("#pull-eventslistview").kendoMobileListView().html("<li><div class='news-item'>No events currently available - have you disabled all events sources in your <a href='#tabstrip-settings'>settings</a>?</div></li>");
+            app.application.hideLoading();
+        }
+       
+        ScreenButtonClicked("events");
+        log("stored:" + localStorage.getItem('allowUsageTracking'));
     }
     else {
-        $("#pull-eventslistview").kendoMobileListView().html("<li><div class='news-item'>No events currently available - have you disabled all events sources in your <a href='#tabstrip-settings'>settings</a>?</div></li>");
-        app.application.hideLoading();
+          
+		$("#pull-eventslistview").kendoMobileListView().html("<li><div class='event-item'>Events feed requires network connection</div></li>");        
+    
     }
-   
-    ScreenButtonClicked("events");
-    log("stored:" + localStorage.getItem('allowUsageTracking'));
 }
 
 
@@ -173,48 +216,58 @@ function newsListViewPullWithEndless(e) {
     var keyStr = "";
     var newsurl = "http://www.birmingham.ac.uk/web_services/News.svc/";
     if (localStorage.getItem('student-news')==='true') {
-        keyStr += "students,"
+        keyStr += "students "
     }
     if (localStorage.getItem('research-news')==='true') {
-        keyStr += "research,"
+        keyStr += "research "
     }
     if (localStorage.getItem('sport-news')==='true') {
-        keyStr += "sport,"
+        keyStr += "sport"
     }
+    keyStr = $.trim(keyStr)
     
-    app.application.showLoading();
-    var dataSource = null;
+    if (!offLine) {
     
-    if (keyStr.length>1) {
-        newsurl += "?keywords=" + keyStr;
-    	dataSource = new kendo.data.DataSource({
-        	transport: {
-            	read: {
-            	    url: newsurl,
-            	    dataType: "json"
+        app.application.showLoading();
+        var dataSource = null;
+        
+        if (keyStr.length>1) {
+            if(keyStr.indexOf(" ") != -1){
+            	newsurl += "?keywords=" + keyStr + "&operator=OR&days=10";
+            } else {
+            	newsurl += "?keywords=" + keyStr + "&days=10";   
+            }
+        	dataSource = new kendo.data.DataSource({
+            	transport: {
+                	read: {
+                	    url: newsurl,
+                	    dataType: "json"
+                	}
+            	},
+            	//serverPaging: true,
+            	//pageSize: 10,
+            	change: function (data) {
+                	app.application.hideLoading();
             	}
-        	},
-        	serverPaging: true,
-        	pageSize: 10,
-        	change: function (data) {
-            	app.application.hideLoading();
-        	}
-    	});
+        	});
 
-    	$("#pull-newslistview").kendoMobileListView({
-    	    dataSource: dataSource,
-    	    template: $("#news-template").text(),
-    	    pullToRefresh: true
-    	});
-    
+        	$("#pull-newslistview").kendoMobileListView({
+        	    dataSource: dataSource,
+        	    template: $("#news-template").text(),
+        	    pullToRefresh: true
+        	});
+        
+        }
+        else {
+            $("#pull-newslistview").kendoMobileListView().html("<li><div class='news-item'>No news currently available - have you disabled all news sources in your <a href='#tabstrip-settings'>settings</a>?</div></li>");
+            app.application.hideLoading();
+        }
+        ScreenButtonClicked("news");
+        log("stored:" + localStorage.getItem('allowUsageTracking'));
     }
     else {
-        $("#pull-newslistview").kendoMobileListView().html("<li><div class='news-item'>No news currently available - have you disabled all news sources in your <a href='#tabstrip-settings'>settings</a>?</div></li>");
-        app.application.hideLoading();
+		$("#pull-newslistview").kendoMobileListView().html("<li><div class='news-item'>News feed requires network connection</div></li>");        
     }
-    ScreenButtonClicked("news");
-    log("stored:" + localStorage.getItem('allowUsageTracking'));
-    
 }
 
 //News Item

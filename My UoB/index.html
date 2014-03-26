@@ -19,12 +19,17 @@
 <body onload="initialize();" onunload="goingAway();">
     <!--Home-->
     <div id="tabstrip-home" data-role="view" data-title="Home" data-after-show="homeShow" data-init="homeInit" >
+        <div class="offlineMessage warning message" data-transition="slidedown">
+            <h3>No network found</h3>
+        	<p>Much of this app depends on network availability. Please check network connection and try again.
+                <br/>Unavailable functions will be greyed out.</p>
+        </div>
         <div class="view-content">
             <ul data-role="listview" datatype="group">
                 <li><a data-icon="organize" href="guide.html" data-transition="slide">Pocket Guide</a></li>
-                <li><a data-icon="cal" href="#tabstrip-events" data-transition="slide">Events</a></li>
-                <li><a data-icon="justify" href="#tabstrip-news" data-transition="slide">News</a></li>
-                <li><a data-icon="globe" href="#tabstrip-location" data-transition="slide">Location</a></li>
+                <li><a data-icon="cal" href="#tabstrip-events" class="networkDependent" data-transition="slide">Events</a></li>
+                <li><a data-icon="justify" href="#tabstrip-news" class="networkDependent" data-transition="slide">News</a></li>
+                <li><a data-icon="globe" href="#tabstrip-location" class="networkDependent" data-transition="slide">Location</a></li>
                 <li><a data-icon="organize" href="autopocket.html" data-transition="slide">Auto Pocket Guide</a></li>
             </ul>
         </div>
@@ -107,6 +112,7 @@
     <!--News screen-->
     <div id="tabstrip-news" data-role="view" data-title="News" data-show="newsListViewPullWithEndless">
         <div class="news-title">UoB News</div>
+        
         <ul id="pull-newslistview" class="news-list"></ul>
         <!--<p>News goes here...</p>-->
     </div>
