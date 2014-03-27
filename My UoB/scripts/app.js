@@ -57,14 +57,16 @@ function onDeviceReady() {
         	localStorage.setItem('research-news',false);
         	localStorage.setItem('sport-news',false);
         	localStorage.setItem('newspreferences','set');
+        log('setting news preferences');
 	}
     if (!localStorage.getItem('eventspreferences')) {
-        	localStorage.setItem('performance-events',false);
+       	localStorage.setItem('performance-events',false);
         	localStorage.setItem('exhibition-events',false);
         	localStorage.setItem('lecture-events',false);
         	localStorage.setItem('sport-events',false);
         	localStorage.setItem('student-events',true);
         	localStorage.setItem('eventspreferences','set');
+        log('setting events prefernces');
 	}
 
     $('#clearLog').on('click', function() {
@@ -120,12 +122,28 @@ function showNetworkDependentItems() {
 function eventListViewPullWithEndless(e) {
     
     var ekeyStr = "";
-    var eventsurl = "http://www.birmingham.ac.uk/web_services/Events.svc/";
+    dateNow = new Date();
+    var twoWeeksTime = new Date();
+	twoWeeksTime.setDate(+14);
+    //format
+    dateNowIso = dateNow.toISOString();
+    twoWeeksTimeIso = twoWeeksTime.toISOString();
+    
+    var eventsurl = "http://www.birmingham.ac.uk/web_services/Events.svc/?startDate=" + dateNowIso + "&endDate=" + twoWeeksTimeIso;
     if (localStorage.getItem('student-events')==='true') {
-        ekeyStr += "students,"
+        ekeyStr += "students "
     }
     if (localStorage.getItem('sport-events')==='true') {
-        ekeyStr += "sport,"
+        ekeyStr += "sport "
+    }
+    if (localStorage.getItem('performance-events')==='true') {
+        ekeyStr += "performance "
+    }
+    if (localStorage.getItem('exhibition-events')==='true') {
+        ekeyStr += "exhibibition "
+    }
+    if (localStorage.getItem('lecture-events')==='true') {
+        ekeyStr += "lecture "
     }
     //alert (offLine);    
 	if (!offLine) {
@@ -135,7 +153,7 @@ function eventListViewPullWithEndless(e) {
         if (ekeyStr.length>1) {
     		ekeyStr = ekeyStr.substring(0,ekeyStr.length-1);
             
-            eventsurl += "?keywords=" + ekeyStr;
+            eventsurl += "&keywords=" + ekeyStr;
         
         	dataSource = new kendo.data.DataSource({
         	    transport: {
@@ -144,8 +162,8 @@ function eventListViewPullWithEndless(e) {
         	            dataType: "json"
         	        }
         	    },
-        	    serverPaging: true,
-        	    pageSize: 10,
+        	    /*serverPaging: true,
+        	    pageSize: 10,*/
         	    change: function (data) {
         	        app.application.hideLoading();
         	    }
@@ -162,8 +180,8 @@ function eventListViewPullWithEndless(e) {
             app.application.hideLoading();
         }
        
-        ScreenButtonClicked("events");
-        log("stored:" + localStorage.getItem('allowUsageTracking'));
+//        ScreenButtonClicked("events");
+//        log("stored:" + localStorage.getItem('allowUsageTracking'));
     }
     else {
           
@@ -197,7 +215,7 @@ function eventItemView(e) {
         change: function (data) {
             var template = kendo.template($("#event-template").text());
             var event = kendo.render(template, this.view());
-            log(event);
+            //log(event);
             $("#event-detail").html(event);
             app.application.hideLoading();
         }
@@ -205,8 +223,8 @@ function eventItemView(e) {
     
     eventSource.read();
     
-    ScreenButtonClicked("event item:");
-    log("stored:" + localStorage.getItem('allowUsageTracking') + ": EVENTITEM");
+//    ScreenButtonClicked("event item:");
+//    log("stored:" + localStorage.getItem('allowUsageTracking') + ": EVENTITEM");
 }
 
 //NEWS
@@ -262,8 +280,8 @@ function newsListViewPullWithEndless(e) {
             $("#pull-newslistview").kendoMobileListView().html("<li><div class='news-item'>No news currently available - have you disabled all news sources in your <a href='#tabstrip-settings'>settings</a>?</div></li>");
             app.application.hideLoading();
         }
-        ScreenButtonClicked("news");
-        log("stored:" + localStorage.getItem('allowUsageTracking'));
+//        ScreenButtonClicked("news");
+//        log("stored:" + localStorage.getItem('allowUsageTracking'));
     }
     else {
 		$("#pull-newslistview").kendoMobileListView().html("<li><div class='news-item'>News feed requires network connection</div></li>");        
@@ -294,7 +312,7 @@ function newsItemView(e) {
         change: function (data) {
             var template = kendo.template($("#news-item-template").text());
             var newsitem = kendo.render(template, this.view());
-            log(newsitem);
+            //log(newsitem);
             $("#news-detail").html(newsitem);
             app.application.hideLoading();
         }
@@ -302,8 +320,8 @@ function newsItemView(e) {
     
     newsSource.read();
     
-    ScreenButtonClicked("news item:");
-    log("stored:" + localStorage.getItem('allowUsageTracking') + ": NEWSITEM");
+//    ScreenButtonClicked("news item:");
+//    log("stored:" + localStorage.getItem('allowUsageTracking') + ": NEWSITEM");
 }
 
 //HOME view
@@ -316,20 +334,21 @@ function homeShow() {
 
 //INFO view
 function infoShow() {
-    ScreenButtonClicked("info");
-    log("stored:" + localStorage.getItem('allowUsageTracking'));
+    //ScreenButtonClicked("info");
+    //log("stored:" + localStorage.getItem('allowUsageTracking'));
 }
 
 //MAP view
 function mapInit() {
-        ScreenButtonClicked("map");
-        log("stored:" + localStorage.getItem('allowUsageTracking'));
+//        ScreenButtonClicked("map");
+//        log("stored:" + localStorage.getItem('allowUsageTracking'));
 }
 
 
 //SETTINGS screen
 function settingsInit() {
-    var switchVal = true;
+//function settingsShow()
+    switchVal = true;
     if (localStorage.getItem('allowUsageTracking')==="deny") {
         switchVal = false;    
     }
@@ -338,8 +357,7 @@ function settingsInit() {
         change: onTrackingChange
     });
     
-    //news
-    var studentNewsVal = false;
+ var studentNewsVal = false;
     if (localStorage.getItem('student-news')==='true') {
         studentNewsVal = true;
     }
@@ -408,30 +426,33 @@ function settingsInit() {
 }
 
 function settingsShow() {
-    ScreenButtonClicked("settings");
-    log("stored:" + localStorage.getItem('allowUsageTracking'));
+   // ScreenButtonClicked("settings");
+   // log("stored:" + localStorage.getItem('allowUsageTracking'));
+    
+       //news
+    
 }
 
 
 //Guide view
 function guideShow() {
-    ScreenButtonClicked("pocket-guide");
-    log("stored:" + localStorage.getItem('allowUsageTracking'));
+//    ScreenButtonClicked("pocket-guide");
+//    log("stored:" + localStorage.getItem('allowUsageTracking'));
 }
 function guideInit() {
     
 }
 function guideAdviceShow() {
-    ScreenButtonClicked("AdviceAndGuidanceIndex");
-    log("stored:" + localStorage.getItem('allowUsageTracking'));    
+//    ScreenButtonClicked("AdviceAndGuidanceIndex");
+//    log("stored:" + localStorage.getItem('allowUsageTracking'));    
 }
 function guideAdviceRepShow() {
-    ScreenButtonClicked("AdviceAndRepresentation");
-    log("stored:" + localStorage.getItem('allowUsageTracking'));
+//    ScreenButtonClicked("AdviceAndRepresentation");
+//    log("stored:" + localStorage.getItem('allowUsageTracking'));
 }
 function guideAdviceCounsellingShow() {
-    ScreenButtonClicked("CounsellingAndGuidance");
-    log("stored:" + localStorage.getItem('allowUsageTracking'));
+//    ScreenButtonClicked("CounsellingAndGuidance");
+//    log("stored:" + localStorage.getItem('allowUsageTracking'));
 }
 
 
@@ -460,12 +481,13 @@ function onTrackingChange(e) {
 function onNewsPrefChange(e) {
     
     //alert(e + ": " + e.target + ": " + e.checked + ": " + this.element.attr("id") )
+    log(e);
     var newsVar = this.element.attr("id");
     var newsVal = e.checked;
     var localStor = newsVar.replace("-switch", "");
     log(localStor + " : " + newsVal);
     localStorage.setItem(localStor, newsVal);
-    
+    log(localStor + " | " + localStorage.getItem(localStor));
 }
 
 function onEventsPrefChange(e) {
