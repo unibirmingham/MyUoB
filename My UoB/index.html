@@ -4,6 +4,7 @@
     <title>My UoB</title>
     <meta charset="utf-8" />
     <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+    <link href="fonts/font-awesome.min.css" rel="stylesheet" />
     <link href="styles/main.css" rel="stylesheet" />
     <link href="styles/guide.css" rel="stylesheet" />
     <link href="styles/location.css" rel="stylesheet" />
@@ -29,6 +30,8 @@
                 
                 <li><a data-icon="justify" href="#tabstrip-news" class="networkDependent" data-transition="slide">News</a></li>
                 <li><a data-icon="cal" href="#tabstrip-events" class="networkDependent" data-transition="slide">Events</a></li>
+                
+                <li><a data-icon="twitter" href="#tabstrip-twitter" class="fa networkDependent" data-transition="slide">UoB Twitter Feed</a></li>
                 <li><a data-icon="globe" href="#tabstrip-location" class="networkDependent" data-transition="slide">Location</a></li>
                 <!--<li><a data-icon="organize" href="guide.html" data-transition="slide">Pocket Guide</a></li>-->
                 <li><a data-icon="organize" href="autopocket.html" data-transition="slide">Auto Pocket Guide</a></li>
@@ -123,6 +126,14 @@
         <div id="news-detail">
         </div>
     </div>
+    
+    <!--Twitter screen-->
+    <div id="tabstrip-twitter" data-role="view" data-title="News" data-show="getTweets">
+        <div class="news-title">UoB Twitter Feed</div>
+        
+        <ul id="pull-twitterlistview" class="tweets-list"></ul>
+        <!--<p>Tweets go here...</p>-->
+    </div>
 
     <!--Map screen-->
     <div id="tabstrip-location"
@@ -176,6 +187,7 @@
         //load templates
         templateLoader.loadExtTemplate("templates/news.tmpl.html");
         templateLoader.loadExtTemplate("templates/events.tmpl.html");
+        templateLoader.loadExtTemplate("templates/tweets.tmpl.html");
     </script>
     
     <script>

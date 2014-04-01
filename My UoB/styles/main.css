@@ -321,6 +321,23 @@ div.offlineMessage {
     content: "\e0f1";
 }
 
+/*try font awesome */
+.fa .km-icon:after,
+.fa .km-icon:before
+{
+    font: 1em/1em 'FontAwesome';
+}
+
+.fa {
+    font-family: helvetica;
+}
+
+/*try twitter */
+.km-twitter:after,
+.km-twitter:before {
+  content: "\F099";
+}
+
 /* settings */
 
 ul#settingsOptions li.info {
@@ -329,4 +346,8 @@ ul#settingsOptions li.info {
     margin-left: 0.2rem;
 	margin-right: 0.2rem;
     color:#2e5968;
+}
+
+.tweet-text {
+    cursor:pointer;
 }

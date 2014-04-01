@@ -494,6 +494,90 @@ function onEventsPrefChange(e) {
     
 }
 
+//twitter
+
+//$('#tabstrip-twitter').live('pageshow', function(event) {
+//	getTweets("unibirmingham");
+//}); 
+
+function getTweets() {    
+    //$.mobile.showPageLoadingMsg();
+    app.application.showLoading();
+    var twitter_user  = "unibirmingham";
+    //pull-twitterlistview
+    /*$.getJSON(
+        "http://tucksoftware.co.uk/twitter-api/index.php?screenname=" + twitter_user,
+        function(data) {
+            $('#tweetsList li').remove();
+            $.each(data, function(i, tweet) {
+
+                if(tweet.text !== undefined) {
+                  // Calculate how many hours/days ago was the tweet posted
+                  var date_tweet = new Date(tweet.created_at);
+                  var date_now   = new Date();
+                  var date_diff  = date_now - date_tweet;
+                  var hours      = Math.round(date_diff/(1000*60*60));
+                  var days = 0;
+                  var timeStr = '';
+                  if (hours>=24) {
+                        days =Math.round(hours/24);
+                        var dayUnit = "day";
+                        if (days>1) {
+                            dayUnit = "days";
+                        }
+                        timeStr = '<span class="tweet_days">' + days + ' ' + dayUnit + ' ago<\/span>';
+                  }
+                  else {
+                        var hourUnit = "hour";
+                        if (hours>1) {
+                            hourUnit = "hours";
+                        }
+                        timeStr = '<span class="tweet_hours">' + hours + ' ' + hourUnit + ' ago<\/span>';
+                  }
+                  
+                  
+                  // Build the html string for the current tweet
+                  var tweet_url = "http://www.twitter.com/" + twitter_user + "/status/" + tweet.id_str;
+                  var tweet_html = '<div class="tweet_text">';
+                  tweet_html    += '<a onClick="window.open(\'' + tweet_url + '\', \'_system\')">';
+                      
+                  //tweet_html    += twitter_user + '/status/' + tweet.id_str + '">';
+                  tweet_html    += tweet.text + '</a>';
+                  tweet_html    += timeStr;
+                  tweet_html    += '</div>';
+        
+                  // Append html string to tweet_container div
+                  $('#pull-twitterlistview').append(tweet_html);
+                  //$('#pull-twitterlistview').listview('refresh');
+                  $('#pull-twitterlistview').kendoMobileListView().refresh;
+                }
+          });
+            //$.mobile.hidePageLoadingMsg();
+            app.application.hideLoading();
+        }
+    )
+*/    
+    var dataSource = new kendo.data.DataSource({
+            	transport: {
+                	read: {
+                	    url: "http://www.butler.bham.ac.uk/twitter-api/index.php?screenname=" + twitter_user,
+                	    dataType: "json"
+                	}
+            	},
+            	//serverPaging: true,
+            	//pageSize: 10,
+            	change: function (data) {
+                	app.application.hideLoading();
+            	}
+        	});
+
+        	$("#pull-twitterlistview").kendoMobileListView({
+        	    dataSource: dataSource,
+        	    template: $("#tweets-template").text(),
+        	    pullToRefresh: true
+        	});
+}
+
 //LOGGING    
 function log(msg) {
     $('#log').val($('#log').val() + msg + '\n');
@@ -510,4 +594,35 @@ function cleanOutHtmlTags(content) {
 
 function htmlDecode(value){
   return $('<div/>').html(value).text();
+}
+
+function timeAgo(created) {
+			var date_tweet = new Date(created);
+            var date_now   = new Date();
+            var date_diff  = date_now - date_tweet;
+            var hours      = Math.round(date_diff/(1000*60*60));
+            var days = 0;
+            var timeStr = '';
+            if (hours>=24) {
+            	days =Math.round(hours/24);
+                var dayUnit = "day";
+                if (days>1) {
+                	dayUnit = "days";
+                }
+                timeStr = '' + days + ' ' + dayUnit + '';
+            }
+            else {
+            	if (hours<1) {
+                	timeStr = 'Just now...';
+                }
+                else {
+                    var hourUnit = "hour";
+                
+                	if (hours>1) {
+                		hourUnit = "hours";
+                	}
+                	timeStr = '' + hours + ' ' + hourUnit + ' ago';
+            	}
+            }
+			return timeStr;
 }
