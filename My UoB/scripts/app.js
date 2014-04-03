@@ -44,7 +44,7 @@ function onDeviceReady() {
     if (!localStorage.getItem('allowUsageTracking')) {
         localStorage.setItem('allowUsageTracking','unset');
     }
-    console.log("AllowUsageTracking: " + localStorage.getItem('allowUsageTracking'));
+    log("AllowUsageTracking: " + localStorage.getItem('allowUsageTracking'));
                             
     if (localStorage.getItem('allowUsageTracking')!="deny") {
         gaPlugin.init(nativePluginResultHandler, nativePluginErrorHandler, "UA-47250154-2", 5);
@@ -128,7 +128,6 @@ function eventListViewPullWithEndless(e) {
     //format
     dateNowIso = dateNow.toISOString();
     twoWeeksTimeIso = twoWeeksTime.toISOString();
-    
     var eventsurl = "http://www.birmingham.ac.uk/web_services/Events.svc/?startDate=" + dateNowIso + "&endDate=" + twoWeeksTimeIso;
     if (localStorage.getItem('student-events')==='true') {
         ekeyStr += "students "
@@ -145,16 +144,19 @@ function eventListViewPullWithEndless(e) {
     if (localStorage.getItem('lecture-events')==='true') {
         ekeyStr += "lecture "
     }
-    //alert (offLine);    
-	if (!offLine) {
+	ekeyStr = $.trim(ekeyStr)
+    
+    if (!offLine) {
         app.application.showLoading();
         var dataSource = null;
         
         if (ekeyStr.length>1) {
-    		ekeyStr = ekeyStr.substring(0,ekeyStr.length-1);
-            
-            eventsurl += "&keywords=" + ekeyStr;
-        
+            if(ekeyStr.indexOf(" ") != -1){
+            	eventsurl += "&keywords=" + ekeyStr + "&keywordOperator=OR";
+            } else {
+            	eventsurl += "&keywords=" + ekeyStr + "";
+            }
+        	log("Events URL: " + eventsurl);
         	dataSource = new kendo.data.DataSource({
         	    transport: {
         	        read: {
@@ -162,8 +164,6 @@ function eventListViewPullWithEndless(e) {
         	            dataType: "json"
         	        }
         	    },
-        	    /*serverPaging: true,
-        	    pageSize: 10,*/
         	    change: function (data) {
         	        app.application.hideLoading();
         	    }
@@ -232,7 +232,8 @@ function newsListViewPullWithEndless(e) {
     
     //determine what's required: limit needed as is order by
     var keyStr = "";
-    var newsurl = "http://www.birmingham.ac.uk/web_services/News.svc/";
+    var newsurl = "http://www.birmingham.ac.uk/web_services/News.svc/?days=10";
+    
     if (localStorage.getItem('student-news')==='true') {
         keyStr += "students "
     }
@@ -251,11 +252,12 @@ function newsListViewPullWithEndless(e) {
         
         if (keyStr.length>1) {
             if(keyStr.indexOf(" ") != -1){
-            	newsurl += "?keywords=" + keyStr + "&operator=OR&days=10";
+            	newsurl += "&keywords=" + keyStr + "&keywordOperator=OR";
             } else {
-            	newsurl += "?keywords=" + keyStr + "&days=10";   
+            	newsurl += "&keywords=" + keyStr + "";   
             }
-        	dataSource = new kendo.data.DataSource({
+		log("News URL: " + newsurl);
+        dataSource = new kendo.data.DataSource({
             	transport: {
                 	read: {
                 	    url: newsurl,
