@@ -14,48 +14,55 @@
 </head>
 <body>
     <!--Home-->
-    <div id="tabstrip-pocket-guide" data-show="guideShow" data-role="view" data-title="TEST" class="guide-view">
+    <div id="tabstrip-pocket-guide" data-after-show="guideAfterShow" data-show="guideShow" data-init="guideInit" data-role="view" data-title="Pocket Guide" class="guide-view">
 
             <ul class="guide-list guide-item pocket-guide-index" id="pocket-guide-index"
                     data-role="listview"
                     data-source="guide"
                     data-click="onGuideIndexClick"
-                    data-template="guide-index-template2">
+                    data-template="guide-index-template">
             </ul>
  
     </div>
 
- 	<!-- Section -->
-    <div style="display:none;" data-show="guideSectionShow" data-role="view" id="guide-section" class="guide-view" data-title="Section Guide">
+ <!-- Section -->
+    <div data-role="view" id="guide-section" data-after-show="guideSectionAfterShow" data-show="guideSectionShow" data-init="guideSectionInit" class="guide-view" data-title="Section Guide">
             <ul data-role="listview" id="section-guide-index" class="guide-list guide-item pocket-guide-index"
                     data-source="guide"
                     data-click="onGuideSectionClick"
-                    data-template="guide-section-template2">
+                    data-template="guide-section-template">
         </ul>
+        <a class="nav-button" data-align="left"  data-role="button">Return to Index</a>
         
         </div>
     
     <!-- Page -->
-    <div style="display:none;" data-show="guidePageShow" data-role="view" id="guide-page" class="guide-view" data-title="Pocket Guide Page">
+    <div data-role="view" id="guide-page" data-after-show="guidePageShow" class="guide-view" data-title="Pocket Guide Page">
         <ul data-role="listview" id="section-guide-page" class="guide-list guide-item pocket-guide-index"
                     data-source="guide"
-                    data-template="guide-page-template2">
+                    data-template="guide-page-template">
         </ul>
         
+        <ul data-role="listview" id="section-guide-back"
+                    data-source="guide"
+                    data-click="onGuidePageClick"
+                    data-template="guide-page-back-template">
+            
+        </ul>
     </div>
     
     <!-- Feedback -->
-    <div style="display:none;" data-role="view" id="guide-page-feedback" class="guide-view" data-title="Pocket Guide Page">
+    <div data-role="view" id="guide-page-feedback" data-after-show="guideFeedbackShow" class="guide-view" data-title="Pocket Guide Page">
         <ul data-role="listview" id="section-guide-page" class="guide-list guide-item pocket-guide-index"
                     data-source="guide"
-                    data-template="guide-feedback-template2">
+                    data-template="guide-feedback-template">
         </ul>
         
-        
+        <a class="nav-button" data-align="left" href="tabstrip-pocket-guide" data-role="button">Return to Index</a>
     </div>
    
     <!--Layout-->
-    <div style="display:none;" data-role="layout" data-id="tabstrip-layout">
+    <div data-role="layout" data-id="tabstrip-layout">
 
         <!--Header-->
         <div data-role="header">
@@ -78,11 +85,11 @@
     </div>
     
     <!-- page specific scripts -->
-    <script src="scripts/guide2.js"></script>
+    <script src="scripts/guide.js"></script>
     
     <!-- templates -->
     <!--guide template-->
-    <script type="text/x-kendo-tmpl" id="guide-index-template2">
+    <script type="text/x-kendo-tmpl" id="guide-index-template">
         #if (PageFunction === "page") {#
             <span data-icon="${icon}"><a href="\#guide-page-feedback?id=${id}">${PageTitle}</a></span>
         #} else {#
@@ -91,12 +98,12 @@
     </script>
     
     <!--guide section template-->
-    <script type="text/x-kendo-tmpl" id="guide-section-template2">
+    <script type="text/x-kendo-tmpl" id="guide-section-template">
         <span data-icon="${icon}"><a href="\#guide-page?id=${id}">${PageTitle}</a></span>
     </script>
 
       <!--guide page template-->
-    <script type="text/x-kendo-tmpl" id="guide-page-template2">
+    <script type="text/x-kendo-tmpl" id="guide-page-template">
         <div>
             <p class="guide-page-title">#: PageTitle #</p>
             <div class="guide-page-content">#= PageContent #</div>
@@ -104,7 +111,7 @@
     </script>
     
     <!--guide feedback template-->
-    <script type="text/x-kendo-tmpl" id="guide-feedback-template2">
+    <script type="text/x-kendo-tmpl" id="guide-feedback-template">
         <div>
             <p class="guide-page-title">#: PageTitle #</p>
             <div class="guide-page-content">#= PageContent #</div>
@@ -112,7 +119,7 @@
     </script>
     
     <!-- button template -->
-    <script type="text/x-kendo-tmpl" id="guide-page-back-template2">
+    <script type="text/x-kendo-tmpl" id="guide-page-back-template">
         <a class="nav-button" data-role="button" id="backFromPage" data-align="left">return to indexy</a>
     </script>
 </body>
