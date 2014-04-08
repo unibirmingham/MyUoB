@@ -196,11 +196,11 @@ div.tweet-item a.tweet-link {
     padding-right:0;
     margin-right:0;
 	    cursor: pointer;
-    margin-top: 1em!important;
+    /*margin-top: 0.5em!important;*/
 }
 
 div.tweet-item a.tweet-link {
-    margin-top: .5em!important;
+    /*margin-top: 0em!important;*/
     
 }
 
@@ -255,7 +255,6 @@ div.news-img img {
     
     display: block;
         height: 230px;
-        /*background: url(../../content/mobile/shared/titanic1.jpg) no-repeat center center;*/
         -webkit-background-size: 100% auto;
         background-size: 100% auto;
         margin: 1em auto;
