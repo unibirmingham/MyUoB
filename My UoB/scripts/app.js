@@ -232,6 +232,7 @@ function newsListViewPullWithEndless(e) {
     
     //determine what's required: limit needed as is order by
     var keyStr = "";
+    //var newsurl = "http://www.bhamlive2.bham.ac.uk/web_services/News.svc/?days=10";
     var newsurl = "http://www.birmingham.ac.uk/web_services/News.svc/?days=10";
     
     if (localStorage.getItem('student-news')==='true') {
@@ -244,6 +245,7 @@ function newsListViewPullWithEndless(e) {
         keyStr += "sport"
     }
     keyStr = $.trim(keyStr)
+    log("Offline:" + offLine);
     
     if (!offLine) {
     
@@ -268,7 +270,11 @@ function newsListViewPullWithEndless(e) {
             	//pageSize: 10,
             	change: function (data) {
                 	app.application.hideLoading();
-            	}
+            	},
+            	error: function (e) {
+                    log("error:" + e.errors);
+
+                }
         	});
 
         	$("#pull-newslistview").kendoMobileListView({
@@ -507,58 +513,6 @@ function getTweets() {
     app.application.showLoading();
     var twitter_user  = "unibirmingham";
     //pull-twitterlistview
-    /*$.getJSON(
-        "http://tucksoftware.co.uk/twitter-api/index.php?screenname=" + twitter_user,
-        function(data) {
-            $('#tweetsList li').remove();
-            $.each(data, function(i, tweet) {
-
-                if(tweet.text !== undefined) {
-                  // Calculate how many hours/days ago was the tweet posted
-                  var date_tweet = new Date(tweet.created_at);
-                  var date_now   = new Date();
-                  var date_diff  = date_now - date_tweet;
-                  var hours      = Math.round(date_diff/(1000*60*60));
-                  var days = 0;
-                  var timeStr = '';
-                  if (hours>=24) {
-                        days =Math.round(hours/24);
-                        var dayUnit = "day";
-                        if (days>1) {
-                            dayUnit = "days";
-                        }
-                        timeStr = '<span class="tweet_days">' + days + ' ' + dayUnit + ' ago<\/span>';
-                  }
-                  else {
-                        var hourUnit = "hour";
-                        if (hours>1) {
-                            hourUnit = "hours";
-                        }
-                        timeStr = '<span class="tweet_hours">' + hours + ' ' + hourUnit + ' ago<\/span>';
-                  }
-                  
-                  
-                  // Build the html string for the current tweet
-                  var tweet_url = "http://www.twitter.com/" + twitter_user + "/status/" + tweet.id_str;
-                  var tweet_html = '<div class="tweet_text">';
-                  tweet_html    += '<a onClick="window.open(\'' + tweet_url + '\', \'_system\')">';
-                      
-                  //tweet_html    += twitter_user + '/status/' + tweet.id_str + '">';
-                  tweet_html    += tweet.text + '</a>';
-                  tweet_html    += timeStr;
-                  tweet_html    += '</div>';
-        
-                  // Append html string to tweet_container div
-                  $('#pull-twitterlistview').append(tweet_html);
-                  //$('#pull-twitterlistview').listview('refresh');
-                  $('#pull-twitterlistview').kendoMobileListView().refresh;
-                }
-          });
-            //$.mobile.hidePageLoadingMsg();
-            app.application.hideLoading();
-        }
-    )
-*/    
     var dataSource = new kendo.data.DataSource({
             	transport: {
                 	read: {

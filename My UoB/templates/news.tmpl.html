@@ -34,6 +34,8 @@
             <div class="news-field-data"><a href="\#singleNewsView?contentId=#:ContentId#" onClick="window.open('#: NewsFullUrl #', '_system')">#: NewsUrl #</a></div> 
             
         </div>
-        <div class="news-img"><img src="#: ImageFullUrl #" alt="news image: #: Title#" /></div>
+    	#if(ImageFullUrl){#
+	        <div class="news-img"><img src="#: ImageFullUrl #" alt="news image: #: Title#" /></div>
+    	#}#
     </div>
 </script>

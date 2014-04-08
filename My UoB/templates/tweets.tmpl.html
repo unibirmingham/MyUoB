@@ -1,15 +1,12 @@
 <!--News template-->
     <script type="text/x-kendo-tmpl" id="tweets-template">
         <div class="tweet-item">
-                
-
                 <div class="tweet-text">
-        			<a onClick="window.open('http://www.twitter.com/#:user.screen_name#/status/#:id_str#', '_system')">
+        			
                     <span class="tweet-title">#:text#</span>
-        			</a><br/>
+        			<br/>
         			<span class="tweet_hours">#:timeAgo(created_at)#</span>
                 </div>
+        		<a class="tweet-link" onClick="window.open('http://www.twitter.com/#:user.screen_name#/status/#:id_str#', '_system')" data-role="detailbutton" data-style="detaildisclose"></a>
         </div>
-        
-        
     </script>

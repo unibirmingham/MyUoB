@@ -48,6 +48,8 @@
             <div class="event-field-data"><a href="\#singleEventView?contentId=#:ContentId#" onClick="window.open('#: EventFullUrl #', '_system')">#: EventUrl #</a></div> 
             
         </div>
-        <div class="event-img"><img src="#: EventImageFullUrl #" alt="event image: #: Title#" /></div>
+        #if(EventImageFullUrl){#
+    		<div class="event-img"><img src="#: EventImageFullUrl #" alt="event image: #: Title#" /></div>
+    	#}#
     </div>
 </script>

@@ -108,29 +108,33 @@ body, html {
     visibility: visible;   
 }
 
-/*NEWS & EVENTS */
+/*NEWS & EVENTS & TWITTER */
 
 div.events-title,
-div.news-title {
+div.news-title,
+div.tweets-title {
     margin: 0.6em 0.8em 0.2em 0.9em;
     font-size: 1.3em;
 }
 
 div.event-item,
-li.news-item {
+div.news-item,
+div.tweet-item {
     padding:0px;
     margin:0px;
     font-size:1em;
 }
 
 ul#pull-eventslistview li,
-ul#pull-newslistview li {
+ul#pull-newslistview li,
+ul#pull-twitterlistview li {
     padding: .4em .2em;
     
 }
 
 div.news-item a,
-div.event-item a {
+div.event-item a,
+div.tweet-item a {
     font-weight:normal;
     text-decoration: none;
 }
@@ -179,16 +183,25 @@ div.news-category div.news-field-data {
 
 div.event-item span.event-title,
 div.event-item span.event-date,
-div.news-item span.news-title {
+div.news-item span.news-title,
+div.tweet-item span.tweet-title {
     
     padding-right: 16px;
     display:block;
 }
 
-div.event-item span.event-link,
-div.news-item span.news-link {
+div.event-item a.event-link,
+div.news-item a.news-link,
+div.tweet-item a.tweet-link {
     padding-right:0;
     margin-right:0;
+	    cursor: pointer;
+    margin-top: 1em!important;
+}
+
+div.tweet-item a.tweet-link {
+    margin-top: .5em!important;
+    
 }
 
 /* news/event image */
@@ -216,6 +229,13 @@ div.news-item span.news-link {
         margin: .5em;
         font-size: 0.8em;
         width: 12em;
+    }
+
+#pull-twitterlistview div.tweet-text {
+        display: inline-block;
+        margin: .5em;
+        font-size: 0.8em;
+    padding-right: 2em;
     }
     
     .km-android #hierarchical-listview .parent:after {
@@ -329,7 +349,8 @@ div.offlineMessage {
 }
 
 .fa {
-    font-family: helvetica;
+    /*font-family: helvetica;*/
+    font-family: Roboto,HelveticaNeue,sans-serif;
 }
 
 /*try twitter */
@@ -346,8 +367,4 @@ ul#settingsOptions li.info {
     margin-left: 0.2rem;
 	margin-right: 0.2rem;
     color:#2e5968;
-}
-
-.tweet-text {
-    cursor:pointer;
 }
