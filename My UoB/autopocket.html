@@ -38,14 +38,6 @@
                     data-template="guide-page-template">
         </ul>
     </div>
-    
-    <!-- Feedback -->
-    <div style="display:none;" data-role="view" id="guide-page-feedback" class="guide-view" data-title="Pocket Guide Page">
-        <ul data-role="listview" id="section-guide-page" class="guide-list guide-item pocket-guide-index"
-                    data-source="guide"
-                    data-template="guide-feedback-template">
-        </ul>
-    </div>
    
     <!--Layout-->
     <div style="display:none;" data-role="layout" data-id="tabstrip-layout">
@@ -74,7 +66,7 @@
     <!--guide template-->
     <script type="text/x-kendo-tmpl" id="guide-index-template">
         #if (PageFunction === "page") {#
-            <span data-icon="${icon}"><a href="\#guide-page-feedback?id=${id}">${PageTitle}</a></span>
+            <span data-icon="${icon}"><a href="\#guide-page?id=${id}">${PageTitle}</a></span>
         #} else {#
             <span data-icon="${icon}"><a href="\#guide-section?id=${id}">${PageTitle}</a></span>
         #}#
@@ -82,28 +74,20 @@
     
     <!--guide section template-->
     <script type="text/x-kendo-tmpl" id="guide-section-template">
-        <span data-icon="${icon}"><a href="\#guide-page?id=${id}">${PageTitle}</a></span>
+        #if (PageFunction === "page") {#
+	        <span data-icon="${icon}"><a href="\#guide-page?id=${id}">${PageTitle}</a></span>
+        #} else {#
+            <span data-icon="${icon}"><a href="\#guide-section?id=${id}">${PageTitle}</a></span>
+        #}#
     </script>
 
       <!--guide page template-->
     <script type="text/x-kendo-tmpl" id="guide-page-template">
         <div>
-            <p class="guide-page-title">#: PageTitle #</p>
+            <h2 class="guide-page-title">#: PageTitle #</h2>
             <div class="guide-page-content">#= PageContent #</div>
         </div>
     </script>
     
-    <!--guide feedback template-->
-    <script type="text/x-kendo-tmpl" id="guide-feedback-template">
-        <div>
-            <p class="guide-page-title">#: PageTitle #</p>
-            <div class="guide-page-content">#= PageContent #</div>
-        </div>
-    </script>
-    
-    <!-- button template -->
-    <script type="text/x-kendo-tmpl" id="guide-page-back-template">
-        <a class="nav-button" data-role="button" id="backFromPage" data-align="left">return to indexy</a>
-    </script>
 </body>
 </html>
