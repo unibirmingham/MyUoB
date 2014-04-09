@@ -150,23 +150,57 @@
             Location requires internet connection to display the map.
         </div>
         <div id="map-search-wrap" data-bind="visible: isGoogleMapsInitialized">
-            <button id="map-navigate-home" data-bind="click: onNavigateHome"></button>
-            <button id="map-clear" data-bind="click: deleteMarkers"></button>
+            
+            <a id="map-drawer-button" data-role="button" data-rel="drawer" href="#map-drawer" data-icon="drawer-button" title="View Map Features"></a>-->
+            <button id="map-navigate-home" data-bind="click: onNavigateHome" title="Go Home"></button>
+            <button id="map-clear" data-bind="click: deleteMarkers" title="Clear Markers"></button>
             <form onsubmit="return false;">
                 <!--
                 <input id="map-address" type="search" data-bind="value: address" placeholder="Address" />
                 -->
-                <select id="map-feature" data-bind="value: featureType, click: onSearchAddress" placeholder="Choose a feature to highlight" data-change="onSearchAddress">
+                --
+                <!--<select id="map-feature" data-bind="value: featureType, click: onSearchAddress" placeholder="Choose a feature to highlight">
                     <option value="Learning and Teaching">Learning and teaching</option>
                     <option value="Culture">Culture</option>
                     <option value="Retail">Retail</option>
                     <option value="Transport">Transport</option>
                 </select>
+                -->
                 <!--<input id="map-clear" type="submit" value="" data-bind="click: clearIcons" />-->
             </form>
         </div>
         <div id="map-canvas" data-bind="visible: isGoogleMapsInitialized"></div>
 
+    </div>
+    
+    <!---------------------- MAP DRAWER --------------------------------->
+    
+    <div class="myUoBDrawer" data-role="drawer" id="map-drawer" style="width: 240px" data-views='["tabstrip-location"]' 
+        data-model="app.locationService.viewModel">
+    	<ul data-role="listview" data-type="group">
+        <li>Map features
+            <ul data-role="listview" id="map-filters" data-style="inset">
+            <li>
+                <label>
+                    <input id="map-feature-culture" name="Culture" type="checkbox" data-bind="value: featureType, events: { change: onSearchAddress} "/>
+                	Culture
+            	</label>
+            </li>
+            <li>
+            	<label>
+                	<input type="checkbox" />
+                	Learning and Teaching
+            	</label>
+        	</li>
+            </ul>
+            <select id="map-feature" data-bind="value: featureType, click: onSearchAddress" placeholder="Choose a feature to highlight">
+                    <option value="Learning and Teaching">Learning and teaching</option>
+                    <option value="Culture">Culture</option>
+                    <option value="Retail">Retail</option>
+                    <option value="Transport">Transport</option>
+                </select>
+        </li>
+    </ul>
     </div>
     
     <div id="tabstrip-console" data-role="view" data-title="Console">

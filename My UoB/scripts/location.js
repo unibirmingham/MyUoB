@@ -76,13 +76,7 @@
             $("#map-feature").val("");
             that.set("featureType","");
 		},
-        
-        getMarkers: function () {
-            //return map.markers;
-        },
-        
-        
-        
+       
         getCatCode: function (code) {
             
             that = this;
@@ -168,7 +162,8 @@
 
         onSearchAddress: function () {
             var that = this;
-
+			alert("boomy");
+            alert(this.checked);
             /*
             geocoder.geocode(
                 {
