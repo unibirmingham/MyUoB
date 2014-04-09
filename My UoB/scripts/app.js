@@ -68,13 +68,13 @@ function onDeviceReady() {
         	localStorage.setItem('eventspreferences','set');
         log('setting events prefernces');
 	}
+    
+    
 
     $('#clearLog').on('click', function() {
         $('#log').val('');
     });
-    
-    
-                        
+                          
 }
 
 //GA plugin

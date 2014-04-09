@@ -151,9 +151,18 @@
         </div>
         <div id="map-search-wrap" data-bind="visible: isGoogleMapsInitialized">
             <button id="map-navigate-home" data-bind="click: onNavigateHome"></button>
+            <button id="map-clear" data-bind="click: deleteMarkers"></button>
             <form onsubmit="return false;">
+                <!--
                 <input id="map-address" type="search" data-bind="value: address" placeholder="Address" />
-                <input id="map-search" type="submit" value="" data-bind="click: onSearchAddress" />
+                -->
+                <select id="map-feature" data-bind="value: featureType, click: onSearchAddress" placeholder="Choose a feature to highlight" data-change="onSearchAddress">
+                    <option value="Learning and Teaching">Learning and teaching</option>
+                    <option value="Culture">Culture</option>
+                    <option value="Retail">Retail</option>
+                    <option value="Transport">Transport</option>
+                </select>
+                <!--<input id="map-clear" type="submit" value="" data-bind="click: clearIcons" />-->
             </form>
         </div>
         <div id="map-canvas" data-bind="visible: isGoogleMapsInitialized"></div>
