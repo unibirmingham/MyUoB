@@ -159,11 +159,21 @@
         },
         
         
+        onFilterFeature: function (e) {
+    
+            //alert(e + ": " + e.target + ": " + e.checked + ": " + this.element.attr("id") )
+            log(e);
+            var featureId = this.element.attr("id");
+            var featureVar = this.element.attr("name");
+            var featureVal = e.checked;
+            
+            alert(featureVar + " " + featureId + " " + featureVal);
+		},
 
         onSearchAddress: function () {
             var that = this;
-			alert("boomy");
-            alert(this.checked);
+			//alert("check:");
+            //log(that.get("featureType"));
             /*
             geocoder.geocode(
                 {
@@ -334,6 +344,6 @@
     };
     
     
-    //, click: onSearchAddress" 
+    
 }
 )(window);

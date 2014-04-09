@@ -151,15 +151,18 @@
         </div>
         <div id="map-search-wrap" data-bind="visible: isGoogleMapsInitialized">
             
-            <a id="map-drawer-button" data-role="button" data-rel="drawer" href="#map-drawer" data-icon="drawer-button" title="View Map Features"></a>-->
+            
+            <a id="map-drawer-button" data-role="button" data-rel="drawer" href="#map-drawer" data-icon="drawer-button" title="View Map Features"></a>
+            
             <button id="map-navigate-home" data-bind="click: onNavigateHome" title="Go Home"></button>
             <button id="map-clear" data-bind="click: deleteMarkers" title="Clear Markers"></button>
             <form onsubmit="return false;">
                 <!--
                 <input id="map-address" type="search" data-bind="value: address" placeholder="Address" />
                 -->
-                --
-                <!--<select id="map-feature" data-bind="value: featureType, click: onSearchAddress" placeholder="Choose a feature to highlight">
+                
+                <!--
+                <select id="map-feature" data-bind="value: featureType, click: onSearchAddress" placeholder="Choose a feature to highlight">
                     <option value="Learning and Teaching">Learning and teaching</option>
                     <option value="Culture">Culture</option>
                     <option value="Retail">Retail</option>
@@ -182,23 +185,25 @@
             <ul data-role="listview" id="map-filters" data-style="inset">
             <li>
                 <label>
-                    <input id="map-feature-culture" name="Culture" type="checkbox" data-bind="value: featureType, events: { change: onSearchAddress} "/>
+                    <input class="filterFeature" name="Culture" id="map-feature-culture" type="checkbox" />
                 	Culture
             	</label>
             </li>
             <li>
             	<label>
-                	<input type="checkbox" />
+                	<input type="checkbox" id="map-feature-learning" name="Learning and Teaching" data-bind="value: featureType, events: { change: onSearchAddress}" />
                 	Learning and Teaching
             	</label>
         	</li>
             </ul>
+            <!--
             <select id="map-feature" data-bind="value: featureType, click: onSearchAddress" placeholder="Choose a feature to highlight">
                     <option value="Learning and Teaching">Learning and teaching</option>
                     <option value="Culture">Culture</option>
                     <option value="Retail">Retail</option>
                     <option value="Transport">Transport</option>
-                </select>
+            </select>
+            -->
         </li>
     </ul>
     </div>
@@ -253,7 +258,7 @@
             skin: "flat"
         });
 		$(document).ready(function () {
-
+            
     });
     </script>
     

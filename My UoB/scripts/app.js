@@ -25,7 +25,9 @@ function onDeviceReady() {
 		offLine = false;
     });
     
-    
+    $(".filterFeature").kendoMobileSwitch({
+                change: app.locationService.viewModel.onFilterFeature
+            });
     
     if (navigator.onLine) {
     	$(".offlineMessage").hide();
