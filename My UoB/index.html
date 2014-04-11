@@ -178,10 +178,10 @@
     
     <!---------------------- MAP DRAWER --------------------------------->
     
-    <div class="myUoBDrawer" data-role="drawer" id="map-drawer" style="width: 240px" data-views='["tabstrip-location"]' 
-        data-model="app.locationService.viewModel">
-    	<ul data-role="listview" data-type="group">
-        <li>Map features
+    <div class="myUoBDrawer" data-role="drawer" id="map-drawer" style="width: 240px; display:none;" data-views='["tabstrip-location"]' 
+        data-model="app.locationService.viewModel" data-bind="visible: isGoogleMapsInitialized">
+    	<!--<ul data-role="listview" data-type="group">-->
+        <h3>Map features</h3>
             <ul data-role="listview" id="map-filters" data-style="inset">
             <li>
                 <label>
@@ -191,10 +191,29 @@
             </li>
             <li>
             	<label>
-                	<input type="checkbox" id="map-feature-learning" name="Learning and Teaching" data-bind="value: featureType, events: { change: onSearchAddress}" />
-                	Learning and Teaching
+                	<input class="filterFeature" name="Learning and Teaching" id="map-feature-learning" type="checkbox" />
+                    <!--<input type="checkbox" id="map-feature-learning" name="Learning and Teaching" data-bind="value: featureType, events: { change: onSearchAddress}" />-->
+                	Learning
             	</label>
         	</li>
+            <li>
+                <label>
+                    <input class="filterFeature" name="Retail" id="map-feature-retail" type="checkbox" />
+                	Retail
+            	</label>
+            </li>
+            <li>
+                <label>
+                    <input class="filterFeature" name="Services" id="map-feature-services" type="checkbox" />
+                	Services
+            	</label>
+            </li>
+            <li>
+                <label>
+                    <input class="filterFeature" name="Transport" id="map-feature-transport" type="checkbox" />
+                	Transport
+            	</label>
+            </li>
             </ul>
             <!--
             <select id="map-feature" data-bind="value: featureType, click: onSearchAddress" placeholder="Choose a feature to highlight">
@@ -204,8 +223,9 @@
                     <option value="Transport">Transport</option>
             </select>
             -->
+        <!--
         </li>
-    </ul>
+    </ul>-->
     </div>
     
     <div id="tabstrip-console" data-role="view" data-title="Console">

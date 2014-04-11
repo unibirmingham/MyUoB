@@ -160,14 +160,17 @@
         
         
         onFilterFeature: function (e) {
-    
+    		var that = this;
             //alert(e + ": " + e.target + ": " + e.checked + ": " + this.element.attr("id") )
             log(e);
             var featureId = this.element.attr("id");
             var featureVar = this.element.attr("name");
             var featureVal = e.checked;
             
-            alert(featureVar + " " + featureId + " " + featureVal);
+            //alert(featureVar);
+            
+            app.locationService.viewModel.mapFacilities(featureVar);
+            
 		},
 
         onSearchAddress: function () {

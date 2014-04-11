@@ -26,8 +26,8 @@ function onDeviceReady() {
     });
     
     $(".filterFeature").kendoMobileSwitch({
-                change: app.locationService.viewModel.onFilterFeature
-            });
+    	change: app.locationService.viewModel.onFilterFeature
+    });
     
     if (navigator.onLine) {
     	$(".offlineMessage").hide();
