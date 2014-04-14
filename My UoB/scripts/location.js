@@ -3,6 +3,11 @@
         geocoder,
         LocationViewModel,
     	markers = [],
+    	serviceMarkers = [],
+    	retailMarkers = [],
+    	learningMarkers = [],
+    	transportMarkers = [],
+    	cultureMarkers = [],
         app = global.app = global.app || {};
     	
 
@@ -54,11 +59,24 @@
     		markers[i].setMap(map);
   		}
 		},
+        
+        // Sets the map on markers in the provided array. NOT USED
+		setMarkersMap: function (map, coll) {
+  		for (var i = 0; i < coll.length; i++) {
+    		coll[i].setMap(map);
+  		}
+		},
 
 		// Removes the markers from the map, but keeps them in the array.
-		clearMarkers: function () {
+		clearAllMarkers: function () {
             var that = this;
-  		that.setAllMap(null);
+  			that.setAllMap(null);
+		},
+        
+        clearMarkers: function (coll) {
+            var that = this;
+            
+  		  that.setMarkersMap(null,coll);
 		},
 
 		// Shows any markers currently in the array.
@@ -68,13 +86,59 @@
 		},
 
 		// Deletes all markers in the array by removing references to them.
-		deleteMarkers: function () {
+		deleteAllMarkers: function () {
   		  var that = this;
-            //alert("bioom");
-            that.clearMarkers();
-  			markers = [];
+			that.clearAllMarkers();
+  		  markers = [];
+            serviceMarkers = [];
+        	retailMarkers = [];
+        	learningMarkers = [];
+        	transportMarkers = [];
+        	cultureMarkers = [];
             $("#map-feature").val("");
             that.set("featureType","");
+            
+            //turn off all switches
+            $("#map-feature-culture").data("kendoMobileSwitch").check(false);
+            $("#map-feature-retail").data("kendoMobileSwitch").check(false);
+            $("#map-feature-learning").data("kendoMobileSwitch").check(false);
+            $("#map-feature-services").data("kendoMobileSwitch").check(false);
+            $("#map-feature-transport").data("kendoMobileSwitch").check(false);
+           
+       },
+        
+        // Deletes markers in the array by removing references to them.
+		deleteMarkers: function (category) {
+			var that = this;
+            var catMarkerCollection;
+            if (category) {
+                //alert(category);
+                switch (category) {
+                case "Culture":
+                    that.clearMarkers(cultureMarkers);
+                	cultureMarkers = [];
+                	break;
+                case "Retail":
+                    that.clearMarkers(retailMarkers);
+                	retailMarkers = [];
+                	break;
+                case "Transport":
+                    that.clearMarkers(transportMarkers);
+                	transportMarkers = [];
+                	break;
+                case "Learning and Teaching":
+                	that.clearMarkers(learningMarkers);
+                    learningMarkers = [];
+                	break;
+                case "Services":
+                	that.clearMarkers(serviceMarkers);
+                    serviceMarkers = [];
+                	break;
+            	}
+            }
+            
+            
+            
 		},
        
         getCatCode: function (code) {
@@ -92,8 +156,6 @@
                       $.each(response, function() {
                           if (code === this.Name) {
                           	_catCode = this.Key;
-                              //alert(this.Key);
-                              
                           }
                       })
   				}
@@ -168,32 +230,17 @@
             var featureVal = e.checked;
             
             //alert(featureVar);
-            
-            app.locationService.viewModel.mapFacilities(featureVar);
+            if (featureVal) {
+                app.locationService.viewModel.mapFacilities(featureVar);
+            }
+            else {
+                app.locationService.viewModel.deleteMarkers(featureVar);
+            }
             
 		},
 
         onSearchAddress: function () {
             var that = this;
-			//alert("check:");
-            //log(that.get("featureType"));
-            /*
-            geocoder.geocode(
-                {
-                    'address': that.get("address")
-                },
-                function (results, status) {
-                    if (status !== google.maps.GeocoderStatus.OK) {
-                        navigator.notification.alert("Unable to find address.",
-                            function () { }, "Search failed", 'OK');
-
-                        return;
-                    }
-
-                    map.panTo(results[0].geometry.location);
-                    that._putMarker(results[0].geometry.location);
-                });
-            */
             var ft = that.get("featureType");
             that.mapFacilities(ft);
             
@@ -232,15 +279,23 @@
         
         createMarker: function (position, facilityTitle, buildingName, category){
             var icon = "images/uni.png";
+            var catMarkerCollection = learningMarkers;
             switch (category) {
                 case "Culture":
                 	icon = "images/art.png";
+                	catMarkerCollection = cultureMarkers;
                 	break;
                 case "Retail":
                 	icon = "images/retail.png";
+                catMarkerCollection = retailMarkers;
                 	break;
                 case "Transport":
                 	icon = "images/trans.png";
+                catMarkerCollection = transportMarkers;
+                	break;
+                case "Services":
+                	icon = "images/pin.png";
+                	catMarkerCollection = serviceMarkers;
                 	break;
             }
             marker = new google.maps.Marker({
@@ -250,12 +305,12 @@
     			icon: new google.maps.MarkerImage(icon)
     		});
             markers.push(marker);
+            catMarkerCollection.push(marker);
             var descripDiv = "<div class='markerInfo'><span class='markerTitle'>" + facilityTitle + "</span>";
             if (buildingName) {
                 descripDiv = descripDiv + "<br/><span class='facilityLocation'>Building: " + buildingName + "</span>";
             }
             
-            //descripDiv = descripDiv + "<span class='markerDistance'>Distance: " + locations[index].distance + "m. </span>";
             descripDiv = descripDiv + "</div>";
             
             this.addInfoWindow(map, marker, descripDiv)
