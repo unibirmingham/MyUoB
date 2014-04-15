@@ -21,7 +21,8 @@
     padding: 3px;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    width:90%;
+    /*width:90%;*/
+    width:132px;
 }
 
 #map-address,
@@ -64,7 +65,8 @@
 
 #map-clear {
    
-    float: right;
+    /*float: right;*/
+    float: left;
     width: 40px;
     height: 40px;
     color: #fff;

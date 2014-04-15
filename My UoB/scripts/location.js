@@ -9,6 +9,89 @@
     	transportMarkers = [],
     	cultureMarkers = [],
         app = global.app = global.app || {};
+    
+    if (navigator.onLine) {
+        buildingsUrl = "http://www.butler.bham.ac.uk/pocket_guides/index.json";
+        categoriesUrl = "http://www.butler.bham.ac.uk/pocket_guides/index.json";
+        facilitiesUrl = "http://www.butler.bham.ac.uk/pocket_guides/index.json";
+    }
+    else {
+        if (!localStorage.getItem('buildings')) {
+            buildingsUrl = "data/map-buildings.json";
+        }
+        if (!localStorage.getItem('categories')) {
+            buildingsUrl = "data/map-categories.json";
+        }
+        if (!localStorage.getItem('facilities')) {
+            buildingsUrl = "data/map-facilities.json";
+        }
+    }
+    
+    buildings = new kendo.data.DataSource({
+		transport: {
+            read: function(operation) {
+	            var cachedData = localStorage.getItem("buildings");
+            	if((cachedData != null || cachedData != undefined) && (!navigator.onLine)) {
+                	operation.success(JSON.parse(cachedData));
+            	} else {
+                	$.ajax({ 
+                   	 url: buildingsUrl,
+                   	 dataType: "json",
+                   	 success: function(response) {
+                   	     if (navigator.onLine) {
+                                localStorage.setItem("buildings", JSON.stringify(response));
+                            }
+                   	     operation.success(response);
+                   	 }
+                	});
+            	}
+        	}
+        }   
+    })
+    
+    categories = new kendo.data.DataSource({
+		transport: {
+            read: function(operation) {
+	            var cachedData = localStorage.getItem("categories");
+            	if((cachedData != null || cachedData != undefined) && (!navigator.onLine)) {
+                	operation.success(JSON.parse(cachedData));
+            	} else {
+                	$.ajax({ 
+                   	 url: categoriesUrl,
+                   	 dataType: "json",
+                   	 success: function(response) {
+                   	     if (navigator.onLine) {
+                                localStorage.setItem("categories", JSON.stringify(response));
+                            }
+                   	     operation.success(response);
+                   	 }
+                	});
+            	}
+        	}
+        }   
+    })
+    
+    facilities = new kendo.data.DataSource({
+		transport: {
+            read: function(operation) {
+	            var cachedData = localStorage.getItem("facilities");
+            	if((cachedData != null || cachedData != undefined) && (!navigator.onLine)) {
+                	operation.success(JSON.parse(cachedData));
+            	} else {
+                	$.ajax({ 
+                   	 url: facilitiesUrl,
+                   	 dataType: "json",
+                   	 success: function(response) {
+                   	     if (navigator.onLine) {
+                                localStorage.setItem("facilities", JSON.stringify(response));
+                            }
+                   	     operation.success(response);
+                   	 }
+                	});
+            	}
+        	}
+        }   
+    })
     	
 
     LocationViewModel = kendo.data.ObservableObject.extend({
@@ -110,7 +193,6 @@
         // Deletes markers in the array by removing references to them.
 		deleteMarkers: function (category) {
 			var that = this;
-            var catMarkerCollection;
             if (category) {
                 //alert(category);
                 switch (category) {
@@ -145,14 +227,12 @@
             
             that = this;
             _catCode= "0\/1\/2836\/2837\/2854";
-            //alert(code);
             if (code) {
                 $.ajax({
   				url: 'data/map-categories.json',
   				async: false,
   				dataType: 'json',
   				success: function (response) {
-    				// do stuff with response.
                       $.each(response, function() {
                           if (code === this.Name) {
                           	_catCode = this.Key;
