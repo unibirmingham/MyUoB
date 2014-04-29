@@ -8,6 +8,7 @@
     	learningMarkers = [],
     	transportMarkers = [],
     	cultureMarkers = [],
+    	paramMarker = [],
         app = global.app = global.app || {};
     
     if (navigator.onLine) {
@@ -134,6 +135,9 @@
                     enableHighAccuracy: true
                 }
             );
+            
+            
+            
         },
         
         // Sets the map on all markers in the array.
@@ -300,6 +304,31 @@
             }
         },
         
+        mapFacility: function (contentId, category) {
+            var that = this;
+            $.getJSON("data/map-facilities.json", function(data) {
+ 
+                	$.each(data, function() {
+
+                        if (this.ContentId == contentId) {
+                            //alert("boom" + contentId);
+                            var cat = "";
+                        	if (category) {
+                                cat = category;
+                            }
+                            var myLatlng = new google.maps.LatLng(parseFloat(this.CoordinatesArray[0]),parseFloat(this.CoordinatesArray[1]));
+                            var id = this.BuildingId;
+                            that.createMarker(myLatlng, this.FacilityName, that.getBuilding(id), cat);
+                            map.panTo(myLatlng);
+                        }
+                        
+	            	});
+ 
+            	}).error(function(error) {
+				  	alert(error.message);
+				});
+        },
+        
         
         onFilterFeature: function (e) {
     		var that = this;
@@ -360,20 +389,20 @@
         createMarker: function (position, facilityTitle, buildingName, category){
             var icon = "images/uni.png";
             var catMarkerCollection = learningMarkers;
-            switch (category) {
-                case "Culture":
+            switch (category.toUpperCase()) {
+                case "CULTURE":
                 	icon = "images/art.png";
                 	catMarkerCollection = cultureMarkers;
                 	break;
-                case "Retail":
+                case "RETAIL":
                 	icon = "images/retail.png";
                 catMarkerCollection = retailMarkers;
                 	break;
-                case "Transport":
+                case "TRANSPORT":
                 	icon = "images/trans.png";
                 catMarkerCollection = transportMarkers;
                 	break;
-                case "Services":
+                case "SERVICES":
                 	icon = "images/pin.png";
                 	catMarkerCollection = serviceMarkers;
                 	break;
@@ -454,6 +483,7 @@
             app.locationService.viewModel.onNavigateHome.apply(app.locationService.viewModel, []);
             
             
+            
         },
 
         show: function (e) {
@@ -468,6 +498,12 @@
             //resize the map in case the orientation has been changed while showing other tab
             google.maps.event.trigger(map, "resize");
             //alert(e.dataItem);
+            
+            var cid = e.view.params.contentId;
+            var cat = e.view.params.category;
+            if (cid) {
+                app.locationService.viewModel.mapFacility(cid, cat);
+            }
             
             
             
