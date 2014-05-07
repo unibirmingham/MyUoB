@@ -101,6 +101,18 @@
     background-repeat: no-repeat;
 }
 
+#map-navigate-campus {
+    float: left;
+    width: 40px;
+    height: 40px;
+    color: #fff;
+    border: none;
+    background: none;
+    background-image: url(../styles/images/clocktower_icon.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
 #map-drawer-button {
     float: left;
     width: 40px;

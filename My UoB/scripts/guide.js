@@ -43,6 +43,7 @@ function guideShow(e) {
     guide.filter(myFilter);
 };
 
+
 function onGuideIndexClick(e) {
 
 };

@@ -159,6 +159,7 @@
             <a id="map-drawer-button" data-role="button" data-rel="drawer" href="#map-drawer" data-icon="drawer-button" title="View Map Features"></a>
             
             <button id="map-navigate-home" data-bind="click: onNavigateHome" title="Go Home"></button>
+            <!--<button id="map-navigate-campus" data-bind="click: onCampusHome" title="Go to Campus"></button>-->
             <button id="map-clear" data-bind="click: deleteAllMarkers" title="Clear Markers"></button>
             <form onsubmit="return false;">
                 <!--
@@ -182,7 +183,7 @@
     
     <!---------------------- MAP DRAWER --------------------------------->
     
-    <div class="myUoBDrawer" data-role="drawer" id="map-drawer" style="width: 240px; display:none;" data-views='["tabstrip-location"]' 
+    <div class="myUoBDrawer" data-role="drawer" data-swipe-to-open="false" id="map-drawer" style="width: 240px; display:none;" data-views="['tabstrip-location']" 
         data-model="app.locationService.viewModel" data-bind="visible: isGoogleMapsInitialized">
     	<!--<ul data-role="listview" data-type="group">-->
         <h3>Map features</h3>
@@ -232,6 +233,8 @@
     </ul>-->
     </div>
     
+    
+<!--    
     <div id="tabstrip-console" data-role="view" data-title="Console">
 
         <h3>Console</h3>
@@ -242,7 +245,7 @@
             </div>
         </div>
     </div>
-
+-->
                 
     <!--Layout-->
     <div data-role="layout" data-id="tabstrip-layout">
@@ -252,7 +255,7 @@
             <div data-role="navbar">
                 <a class="nav-button" data-align="left" data-role="backbutton">Back</a>
                 <span data-role="view-title"></span>
-                <a data-align="right" data-role="button" class="nav-button" href="#tabstrip-console">Console</a>
+                <!--<a data-align="right" data-role="button" class="nav-button" href="#tabstrip-console">Console</a>-->
             </div>
         </div>
 
