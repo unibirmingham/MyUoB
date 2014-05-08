@@ -33,6 +33,9 @@
         	}
         }   
     })
+    
+            
+
         
 })(window);
 
@@ -60,9 +63,23 @@ function onGuideSectionClick(e) {
 function guidePageShow(e) {
     id = parseInt(e.view.params.id);
     guide.filter({field: "id", operator: "eq", value: id});
+    
+    $(".guide-page-content a").click(function(e){
+    	//alert(this.href.substring(0,4));
+    	if (this.href.substring(0,4)==="http") {
+            e.preventDefault();
+    	    window.open(this.href, '_system');
+            //alert("stop");
+    	}
+    	else {
+    	    //alert("go");
+            return true;
+    	}
+	});
 };
 
 function onPageSectionClick(e) {
     
 };
+
 
