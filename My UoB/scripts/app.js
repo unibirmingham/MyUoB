@@ -584,3 +584,12 @@ function timeAgo(created) {
             }
 			return timeStr;
 }
+
+function prettyTime(dateStr) {
+    var pTime = "";
+    var pDate = new Date(parseInt(dateStr.replace("/Date(", "").replace(")/",""), 10));
+    pTime = pDate.toLocaleTimeString();
+    //pTime = (pDate.getHours()<10?'0':'') + pDate.getHours() + ":" + (pDate.getMinutes()<10?'0':'') + pDate.getMinutes();
+    return pTime;
+    
+}
