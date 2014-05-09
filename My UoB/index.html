@@ -97,12 +97,20 @@
             <h2>My UoB Mobile App</h2>
             <p>My UoB is one of a number of official mobile apps from the University of Birmingham, replacing UoB Student.<br/>A full list of University apps is availble on our app store page:</p>
             <ul><li><a onClick="window.open('http://www.birmingham.ac.uk/contact/app-store.aspx', '_system')" href="#tabstrip-info">www.birmingham.ac.uk/contact/app-store.aspx</a></li></ul>
-            <h3>Get in touch</h3>
-            <p>If you have any feedback on the UoB Student app or need help then please visit:</p>
+            <h3>Feedback</h3>
+            <p>If you have any feedback on My UoB app or need help then either:</p>
 
-                <ul><li><a onClick="window.open('https://universityofbirmingham.service-now.com', '_system')" href="#tabstrip-info">universityofbirmingham.service-now.com</a></li></ul>
+                <!--
+            	<ul data-role="listview" datatype="group" class="">
+                    <li><a data-icon="reply" href="feedback.html">Complete our feedback form</a></li>
+                    <li><a data-icon="email" href="mailto:webservices@lists.bham.ac.uk">webservices@lists.bham.ac.uk</a></li>
+                </ul>
+            	-->
+            <div data-role="buttongroup" class="feedback_options">
+                        <a data-role="button" data-icon="reply" data-iconpos="left" href="feedback.html">Complete a form</a>
+                        <a data-role="button" data-icon="email" data-iconpos="left" href="mailto:webservices@lists.bham.ac.uk?subject=MyUob App Feedback" data-rel="external">Send an email</a>
+             </div>
 
-            <p>Select ‘Find an answer’ and search for UoB Student.</p>        
         </div>
     </div>
                 

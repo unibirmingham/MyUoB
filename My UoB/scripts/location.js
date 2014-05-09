@@ -99,6 +99,7 @@
         _lastMarker: null,
         _isLoading: false,
         _buildingName: "building",
+        _buildingCode: "",
          
         address: "",
         isGoogleMapsInitialized: false,
@@ -271,11 +272,12 @@
                           if (id === this.ContentId) {
  
                               		_buildingName = this.BuildingName;
+                              		_buildingCode = this.BuildingCode;
                                 }
                       })
   				}
 				});
-                return _buildingName;
+                return _buildingName + ";" + _buildingCode;
 
             }
         },
@@ -417,7 +419,10 @@
             catMarkerCollection.push(marker);
             var descripDiv = "<div class='markerInfo'><span class='markerTitle'>" + facilityTitle + "</span>";
             if (buildingName) {
-                descripDiv = descripDiv + "<br/><span class='facilityLocation'>Building: " + buildingName + "</span>";
+                var bui = buildingName.split(";");
+                var imgLoc = "images/buildings/" + bui[1] + ".jpg";
+                
+                descripDiv = descripDiv + "<br/><img src='" + imgLoc + "'/><br/><span class='facilityLocation'>Building: " + bui[0] + " " + "(" + bui[1] + ")</span>";
             }
             
             descripDiv = descripDiv + "</div>";

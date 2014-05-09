@@ -341,6 +341,15 @@ div.offlineMessage {
     content: "\e0f1";
 }
 
+.km-email:after,
+.km-email:before {
+    content: "\e099";
+}
+
+ul.feedback_options {
+    margin: 10px;
+}
+
 /*try font awesome */
 .fa .km-icon:after,
 .fa .km-icon:before
