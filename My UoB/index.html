@@ -69,6 +69,7 @@
         			<!--	</li>
                     </ul>-->
                 </li>
+                <!--
                 <li id="newsSettings">News
                 	<ul>
                         <li><label><input id="student-news-switch" />Student News</label></li>
@@ -76,6 +77,7 @@
                         <li><label><input id="sport-news-switch" />Sport News</label></li>
                     </ul>
                 </li>
+                -->
                 <li id="eventsSettings">Events
                 	<ul>
                         <li><label><input id="student-events-switch" />Student Events</label></li>
@@ -116,7 +118,7 @@
                 
     <!--Events screen-->
     <div id="tabstrip-events" data-role="view" data-show="eventListViewPullWithEndless" data-title="Events">
-        <div class="events-title">UoB Events</div>
+        
         <ul id="pull-eventslistview" class="events-list"></ul>
     </div>
     
@@ -127,9 +129,9 @@
     </div>
     
     <!--News screen-->
-    <div id="tabstrip-news" data-role="view" data-title="News" data-show="newsListViewPullWithEndless">
-        <div class="news-title">UoB News</div>
+    <div id="tabstrip-news" data-role="view" data-title="News" data-show="newsListViewPullWithEndless" data-init="newsInit" data-layout="tabstrip-layout-news">
         
+                
         <ul id="pull-newslistview" class="news-list"></ul>
         <!--<p>News goes here...</p>-->
     </div>
@@ -141,8 +143,8 @@
     </div>
     
     <!--Twitter screen-->
-    <div id="tabstrip-twitter" data-role="view" data-title="News" data-show="getTweets">
-        <div class="news-title">UoB Twitter Feed</div>
+    <div id="tabstrip-twitter" data-role="view" data-title="Tweets" data-show="getTweets">
+        <!--<div class="news-title">UoB Twitter Feed</div>-->
         
         <ul id="pull-twitterlistview" class="tweets-list"></ul>
         <!--<p>Tweets go here...</p>-->
@@ -241,6 +243,20 @@
     </ul>-->
     </div>
     
+    <!---------------------- NEWS DRAWER --------------------------------->
+    
+    <div class="myUoBDrawer" data-role="drawer" data-swipe-to-open="true" id="news-drawer" style="width: 240px; display:none;" data-position="right" data-views="['tabstrip-news']" >
+        <!--data-model="app.locationService.viewModel" data-bind="visible: isGoogleMapsInitialized">-->
+    	
+        <h3>News filters</h3>
+            <ul data-role="listview" id="news-filters" data-style="inset">
+                        <li><label><input id="student-news-switch" />Student News</label></li>
+                        <li><label><input id="research-news-switch" />Research News</label></li>
+                        <li><label><input id="sport-news-switch" />Sport News</label></li>          
+            </ul>
+            
+    </div>
+    
     
 <!--    
     <div id="tabstrip-console" data-role="view" data-title="Console">
@@ -255,7 +271,7 @@
     </div>
 -->
                 
-    <!--Layout-->
+    <!--Layouts-->
     <div data-role="layout" data-id="tabstrip-layout">
 
         <!--Header-->
@@ -276,7 +292,28 @@
             </div>
         </div>
     </div>
-    <!-- Layout End -->
+    <div data-role="layout" data-id="tabstrip-layout-news">
+
+        <!--Header-->
+        <div data-role="header">
+            <div data-role="navbar">
+                <a class="nav-button" data-align="left" data-role="backbutton">Back</a>
+                
+                <span data-role="view-title"></span>
+                <a data-align="right" id="news-drawer-button" data-role="button" data-rel="drawer" href="#news-drawer" data-icon="drawer-button" title="View News Filters"></a>
+            </div>
+        </div>
+
+        <!--Footer-->
+        <div data-role="footer">
+            <div data-role="tabstrip">
+                <a href="#tabstrip-home" data-icon="home">Home</a>
+                <a href="#tabstrip-settings" data-icon="settings" data-transition="slide">Settings</a>
+                <a href="#tabstrip-info" data-icon="info" data-transition="slide">Info</a>
+            </div>
+        </div>
+    </div>
+    <!-- Layouts End -->
     
     <script src="scripts/templateLoader.js"></script>
     <script>

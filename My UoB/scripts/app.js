@@ -230,7 +230,38 @@ function eventItemView(e) {
 }
 
 //NEWS
+
+function newsInit() {
+    var studentNewsVal = false;
+    if (localStorage.getItem('student-news')==='true') {
+        studentNewsVal = true;
+    }
+    var researchNewsVal = false;
+    if (localStorage.getItem('research-news')==='true') {
+        researchNewsVal = true;
+    }
+    var sportNewsVal = false;
+    if (localStorage.getItem('sport-news')==='true') {
+        sportNewsVal = true;
+    }
+    $("#research-news-switch").kendoMobileSwitch({
+        checked: researchNewsVal,
+        change: onNewsPrefChange
+    });
+    $("#student-news-switch").kendoMobileSwitch({
+        checked: studentNewsVal,
+        change: onNewsPrefChange
+    });
+    $("#sport-news-switch").kendoMobileSwitch({
+        checked: sportNewsVal,
+        change: onNewsPrefChange
+    });
+    
+}
+
 function newsListViewPullWithEndless(e) {
+    
+    
     
     //determine what's required: limit needed as is order by
     var keyStr = "";
@@ -367,30 +398,6 @@ function settingsInit() {
         change: onTrackingChange
     });
     
- var studentNewsVal = false;
-    if (localStorage.getItem('student-news')==='true') {
-        studentNewsVal = true;
-    }
-    var researchNewsVal = false;
-    if (localStorage.getItem('research-news')==='true') {
-        researchNewsVal = true;
-    }
-    var sportNewsVal = false;
-    if (localStorage.getItem('sport-news')==='true') {
-        sportNewsVal = true;
-    }
-    $("#research-news-switch").kendoMobileSwitch({
-        checked: researchNewsVal,
-        change: onNewsPrefChange
-    });
-    $("#student-news-switch").kendoMobileSwitch({
-        checked: studentNewsVal,
-        change: onNewsPrefChange
-    });
-    $("#sport-news-switch").kendoMobileSwitch({
-        checked: sportNewsVal,
-        change: onNewsPrefChange
-    });
     
     //events
     var studentEventsVal = false;
@@ -498,6 +505,7 @@ function onNewsPrefChange(e) {
     log(localStor + " : " + newsVal);
     localStorage.setItem(localStor, newsVal);
     log(localStor + " | " + localStorage.getItem(localStor));
+    newsListViewPullWithEndless();
 }
 
 function onEventsPrefChange(e) {
