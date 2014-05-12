@@ -56,16 +56,16 @@ function onDeviceReady() {
     //News and Events preferences
     if (!localStorage.getItem('newspreferences')) {
         	localStorage.setItem('student-news',true);
-        	localStorage.setItem('research-news',false);
-        	localStorage.setItem('sport-news',false);
+        	localStorage.setItem('research-news',true);
+        	localStorage.setItem('sport-news',true);
         	localStorage.setItem('newspreferences','set');
         log('setting news preferences');
 	}
     if (!localStorage.getItem('eventspreferences')) {
-       	localStorage.setItem('performance-events',false);
-        	localStorage.setItem('exhibition-events',false);
-        	localStorage.setItem('lecture-events',false);
-        	localStorage.setItem('sport-events',false);
+       	localStorage.setItem('performance-events',true);
+        	localStorage.setItem('exhibition-events',true);
+        	localStorage.setItem('lecture-events',true);
+        	localStorage.setItem('sport-events',true);
         	localStorage.setItem('student-events',true);
         	localStorage.setItem('eventspreferences','set');
         log('setting events prefernces');
@@ -121,6 +121,52 @@ function showNetworkDependentItems() {
 
 
 //EVENTS
+
+function eventsInit() {
+    
+    //events
+    var studentEventsVal = false;
+    if (localStorage.getItem('student-events')==='true') {
+        studentEventsVal=true;
+    }
+    var performanceEventsVal = false;
+    if (localStorage.getItem('performance-events')==='true') {
+        performanceEventsVal = true;
+    }
+    var sportEventsVal = false;
+    if (localStorage.getItem('sport-events')==='true') {
+        sportEventsVal = true;
+    }
+    var lectureEventsVal = false;
+    if (localStorage.getItem('lecture-events')==='true') {
+        lectureEventsVal = true;
+    }
+    var exhibitionEventsVal = false;
+    if (localStorage.getItem('exhibition-events')==='true') {
+        exhibitionEventsVal = true;
+    }
+    $("#performance-events-switch").kendoMobileSwitch({
+        checked: performanceEventsVal,
+        change: onEventsPrefChange
+    });
+    $("#student-events-switch").kendoMobileSwitch({
+        checked: studentEventsVal,
+        change: onEventsPrefChange
+    });
+    $("#sport-events-switch").kendoMobileSwitch({
+        checked: sportEventsVal,
+        change: onEventsPrefChange
+    });
+    $("#lecture-events-switch").kendoMobileSwitch({
+        checked: lectureEventsVal,
+        change: onEventsPrefChange
+    });
+    $("#exhibition-events-switch").kendoMobileSwitch({
+        checked: exhibitionEventsVal,
+        change: onEventsPrefChange
+    });
+}
+
 function eventListViewPullWithEndless(e) {
     
     var ekeyStr = "";
@@ -398,48 +444,6 @@ function settingsInit() {
         change: onTrackingChange
     });
     
-    
-    //events
-    var studentEventsVal = false;
-    if (localStorage.getItem('student-events')==='true') {
-        studentEventsVal=true;
-    }
-    var performanceEventsVal = false;
-    if (localStorage.getItem('performance-events')==='true') {
-        performanceEventsVal = true;
-    }
-    var sportEventsVal = false;
-    if (localStorage.getItem('sport-events')==='true') {
-        sportEventsVal = true;
-    }
-    var lectureEventsVal = false;
-    if (localStorage.getItem('lecture-events')==='true') {
-        lectureEventsVal = true;
-    }
-    var exhibitionEventsVal = false;
-    if (localStorage.getItem('exhibition-events')==='true') {
-        exhibitionEventsVal = true;
-    }
-    $("#performance-events-switch").kendoMobileSwitch({
-        checked: performanceEventsVal,
-        change: onNewsPrefChange
-    });
-    $("#student-events-switch").kendoMobileSwitch({
-        checked: studentEventsVal,
-        change: onNewsPrefChange
-    });
-    $("#sport-events-switch").kendoMobileSwitch({
-        checked: sportEventsVal,
-        change: onNewsPrefChange
-    });
-    $("#lecture-events-switch").kendoMobileSwitch({
-        checked: lectureEventsVal,
-        change: onNewsPrefChange
-    });
-    $("#exhibition-events-switch").kendoMobileSwitch({
-        checked: exhibitionEventsVal,
-        change: onNewsPrefChange
-    });
 }
 
 function settingsShow() {
@@ -506,17 +510,19 @@ function onNewsPrefChange(e) {
     localStorage.setItem(localStor, newsVal);
     log(localStor + " | " + localStorage.getItem(localStor));
     newsListViewPullWithEndless();
+
 }
 
 function onEventsPrefChange(e) {
     
+    var eventsVar = this.element.attr("id");
+    var eventsVal = e.checked;
+    var localStor = eventsVar.replace("-switch", "");
+    localStorage.setItem(localStor, eventsVal);
+    eventListViewPullWithEndless();
+    
 }
 
-//twitter
-
-//$('#tabstrip-twitter').live('pageshow', function(event) {
-//	getTweets("unibirmingham");
-//}); 
 
 function getTweets() {    
     //$.mobile.showPageLoadingMsg();

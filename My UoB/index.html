@@ -78,15 +78,7 @@
                     </ul>
                 </li>
                 -->
-                <li id="eventsSettings">Events
-                	<ul>
-                        <li><label><input id="student-events-switch" />Student Events</label></li>
-                        <li><label><input id="sport-events-switch" />Sport Events</label></li>
-                        <li><label><input id="performance-events-switch" />Performance</label></li>                        
-                        <li><label><input id="exhibition-events-switch" />Exhibitions</label></li>
-                        <li><label><input id="lecture-events-switch" />Lectures & Talks</label></li>                        
-                    </ul>
-                </li>
+                
             </ul>
             
                                     
@@ -117,7 +109,7 @@
     </div>
                 
     <!--Events screen-->
-    <div id="tabstrip-events" data-role="view" data-show="eventListViewPullWithEndless" data-title="Events">
+    <div id="tabstrip-events" data-role="view" data-show="eventListViewPullWithEndless" data-title="Events" data-init="eventsInit" data-layout="tabstrip-layout-events">
         
         <ul id="pull-eventslistview" class="events-list"></ul>
     </div>
@@ -257,6 +249,22 @@
             
     </div>
     
+    <!---------------------- EVENTS DRAWER --------------------------------->
+    
+    <div class="myUoBDrawer" data-role="drawer" data-swipe-to-open="true" id="events-drawer" style="width: 240px; display:none;" data-position="right" data-views="['tabstrip-events']" >
+           	
+        <h3>Events filters</h3>
+            <ul data-role="listview" id="events-filters" data-style="inset">
+ 
+                        <li><label><input id="student-events-switch" />Student Events</label></li>
+                        <li><label><input id="sport-events-switch" />Sport Events</label></li>
+                        <li><label><input id="performance-events-switch" />Performance</label></li>                        
+                        <li><label><input id="exhibition-events-switch" />Exhibitions</label></li>
+                        <li><label><input id="lecture-events-switch" />Lectures & Talks</label></li>                        
+            </ul>
+                
+    </div>
+    
     
 <!--    
     <div id="tabstrip-console" data-role="view" data-title="Console">
@@ -292,8 +300,8 @@
             </div>
         </div>
     </div>
+    
     <div data-role="layout" data-id="tabstrip-layout-news">
-
         <!--Header-->
         <div data-role="header">
             <div data-role="navbar">
@@ -303,7 +311,25 @@
                 <a data-align="right" id="news-drawer-button" data-role="button" data-rel="drawer" href="#news-drawer" data-icon="drawer-button" title="View News Filters"></a>
             </div>
         </div>
-
+        <!--Footer-->
+        <div data-role="footer">
+            <div data-role="tabstrip">
+                <a href="#tabstrip-home" data-icon="home">Home</a>
+                <a href="#tabstrip-settings" data-icon="settings" data-transition="slide">Settings</a>
+                <a href="#tabstrip-info" data-icon="info" data-transition="slide">Info</a>
+            </div>
+        </div>
+    </div>
+    
+    <div data-role="layout" data-id="tabstrip-layout-events">
+        <!--Header-->
+        <div data-role="header">
+            <div data-role="navbar">
+                <a class="nav-button" data-align="left" data-role="backbutton">Back</a>
+                <span data-role="view-title"></span>
+                <a data-align="right" id="news-drawer-button" data-role="button" data-rel="drawer" href="#events-drawer" data-icon="drawer-button" title="View Events Filters"></a>
+            </div>
+        </div>
         <!--Footer-->
         <div data-role="footer">
             <div data-role="tabstrip">

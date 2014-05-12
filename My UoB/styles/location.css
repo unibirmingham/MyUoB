@@ -123,3 +123,8 @@
     background-repeat: no-repeat;*/
     background-position: center center;
 }
+
+.markerInfo img {
+    width:175px;
+    height:125px;
+}
