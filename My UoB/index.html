@@ -155,7 +155,7 @@
             <a id="map-drawer-button" data-role="button" data-rel="drawer" href="#map-drawer" data-icon="drawer-button" title="View Map Features"></a>
             
             <button id="map-navigate-home" data-bind="click: onNavigateHome" title="Go Home"></button>
-            <!--<button id="map-navigate-campus" data-bind="click: onCampusHome" title="Go to Campus"></button>-->
+            <button id="map-navigate-campus" data-bind="click: onCampusHome" title="Go to Campus"></button>
             <button id="map-clear" data-bind="click: deleteAllMarkers" title="Clear Markers"></button>
             <form onsubmit="return false;">
                 <!--
@@ -216,17 +216,15 @@
             	</label>
             </li>
             </ul>
-            <!--
-            <select id="map-feature" data-bind="value: featureType, click: onSearchAddress" placeholder="Choose a feature to highlight">
-                    <option value="Learning and Teaching">Learning and teaching</option>
-                    <option value="Culture">Culture</option>
-                    <option value="Retail">Retail</option>
-                    <option value="Transport">Transport</option>
+        
+        <h3>Select a campus</h3>
+
+            <select id="map-campus" data-bind="value: campus, click: onCampusSelect" placeholder="Choose a campus">
+            <!--<select id="map-feature" data-bind="value: featureType, click: onSearchAddress" placeholder="Choose a feature to highlight">-->    
+                    <option value="Edgbaston" selected="selected">Edgbaston</option>
+                    <option value="Dental">Dental school</option>
+                    <option value="Selly">Selly Oak</option>
             </select>
-            -->
-        <!--
-        </li>
-    </ul>-->
     </div>
     
     <!---------------------- NEWS DRAWER --------------------------------->
@@ -246,7 +244,6 @@
     <!---------------------- EVENTS DRAWER --------------------------------->
     
     <div class="myUoBDrawer" data-role="drawer" data-swipe-to-open="true" id="events-drawer" style="width: 240px; display:none;" data-position="right" data-views="['tabstrip-events']" >
-           	
         <h3>Events filters</h3>
             <ul data-role="listview" id="events-filters" data-style="inset">
  
@@ -255,8 +252,7 @@
                         <li><label><input id="performance-events-switch" />Performance</label></li>                        
                         <li><label><input id="exhibition-events-switch" />Exhibitions</label></li>
                         <li><label><input id="lecture-events-switch" />Lectures & Talks</label></li>                        
-            </ul>
-                
+            </ul> 
     </div>
     
     

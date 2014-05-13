@@ -357,6 +357,26 @@
             
         },
         
+        onCampusSelect: function () {
+            var that = this;
+            var camp = that.get("campus");
+            alert(camp);
+        },
+        
+        onCampusHome: function() {
+        	var that = this;
+
+            that._isLoading = true;
+            that.showLoading();
+
+            position = new google.maps.LatLng(52.450343, -1.930547);
+            map.panTo(position);
+			//that._putMarker(position);
+            
+            that._isLoading = false;
+            that.hideLoading();
+
+        },
         
 
         showLoading: function () {
@@ -509,6 +529,8 @@
             if (cid) {
                 app.locationService.viewModel.mapFacility(cid, cat);
             }
+            
+            
             
             
             

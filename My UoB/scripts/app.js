@@ -76,6 +76,8 @@ function onDeviceReady() {
     $('#clearLog').on('click', function() {
         $('#log').val('');
     });
+    
+    
                           
 }
 
