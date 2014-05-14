@@ -128,3 +128,13 @@
     width:175px;
     height:125px;
 }
+
+h3.campus-list {
+    padding-top: 14px;
+	padding-bottom: 2px;
+	margin-bottom: 2px;
+}
+
+div.campus-list {
+    margin: 8px 24px;
+}

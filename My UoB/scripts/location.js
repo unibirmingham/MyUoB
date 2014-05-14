@@ -9,6 +9,7 @@
     	transportMarkers = [],
     	cultureMarkers = [],
     	paramMarker = [],
+    	
         app = global.app = global.app || {};
     
     if (navigator.onLine) {
@@ -27,6 +28,11 @@
             buildingsUrl = "data/map-facilities.json";
         }
     }
+    if (!localStorage.getItem('campus')) {
+            localStorage.setItem('campus', 'Edgbaston');
+    }
+    
+    
     
     buildings = new kendo.data.DataSource({
 		transport: {
@@ -94,7 +100,10 @@
         }   
     })
     	
-
+	
+    
+    
+    
     LocationViewModel = kendo.data.ObservableObject.extend({
         _lastMarker: null,
         _isLoading: false,
@@ -136,6 +145,9 @@
                     enableHighAccuracy: true
                 }
             );
+            
+            selCamp = localStorage.getItem('campus');
+    		$('#map-campus option[value="' + selCamp + '"]').prop('selected', true);
             
             
             
@@ -360,7 +372,31 @@
         onCampusSelect: function () {
             var that = this;
             var camp = that.get("campus");
-            alert(camp);
+            
+            switch (camp) {
+                case "Edgbaston":
+                    position = new google.maps.LatLng(52.450343, -1.930547);
+                    map.panTo(position);
+                	localStorage.setItem('campus', 'Edgbaston');
+                	break;
+                case "Selly":
+                    position = new google.maps.LatLng(52.434874, -1.946983);
+                    map.panTo(position);
+                	localStorage.setItem('campus', 'Selly');
+                	break;
+                case "Dental":
+                    position = new google.maps.LatLng(52.485691, -1.895232);
+                    map.panTo(position);
+                	localStorage.setItem('campus', 'Dental');
+                	break;
+            }
+        },
+        
+        closeMapDrawerButton: function () {
+            $("#map-drawer").data("kendoMobileDrawer").hide();
+            //$(".drawer-link").removeClass("active");
+            //$(this).addClass("active");
+            return false;
         },
         
         onCampusHome: function() {
@@ -369,8 +405,25 @@
             that._isLoading = true;
             that.showLoading();
 
-            position = new google.maps.LatLng(52.450343, -1.930547);
-            map.panTo(position);
+            switch (localStorage.getItem('campus')) {
+                case "Edgbaston":
+                    position = new google.maps.LatLng(52.450343, -1.930547);
+                    map.panTo(position);
+                	break;
+                case "Selly":
+                    position = new google.maps.LatLng(52.434874, -1.946983);
+                    map.panTo(position);
+                	break;
+                case "Dental":
+                    position = new google.maps.LatLng(52.485691, -1.895232);
+                    map.panTo(position);
+                	break;
+                default:
+                	position = new google.maps.LatLng(52.450343, -1.930547);
+            		map.panTo(position);
+                	
+            }
+            
 			//that._putMarker(position);
             
             that._isLoading = false;

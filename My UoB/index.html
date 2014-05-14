@@ -154,7 +154,7 @@
             
             <a id="map-drawer-button" data-role="button" data-rel="drawer" href="#map-drawer" data-icon="drawer-button" title="View Map Features"></a>
             
-            <button id="map-navigate-home" data-bind="click: onNavigateHome" title="Go Home"></button>
+            <button id="map-navigate-home" data-bind="click: onNavigateHome" title="My location"></button>
             <button id="map-navigate-campus" data-bind="click: onCampusHome" title="Go to Campus"></button>
             <button id="map-clear" data-bind="click: deleteAllMarkers" title="Clear Markers"></button>
             <form onsubmit="return false;">
@@ -217,14 +217,16 @@
             </li>
             </ul>
         
-        <h3>Select a campus</h3>
-
-            <select id="map-campus" data-bind="value: campus, click: onCampusSelect" placeholder="Choose a campus">
+        <h3 class="campus-list">Select a campus</h3>
+        <div class="campus-list">
+            <select data-style="inset" id="map-campus" data-bind="value: campus, click: onCampusSelect" placeholder="Choose a campus">
             <!--<select id="map-feature" data-bind="value: featureType, click: onSearchAddress" placeholder="Choose a feature to highlight">-->    
-                    <option value="Edgbaston" selected="selected">Edgbaston</option>
+                    <option value="Edgbaston">Edgbaston</option>
                     <option value="Dental">Dental school</option>
                     <option value="Selly">Selly Oak</option>
             </select>
+            <a class="button" data-role="button" data-rel="drawer" data-click="closeMapDrawerButton" href="#map-drawer">Go</a>
+        </div>
     </div>
     
     <!---------------------- NEWS DRAWER --------------------------------->
