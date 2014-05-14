@@ -376,16 +376,19 @@
             switch (camp) {
                 case "Edgbaston":
                     position = new google.maps.LatLng(52.450343, -1.930547);
+                	
                     map.panTo(position);
                 	localStorage.setItem('campus', 'Edgbaston');
                 	break;
                 case "Selly":
                     position = new google.maps.LatLng(52.434874, -1.946983);
+                	
                     map.panTo(position);
                 	localStorage.setItem('campus', 'Selly');
                 	break;
                 case "Dental":
                     position = new google.maps.LatLng(52.485691, -1.895232);
+                
                     map.panTo(position);
                 	localStorage.setItem('campus', 'Dental');
                 	break;
