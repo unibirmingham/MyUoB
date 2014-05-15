@@ -138,3 +138,17 @@ h3.campus-list {
 div.campus-list {
     margin: 8px 24px;
 }
+
+li.setCampusTitle div.km-text {
+    text-indent:0px;
+}
+
+<!--
+li.setCampusTitle ul.km-list li {
+    border: 1px solid rgba(0,0,0,0.1);
+}
+-->
+
+.km-flat div.myUoBDrawer .km-list > li {
+    border: 1px solid rgba(0,0,0,0.1);
+}

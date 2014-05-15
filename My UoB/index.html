@@ -217,7 +217,7 @@
             </li>
             </ul>
         
-        <h3 class="campus-list">Set your campus</h3>
+        <!--<h3 class="campus-list">Set your campus</h3>-->
         <!--<div class="campus-list">
             
             <select data-style="inset" id="map-campus" data-bind="value: campus, click: onSearchAddress" placeholder="Choose a campus">
@@ -226,12 +226,11 @@
                     <option value="Selly">Selly Oak</option>
             </select>-->
             <ul data-role="listview" data-style="inset" data-type="group" >
-        <!--<li>
-            Campuses
-            <ul>-->
+        	<li class="setCampusTitle">Set your campus
+            <ul>
                 <li>
                     <label>
-                        <input name="radio" value="Edgbaston" type="radio" checked="checked" data-bind="checked: campus, click: onCampusSelect" />
+                        <input name="radio" value="Edgbaston" type="radio" data-bind="checked: campus, click: onCampusSelect" />
                         Edgbaston
                     </label>
                 </li>
@@ -248,8 +247,8 @@
                     </label>
                 </li>
                 
-            <!--</ul>
-        </li>-->
+            </ul>
+        </li>
     </ul>
             <!--<a class="button" data-role="button" data-rel="drawer" data-click="closeMapDrawerButton" href="#map-drawer">Go</a>-->
         <!--</div>-->
