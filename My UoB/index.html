@@ -217,14 +217,6 @@
             </li>
             </ul>
         
-        <!--<h3 class="campus-list">Set your campus</h3>-->
-        <!--<div class="campus-list">
-            
-            <select data-style="inset" id="map-campus" data-bind="value: campus, click: onSearchAddress" placeholder="Choose a campus">
-                    <option value="Edgbaston">Edgbaston</option>
-                    <option value="Dental">Dental school</option>
-                    <option value="Selly">Selly Oak</option>
-            </select>-->
             <ul data-role="listview" data-style="inset" data-type="group" >
         	<li class="setCampusTitle">Set your campus
             <ul>
@@ -252,6 +244,15 @@
     </ul>
             <!--<a class="button" data-role="button" data-rel="drawer" data-click="closeMapDrawerButton" href="#map-drawer">Go</a>-->
         <!--</div>-->
+        
+        	<h4>Search</h4>
+        	
+            <form onsubmit="return false;">
+                <input id="map-address" type="search" data-bind="value: address" placeholder="Address" />
+                <input id="map-search" type="submit" value="" data-bind="click: onSearchAddress" />
+            </form>
+        
+        	
     </div>
     
     <!---------------------- NEWS DRAWER --------------------------------->

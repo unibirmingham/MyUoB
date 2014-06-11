@@ -72,7 +72,8 @@
     color: #fff;
     border: none;
     background: none;
-    background-image: url(../styles/images/edit_clear2.png);
+/*    background-image: url(../styles/images/edit_clear2.png);*/
+    background-image: url(../styles/images/remove-iconb.png);
     background-repeat: no-repeat;
     background-position: center center;
 }
