@@ -22,7 +22,8 @@
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     /*width:90%;*/
-    width:170px;
+    /*width:170px;*/
+    width: 212px;
 }
 
 #map-address,
@@ -79,7 +80,7 @@
 }
 
 #map-clear:active {
-    background-image: url(../styles/images/edit_clear2.png);
+    background-image: url(../styles/images/remove-iconb.png);
     background-repeat: no-repeat;
 }
 
@@ -99,6 +100,23 @@
 
 #map-navigate-home:active {
     background-image: url(../styles/images/location_active.png);
+    background-repeat: no-repeat;
+}
+
+#map-search {
+    float: left;
+    width: 40px;
+    height: 40px;
+    color: #fff;
+    border: none;
+    background: none;
+    background-image: url(../styles/images/search.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#map-search:active {
+    background-image: url(../styles/images/search_active.png);
     background-repeat: no-repeat;
 }
 

@@ -151,12 +151,14 @@
         </div>
         <div id="map-search-wrap" data-bind="visible: isGoogleMapsInitialized">
             
-            
             <a id="map-drawer-button" data-role="button" data-rel="drawer" href="#map-drawer" data-icon="drawer-button" title="View Map Features"></a>
             
             <button id="map-navigate-home" data-bind="click: onNavigateHome" title="My location"></button>
             <button id="map-navigate-campus" data-bind="click: onCampusHome" title="Go to Campus"></button>
             <button id="map-clear" data-bind="click: deleteAllMarkers" title="Clear Markers"></button>
+            <!--<button id="map-search" data-bind="click: showSearch" title="Search for Building/Address"></button>-->
+            <a data-role="button" data-rel="modalview" href="#modalview-search" id="map-search"></a>
+            
             <form onsubmit="return false;">
                 <!--
                 <input id="map-address" type="search" data-bind="value: address" placeholder="Address" />
@@ -171,11 +173,44 @@
                 </select>
                 -->
                 <!--<input id="map-clear" type="submit" value="" data-bind="click: clearIcons" />-->
+            
             </form>
+            
         </div>
         <div id="map-canvas" data-bind="visible: isGoogleMapsInitialized"></div>
 
     </div>
+
+    <div data-model="app.locationService.viewModel" data-role="modalview" id="modalview-search" style="width: 80%; height: 200px;">
+    	<div data-role="header">
+        	<div data-role="navbar">
+        	    <span>Search</span>
+        	    <a data-click="closeModalView" data-role="button" data-align="right">Cancel</a>
+        	</div>
+    	</div>
+
+    	<!--<ul data-role="listview" data-style="inset">
+        	<li><label for="username">Username: <input type="text" id="username" /></label></li>
+        	<li><label for="password">Password: <input type="password" id="password" /></label></li>
+    	</ul>-->
+        <!--<ul id="filterable-buildings"></ul>-->
+    
+		<form onsubmit="return false;">
+                <input id="map-address" type="search" data-bind="value: address" placeholder="Address" />
+                <input id="map-search-but" type="submit" value="search" data-bind="click: onSearchAddress" />
+        </form>        
+    
+        
+    </div>
+    
+<style>
+    #modalview-search ul {
+            width: 90%;
+            margin: 30px auto 20px;
+            padding: 0;
+            list-style-type: none;
+        }
+</style>
     
     <!---------------------- MAP DRAWER --------------------------------->
     
@@ -245,12 +280,9 @@
             <!--<a class="button" data-role="button" data-rel="drawer" data-click="closeMapDrawerButton" href="#map-drawer">Go</a>-->
         <!--</div>-->
         
-        	<h4>Search</h4>
         	
-            <form onsubmit="return false;">
-                <input id="map-address" type="search" data-bind="value: address" placeholder="Address" />
-                <input id="map-search" type="submit" value="" data-bind="click: onSearchAddress" />
-            </form>
+        	
+            
         
         	
     </div>

@@ -609,3 +609,7 @@ function prettyTime(dateStr) {
     return pTime;
     
 }
+
+function closeModalView() {
+        $("#modalview-search").kendoMobileModalView("close");
+}

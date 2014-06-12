@@ -363,10 +363,51 @@
 		},
 
         onSearchAddress: function () {
+            //var that = this;
+            //var ft = that.get("featureType");
+            //that.mapFacilities(ft);
+
             var that = this;
-            var ft = that.get("featureType");
-            that.mapFacilities(ft);
             
+            var defaultBounds = new google.maps.LatLngBounds(
+  				    new google.maps.LatLng(52.447744, -1.936833),
+  				    new google.maps.LatLng(52.464511, -1.924045)
+                    );
+  			//map.fitBounds(defaultBounds);
+            
+            geocoder.geocode(
+                {
+                    'address': that.get("address"),
+                    'bounds': defaultBounds 
+                    //"bounds": "34.172684,-118.604794|34.236144,-118.500938"
+                },
+                function (results, status) {
+					//alert(results[0].geometry.location);
+                    
+                    
+                    
+                    if (status !== google.maps.GeocoderStatus.OK) {
+                        navigator.notification.alert("Unable to find address.",
+                            function () { }, "Search failed", 'OK');
+
+                        return;
+                    }
+                    /*"results": [ {
+                      "bounds": {
+       				 "southwest": {
+      			    "lat": 42.0885320,
+      			    "lng": -87.7715480
+      				  },
+      			  "northeast": {
+          			"lat": 42.1284090,
+          			"lng": -87.7110160
+        				}
+      				}  
+                    }]*/
+                    map.panTo(results[0].geometry.location);
+                    that._putMarker(results[0].geometry.location);
+                });
+            closeModalView();
         },
         
         onCampusSelect: function () {
@@ -560,6 +601,10 @@
             };
 
             map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+            
+            
+  		
+            
             geocoder = new google.maps.Geocoder();
             app.locationService.viewModel.onNavigateHome.apply(app.locationService.viewModel, []);
             
