@@ -157,24 +157,10 @@
             <button id="map-navigate-campus" data-bind="click: onCampusHome" title="Go to Campus"></button>
             <button id="map-clear" data-bind="click: deleteAllMarkers" title="Clear Markers"></button>
             <!--<button id="map-search" data-bind="click: showSearch" title="Search for Building/Address"></button>-->
-            <a data-role="button" data-rel="modalview" href="#modalview-search" id="map-search"></a>
+            <!--<a data-role="button" data-rel="modalview" href="#modalview-search" id="map-search"></a>-->
+            <a data-role="button" data-rel="modalview" href="#modalview-buildings" id="map-search-building"></a>
             
-            <form onsubmit="return false;">
-                <!--
-                <input id="map-address" type="search" data-bind="value: address" placeholder="Address" />
-                -->
-                
-                <!--
-                <select id="map-feature" data-bind="value: featureType, click: onSearchAddress" placeholder="Choose a feature to highlight">
-                    <option value="Learning and Teaching">Learning and teaching</option>
-                    <option value="Culture">Culture</option>
-                    <option value="Retail">Retail</option>
-                    <option value="Transport">Transport</option>
-                </select>
-                -->
-                <!--<input id="map-clear" type="submit" value="" data-bind="click: clearIcons" />-->
             
-            </form>
             
         </div>
         <div id="map-canvas" data-bind="visible: isGoogleMapsInitialized"></div>
@@ -189,11 +175,6 @@
         	</div>
     	</div>
 
-    	<!--<ul data-role="listview" data-style="inset">
-        	<li><label for="username">Username: <input type="text" id="username" /></label></li>
-        	<li><label for="password">Password: <input type="password" id="password" /></label></li>
-    	</ul>-->
-        <!--<ul id="filterable-buildings"></ul>-->
     
 		<form onsubmit="return false;">
                 <input id="map-address" type="search" data-bind="value: address" placeholder="Address" />
@@ -202,6 +183,20 @@
     
         
     </div>
+    
+    <div data-model="app.locationService.viewModel" data-role="modalview" data-bind="visible: isGoogleMapsInitialized" id="modalview-buildings" style="width: 80%; height: 70%;">
+    	<div data-role="header">
+        	<div data-role="navbar">
+         	    <a data-icon="close" data-click="closeModalView" data-role="button" data-align="right"></a>
+        	</div>
+    	</div>
+
+    	
+        <ul id="filterable-buildings" data-role="listview"></ul>
+        
+    </div>
+    
+    
     
 <style>
     #modalview-search ul {
@@ -250,6 +245,7 @@
                 	Transport
             	</label>
             </li>
+
             </ul>
         
             <ul data-role="listview" data-style="inset" data-type="group" >
@@ -397,6 +393,7 @@
         templateLoader.loadExtTemplate("templates/news.tmpl.html");
         templateLoader.loadExtTemplate("templates/events.tmpl.html");
         templateLoader.loadExtTemplate("templates/tweets.tmpl.html");
+        templateLoader.loadExtTemplate("templates/buildings.tmpl.html");
     </script>
     
     <script>

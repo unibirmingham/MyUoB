@@ -78,6 +78,8 @@ function onDeviceReady() {
     });
     
     
+    
+    
                           
 }
 
@@ -552,6 +554,8 @@ function getTweets() {
         	});
 }
 
+
+
 //LOGGING    
 function log(msg) {
     $('#log').val($('#log').val() + msg + '\n');
@@ -612,4 +616,5 @@ function prettyTime(dateStr) {
 
 function closeModalView() {
         $("#modalview-search").kendoMobileModalView("close");
+    	$("#modalview-buildings").kendoMobileModalView("close");
 }

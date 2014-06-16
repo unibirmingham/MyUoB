@@ -13,7 +13,7 @@
         app = global.app = global.app || {};
     
     if (navigator.onLine) {
-        buildingsUrl = "http://www.butler.bham.ac.uk/pocket_guides/index.json";
+        buildingsUrl = "data/map-buildings.json";
         categoriesUrl = "http://www.butler.bham.ac.uk/pocket_guides/index.json";
         facilitiesUrl = "http://www.butler.bham.ac.uk/pocket_guides/index.json";
     }
@@ -32,29 +32,53 @@
             localStorage.setItem('campus', 'Edgbaston');
     }
     
-    
-    
     buildings = new kendo.data.DataSource({
 		transport: {
             read: function(operation) {
 	            var cachedData = localStorage.getItem("buildings");
             	if((cachedData != null || cachedData != undefined) && (!navigator.onLine)) {
+                	//if local data exists and we're offline, load from it
                 	operation.success(JSON.parse(cachedData));
             	} else {
                 	$.ajax({ 
                    	 url: buildingsUrl,
                    	 dataType: "json",
                    	 success: function(response) {
+                   	     //store response, if online 
                    	     if (navigator.onLine) {
                                 localStorage.setItem("buildings", JSON.stringify(response));
                             }
+                   	     //pass the response to the DataSource
                    	     operation.success(response);
+                            
                    	 }
                 	});
             	}
         	}
-        }   
+        },
+        
+        schema: {
+            parse: function(response) {
+                var buildings = [];
+                for (var i =0; i < response.length; i++) {
+                    var building = {
+                        id: response[i].ContentId,
+                        BuildingName: response[i].BuildingName,
+                        BuildingCode: response[i].BuildingCode,
+                        Colour: response[i].Colour,
+                        DisplayName: response[i].BuildingName + " (" + response[i].BuildingCode + ")"
+                    };
+                    buildings.push(building);
+                }
+                return buildings;
+            }        
+        },
+        filter: { field: "BuildingName", operator: "eq", value: "baloney" }
     })
+    
+    
+    
+    
     
     categories = new kendo.data.DataSource({
 		transport: {
@@ -266,6 +290,10 @@
         },
         
         
+            
+
+        
+        
         
         getBuilding: function(id) {
             that = this;
@@ -294,6 +322,34 @@
             }
         },
         
+ 
+        
+        mapBuilding: function (zone) {
+            var that = this;
+            category="";
+            if (zone) {
+                //var zon = that.getCatCode(zone);
+                $.getJSON("data/map-buildings.json", function(data) {
+ 
+                	$.each(data, function() {
+
+                        //if (this.CategoryAsTaxonomyIds.indexOf(zone) != -1) {
+                        	var myLatlng = new google.maps.LatLng(parseFloat(this.PolygonCoordinatesAsArrayList[0,0]),parseFloat(this.PolygonCoordinatesAsArrayList[0,1]));
+                            alert(myLatlng + this.BuildingName + "" + category)
+                            that.createMarker(myLatlng, this.BuildingName, "", category);
+                        //}
+	            	});
+ 
+            	}).error(function(error) {
+				  	alert(error.message);
+				});
+                
+            }
+            
+        },
+        
+        
+        
         mapFacilities: function (category) {
             var that = this;
             if (category) {
@@ -305,7 +361,7 @@
                 	$.each(data, function() {
 
                         if (this.CategoryAsTaxonomyIds.indexOf(cat) != -1) {
-                        	var myLatlng = new google.maps.LatLng(parseFloat(this.CoordinatesArray[0]),parseFloat(this.CoordinatesArray[1]));
+                        	var myLatlng = new google.maps.LatLng(parseFloat(this.PolygonCoordinatesAsArrayList[0]),parseFloat(this.PolygonCoordinatesAsArrayList[1]));
                             var id = this.BuildingId;
                             that.createMarker(myLatlng, this.FacilityName, that.getBuilding(id), category);
                         }
@@ -582,6 +638,18 @@
             } 
 
             app.locationService.viewModel.set("isGoogleMapsInitialized", true);
+            
+            
+            
+            $("#filterable-buildings").kendoMobileListView({
+            dataSource: buildings,
+            template: $("#buildings-template").text(),
+            filterable: {
+                field: "DisplayName",
+                operator: "contains"
+            }
+            })
+            
 
             mapOptions = {
                 zoom: 16,
@@ -649,3 +717,4 @@
     
 }
 )(window);
+

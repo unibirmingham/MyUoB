@@ -341,10 +341,31 @@ div.offlineMessage {
     content: "\e0f1";
 }
 
+.km-close:after,
+.km-close:before {
+    
+    content: "\e038";
+}
+
+.km-zone:after,
+.km-zone:before {
+    
+    content: "\e0ac";
+}
+
 .km-email:after,
 .km-email:before {
     content: "\e099";
+    
 }
+
+
+.km-flat .building-text a.km-button {
+    background:none!important;
+    border:none!important;
+    padding: .2em .1em;
+}
+
 
 ul.feedback_options {
     margin: 10px;
