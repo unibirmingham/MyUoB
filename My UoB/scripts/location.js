@@ -339,8 +339,9 @@
                             //alert("boom" + contentId);
                             var myLatlng = new google.maps.LatLng(parseFloat(this.PolygonCoordinatesAsArrayList[0][0]),parseFloat(this.PolygonCoordinatesAsArrayList[0][1]));
                             //alert(myLatlng);
-                            that.createMarker(myLatlng, this.BuildingName, this.BuildingName + ";" + this.BuildingCode, "building");
+                            that.createMarker(myLatlng, this.BuildingName, this.BuildingName + ";" + this.BuildingCode, "building", this.BuildingCode.substr(0,1));
                             map.panTo(myLatlng);
+                            
                         }
 				}); 
             }).error(function(error) {
@@ -367,7 +368,7 @@
                         	
                             var myLatlng = new google.maps.LatLng(parseFloat(this.CoordinatesArray[0]),parseFloat(this.CoordinatesArray[1]));
                             var id = this.BuildingId;
-                            that.createMarker(myLatlng, this.FacilityName, that.getBuilding(id), category);
+                            that.createMarker(myLatlng, this.FacilityName, that.getBuilding(id), category, null);
                         }
 	            	});
  
@@ -392,7 +393,7 @@
                             }
                             var myLatlng = new google.maps.LatLng(parseFloat(this.CoordinatesArray[0]),parseFloat(this.CoordinatesArray[1]));
                             var id = this.BuildingId;
-                            that.createMarker(myLatlng, this.FacilityName, that.getBuilding(id), cat);
+                            that.createMarker(myLatlng, this.FacilityName, that.getBuilding(id), cat, null);
                             map.panTo(myLatlng);
                         }
                         
@@ -554,10 +555,11 @@
     		//var pinImageGood = new google.maps.MarkerImage("images/computers.png");
         },
         
-        createMarker: function (position, facilityTitle, buildingName, category){
+        createMarker: function (position, facilityTitle, buildingName, category, zone){
             var icon = "images/uni.png";
             var catMarkerCollection = learningMarkers;
-                
+			var windowState = "closed";
+            
             switch (category.toUpperCase()) {
                 case "CULTURE":
                 	icon = "images/art.png";
@@ -576,8 +578,13 @@
                 	catMarkerCollection = serviceMarkers;
                 	break;
             	case "BUILDING":
-                	icon = "images/pin.png";
+                	if (zone) {
+                		icon = "images/building_" + zone + ".png";
+                	} else {
+                        icon = "images/building_r.png";
+                    }   	
                 	catMarkerCollection = buildingMarkers;
+                	windowState = "open";
                 	break;
             }
             marker = new google.maps.Marker({
@@ -588,9 +595,12 @@
     		});
             markers.push(marker);
             catMarkerCollection.push(marker);
-            var descripDiv = "<div class='markerInfo'>";
-            if (!category.toUpperCase()==="BUILDING") {
-            	descripDiv = descripDiv + "<span class='markerTitle'>" + facilityTitle + "</span>";
+            var descripDiv = ""
+            if (category.toUpperCase()==="BUILDING") {
+                descripDiv = "<div class='markerInfo'>";
+            }
+            else {
+            	descripDiv = "<div class='markerInfo'><span class='markerTitle'>" + facilityTitle + "</span>";
             }
 
             if (buildingName) {
@@ -604,18 +614,17 @@
                 	descripDiv = descripDiv + "<br/><span class='facilityLocation'>Building: " + bui[0] + " " + "(" + bui[1] + ")</span>";
             	}
 				//get distance
-                descripDiv = descripDiv + "<br/><span class='distance'>Distance: " + distance(position.lat(), position.lng(),me.lat(),me.lng()) + " </span>";
+                descripDiv = descripDiv + "<br/><span class='distance'>Distance: " + distance(position.lat(), position.lng(),me.lat(),me.lng()) + " (approx)</span>";
                 //alert(position.lat());
                 //descripDiv = descripDiv + "<br/><span class='distance'>Distance: " + distance(52.356522,-1.998138,52.454217648033463,-1.9306327754630956) + "</span>";
             }
             descripDiv = descripDiv + "</div>";
             
-            this.addInfoWindow(map, marker, descripDiv)
-
-            //that.oneMarkerAtTime();
+            this.addInfoWindow(map, marker, descripDiv, windowState)
+			
         },
         
-        addInfoWindow: function(map, marker, message) {
+        addInfoWindow: function(map, marker, message, windowstate) {
 
             var infoWindow = new google.maps.InfoWindow({
                 content: message
@@ -624,6 +633,10 @@
             google.maps.event.addListener(marker, 'click', function () {
                 infoWindow.open(map, marker);
             });
+            
+            if (windowstate==="open"){
+                infoWindow.open(map, marker);
+            }
         },
         
         oneMarkerAtTime: function ()
@@ -680,14 +693,9 @@
 
             map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
             
-            
-  		
-            
             geocoder = new google.maps.Geocoder();
             app.locationService.viewModel.onNavigateHome.apply(app.locationService.viewModel, []);
-            
-            
-            
+
         },
 
         show: function (e) {
@@ -713,11 +721,7 @@
                 	app.locationService.viewModel.mapFacility(cid, cat);
                 }
             }
-            
-            
-            
-            
-            
+
         },
 
         hide: function () {
