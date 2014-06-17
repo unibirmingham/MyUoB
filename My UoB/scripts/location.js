@@ -2,12 +2,14 @@
     var map,
         geocoder,
         LocationViewModel,
+    	me,
     	markers = [],
     	serviceMarkers = [],
     	retailMarkers = [],
     	learningMarkers = [],
     	transportMarkers = [],
     	cultureMarkers = [],
+    	buildingMarkers = [],
     	paramMarker = [],
     	
         app = global.app = global.app || {};
@@ -147,6 +149,7 @@
             navigator.geolocation.getCurrentPosition(
                 function (position) {
                     position = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                    me = position;
                     map.panTo(position);
                     that._putMarker(position);
 
@@ -219,6 +222,7 @@
         	learningMarkers = [];
         	transportMarkers = [];
         	cultureMarkers = [];
+            buildingMarkers = [];
             $("#map-feature").val("");
             that.set("featureType","");
             
@@ -324,27 +328,26 @@
         
  
         
-        mapBuilding: function (zone) {
+        mapBuilding: function (contentId) {
             var that = this;
-            category="";
-            if (zone) {
-                //var zon = that.getCatCode(zone);
-                $.getJSON("data/map-buildings.json", function(data) {
+            
+            $.getJSON("data/map-buildings.json", function(data) {
  
-                	$.each(data, function() {
+                $.each(data, function() {
 
-                        //if (this.CategoryAsTaxonomyIds.indexOf(zone) != -1) {
-                        	var myLatlng = new google.maps.LatLng(parseFloat(this.PolygonCoordinatesAsArrayList[0,0]),parseFloat(this.PolygonCoordinatesAsArrayList[0,1]));
-                            alert(myLatlng + this.BuildingName + "" + category)
-                            that.createMarker(myLatlng, this.BuildingName, "", category);
-                        //}
-	            	});
- 
-            	}).error(function(error) {
+                        if (this.ContentId == contentId) {
+                            //alert("boom" + contentId);
+                            var myLatlng = new google.maps.LatLng(parseFloat(this.PolygonCoordinatesAsArrayList[0][0]),parseFloat(this.PolygonCoordinatesAsArrayList[0][1]));
+                            //alert(myLatlng);
+                            that.createMarker(myLatlng, this.BuildingName, this.BuildingName + ";" + this.BuildingCode, "building");
+                            map.panTo(myLatlng);
+                        }
+				}); 
+            }).error(function(error) {
 				  	alert(error.message);
-				});
+			});
                 
-            }
+            
             
         },
         
@@ -361,7 +364,8 @@
                 	$.each(data, function() {
 
                         if (this.CategoryAsTaxonomyIds.indexOf(cat) != -1) {
-                        	var myLatlng = new google.maps.LatLng(parseFloat(this.PolygonCoordinatesAsArrayList[0]),parseFloat(this.PolygonCoordinatesAsArrayList[1]));
+                        	
+                            var myLatlng = new google.maps.LatLng(parseFloat(this.CoordinatesArray[0]),parseFloat(this.CoordinatesArray[1]));
                             var id = this.BuildingId;
                             that.createMarker(myLatlng, this.FacilityName, that.getBuilding(id), category);
                         }
@@ -448,18 +452,7 @@
 
                         return;
                     }
-                    /*"results": [ {
-                      "bounds": {
-       				 "southwest": {
-      			    "lat": 42.0885320,
-      			    "lng": -87.7715480
-      				  },
-      			  "northeast": {
-          			"lat": 42.1284090,
-          			"lng": -87.7110160
-        				}
-      				}  
-                    }]*/
+                    
                     map.panTo(results[0].geometry.location);
                     that._putMarker(results[0].geometry.location);
                 });
@@ -564,6 +557,7 @@
         createMarker: function (position, facilityTitle, buildingName, category){
             var icon = "images/uni.png";
             var catMarkerCollection = learningMarkers;
+                
             switch (category.toUpperCase()) {
                 case "CULTURE":
                 	icon = "images/art.png";
@@ -571,15 +565,19 @@
                 	break;
                 case "RETAIL":
                 	icon = "images/retail.png";
-                catMarkerCollection = retailMarkers;
+            	    catMarkerCollection = retailMarkers;
                 	break;
                 case "TRANSPORT":
                 	icon = "images/trans.png";
-                catMarkerCollection = transportMarkers;
+                	catMarkerCollection = transportMarkers;
                 	break;
                 case "SERVICES":
                 	icon = "images/pin.png";
                 	catMarkerCollection = serviceMarkers;
+                	break;
+            	case "BUILDING":
+                	icon = "images/pin.png";
+                	catMarkerCollection = buildingMarkers;
                 	break;
             }
             marker = new google.maps.Marker({
@@ -590,14 +588,26 @@
     		});
             markers.push(marker);
             catMarkerCollection.push(marker);
-            var descripDiv = "<div class='markerInfo'><span class='markerTitle'>" + facilityTitle + "</span>";
+            var descripDiv = "<div class='markerInfo'>";
+            if (!category.toUpperCase()==="BUILDING") {
+            	descripDiv = descripDiv + "<span class='markerTitle'>" + facilityTitle + "</span>";
+            }
+
             if (buildingName) {
                 var bui = buildingName.split(";");
+                if (category.toUpperCase()==="BUILDING") {
+                    descripDiv = descripDiv + "<span class='markerTitle'>" + bui[0] + " (" + bui[1] + ")</span>";
+                }
                 var imgLoc = "images/buildings/" + bui[1] + ".jpg";
-                
-                descripDiv = descripDiv + "<br/><img src='" + imgLoc + "'/><br/><span class='facilityLocation'>Building: " + bui[0] + " " + "(" + bui[1] + ")</span>";
+                descripDiv = descripDiv + "<br/><img src='" + imgLoc + "'/>"
+                if (!category.toUpperCase()==="BUILDING") {
+                	descripDiv = descripDiv + "<br/><span class='facilityLocation'>Building: " + bui[0] + " " + "(" + bui[1] + ")</span>";
+            	}
+				//get distance
+                descripDiv = descripDiv + "<br/><span class='distance'>Distance: " + distance(position.lat(), position.lng(),me.lat(),me.lng()) + " </span>";
+                //alert(position.lat());
+                //descripDiv = descripDiv + "<br/><span class='distance'>Distance: " + distance(52.356522,-1.998138,52.454217648033463,-1.9306327754630956) + "</span>";
             }
-            
             descripDiv = descripDiv + "</div>";
             
             this.addInfoWindow(map, marker, descripDiv)
@@ -696,7 +706,12 @@
             var cid = e.view.params.contentId;
             var cat = e.view.params.category;
             if (cid) {
-                app.locationService.viewModel.mapFacility(cid, cat);
+                if (cat === "building") {
+                 	app.locationService.viewModel.mapBuilding(cid);   
+                }
+                else {
+                	app.locationService.viewModel.mapFacility(cid, cat);
+                }
             }
             
             
@@ -718,3 +733,31 @@
 }
 )(window);
 
+function distance(lon1, lat1, lon2, lat2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = (lat2-lat1).toRad();  // Javascript functions in radians
+  var dLon = (lon2-lon1).toRad(); 
+  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * 
+          Math.sin(dLon/2) * Math.sin(dLon/2); 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in km
+  var dm = parseFloat(d*1000).toFixed(0); //distance in m
+    return dm + "m";
+}
+
+/** Converts numeric degrees to radians */
+if (typeof(Number.prototype.toRad) === "undefined") {
+  Number.prototype.toRad = function() {
+    return this * Math.PI / 180;
+  }
+}
+
+/*
+window.navigator.geolocation.getCurrentPosition(function(pos) {
+  console.log(loc); 
+  console.log(
+    distance(pos.coords.longitude, pos.coords.latitude, 42.37, 71.03)
+  ); 
+});
+*/
