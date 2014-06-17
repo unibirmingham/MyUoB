@@ -581,7 +581,7 @@
                 	if (zone) {
                 		icon = "images/building_" + zone + ".png";
                 	} else {
-                        icon = "images/building_r.png";
+                        icon = "images/building_other.png";
                     }   	
                 	catMarkerCollection = buildingMarkers;
                 	windowState = "open";
