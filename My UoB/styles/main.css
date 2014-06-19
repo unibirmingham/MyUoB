@@ -389,6 +389,11 @@ ul.feedback_options {
   content: "\F099";
 }
 
+.km-facebook:after,
+.km-facebook:before {
+  content: "\F09a";
+}
+
 /* settings */
 
 ul#settingsOptions li.info {

@@ -31,6 +31,7 @@
                 <li><a data-icon="justify" href="#tabstrip-news" class="networkDependent" data-transition="slide">News</a></li>
                 <li><a data-icon="cal" href="#tabstrip-events" class="networkDependent" data-transition="slide">Events</a></li>
                 <li><a data-icon="twitter" href="#tabstrip-twitter" class="fa networkDependent" data-transition="slide">UoB Twitter Feed</a></li>
+                <li><a data-icon="facebook" href="#tabstrip-face" class="fa networkDependent" data-transition="slide">UoB Facebook Posts</a></li>
                 <li><a data-icon="globe" href="#tabstrip-location" class="networkDependent" data-transition="slide">Location</a></li>
                 <li><a data-icon="organize" href="autopocket.html" data-transition="slide">Pocket Guide</a></li>
                 
@@ -136,6 +137,11 @@
         <!--<p>Tweets go here...</p>-->
     </div>
 
+    <!--FriendFace screen-->
+    <div id="tabstrip-face" data-role="view" data-title="Facebook" data-show="getFriendFacePosts">
+        <ul id="pull-friendfacelistview" class="tweets-list"></ul>
+    </div>
+    
     <!--Map screen-->
     <div id="tabstrip-location"
         data-role="view"
@@ -393,6 +399,7 @@
         templateLoader.loadExtTemplate("templates/news.tmpl.html");
         templateLoader.loadExtTemplate("templates/events.tmpl.html");
         templateLoader.loadExtTemplate("templates/tweets.tmpl.html");
+        templateLoader.loadExtTemplate("templates/friendface.tmpl.html");
         templateLoader.loadExtTemplate("templates/buildings.tmpl.html");
     </script>
     

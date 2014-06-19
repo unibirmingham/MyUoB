@@ -527,6 +527,29 @@ function onEventsPrefChange(e) {
     
 }
 
+function getFriendFacePosts() {
+    app.application.showLoading();
+    
+    var dataSource = new kendo.data.DataSource({
+            	transport: {
+                	read: {
+                	    url: "data/facebook.json",
+                        //http://www.ideas.bham.ac.uk/feed.json
+                	    dataType: "json"
+                	}
+            	},
+            	change: function (data) {
+                	app.application.hideLoading();
+            	}
+        	});
+
+        	$("#pull-friendfacelistview").kendoMobileListView({
+        	    dataSource: dataSource,
+        	    template: $("#friendface-template").text(),
+        	    pullToRefresh: true
+        	});    
+}
+
 
 function getTweets() {    
     //$.mobile.showPageLoadingMsg();
