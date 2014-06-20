@@ -2,23 +2,35 @@
 <script type="text/x-kendo-tmpl" id="friendface-template">
         <div class="post-item">
                 <div class="post-header">
-    				<a class="profile_image_link profile_link" href="\#"><img class="_s0 _50c7 _54rt img" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/t1.0-1/p43x43/1383981_10151883344553608_722443765_n.jpg" alt=""></a>
+    				<a class="profile_image_link profile_link" onClick="window.open('https://www.facebook.com/unibirmingham', '_system')"><img class="_s0 _50c7 _54rt img" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/t1.0-1/p43x43/1383981_10151883344553608_722443765_n.jpg" alt=""></a>
     				<div class="nameDate">
-    					<h5><a class="profile_link">University of Birmingham</a> <!--shared a link, and statuses --></h5>
-    					<span class="post-time">#:timeAgo(created)#</span>
+    					<h5>
+    						<a class="profile_link" onClick="window.open('https://www.facebook.com/unibirmingham', '_system')">University of Birmingham</a> <!--shared a link, and statuses -->
+    						#if(type=="link"){# <span> shared a <a class="profile_link" onClick="window.open('#: link #', '_system')">link</a>.</span> #}#
+    					</h5>
+    					<span class="post-time"><a class="post-link" onClick="window.open('https://www.facebook.com/unibirmingham/posts/#:object_id#', '_system')">#:timeAgo(created)#</a></span>
     				</div>
     			</div>
+    				
     			<div class="post-text">
+    				
     				#if(name){#
     					<span class="post-title">#:name#</span>
         				<br/>
     				#}#
     				<span class="post-text">#:message#</span>
         			<br/>
-                	<span class="post-likes">\# Likes</span>
+                	
     			</div>
-        		<a class="post-link" onClick="window.open('https://m.facebook.com/unibirmingham/posts/#:object_id#', '_system')" data-role="detailbutton" data-style="detaildisclose"></a>
-        		<br/>
+    			#if(picture){#
+                    	<!--<span class="post-image">-->
+    					<div class="letterboxed-image">
+    					<img class="post-image" src="#:picture#"/>
+    					</div>
+    					<!--</span>-->
+        			#}#
+        		<!--<a class="post-link" onClick="window.open('https://www.facebook.com/unibirmingham/posts/#:object_id#', '_system')" data-role="detailbutton" data-style="detaildisclose"></a>
+        		<br/>-->
     			
     	</div>
     </script>

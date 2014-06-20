@@ -533,8 +533,9 @@ function getFriendFacePosts() {
     var dataSource = new kendo.data.DataSource({
             	transport: {
                 	read: {
-                	    url: "data/facebook.json",
-                        //http://www.ideas.bham.ac.uk/feed.json
+                	    //url: "data/facebook.json",
+                        //url: "http://winterbourn.co.uk:3000/feed.json",
+                        url: "http://www.friendface.butler.bham.ac.uk/feed.json",
                 	    dataType: "json"
                 	}
             	},
@@ -636,6 +637,7 @@ function prettyTime(dateStr) {
     return pTime;
     
 }
+
 
 function closeModalView() {
         $("#modalview-search").kendoMobileModalView("close");

@@ -194,12 +194,15 @@ div.tweet-item span.tweet-title {
     display:block;
 }
 
-ul#pull-friendfacelistview {
+ul#pull-friendfacelistview,
+ul#pull-twitterlistview {
     background-color: #eee;
-	padding-top: 6px;
+	/*padding-top: 4px;*/
+    
 }
 
-ul#pull-friendfacelistview li {
+ul#pull-friendfacelistview li,
+ul#pull-twitterlistview li {
     background-color: #fff;
 	margin: 6px;    
 }
@@ -219,7 +222,7 @@ div.post-item span.post-likes {
     font-size:11px;
     color:gray;
     padding-top: 4px;
-display: block;
+	display: block;
 }
 
 div.post-header {
@@ -285,6 +288,28 @@ div.tweet-item a.tweet-link {
         background-position: center center;
         -webkit-transform: translatez(0);
         vertical-align: top;
+    }
+
+img.post-image {
+    
+    
+}
+div.letterboxed-image {
+    
+}
+#pull-friendfacelistview .post-image {
+    	/*width: 90%;*/
+        margin: 0.5em auto;
+        border: 1px solid rgba(0,0,0,.2);
+        /*-webkit-border-radius: 4em;*/
+        /*border-radius: 4em;
+        display: inline-block;*/
+        -webkit-background-size: auto 100%;
+        /*background-size: auto 100%;
+        background-repeat: no-repeat;
+        background-position: center center;*/
+        -webkit-transform: translatez(0);
+		display:block;
     }
 
 #pull-eventslistview div.event-text,
