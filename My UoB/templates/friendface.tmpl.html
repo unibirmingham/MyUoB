@@ -8,8 +8,14 @@
     						<a class="profile_link" onClick="window.open('https://www.facebook.com/unibirmingham', '_system')">University of Birmingham</a> <!--shared a link, and statuses -->
     						#if(type=="link"){# <span> shared a <a class="profile_link" onClick="window.open('#: link #', '_system')">link</a>.</span> #}#
     					</h5>
-    					<span class="post-time"><a class="post-link" onClick="window.open('https://www.facebook.com/unibirmingham/posts/#:object_id#', '_system')">#:timeAgo(created)#</a></span>
-    				</div>
+    					<span class="post-time">
+    						#if(type!="link"){#
+    							<a class="post-link" onClick="window.open('#:link#', '_system')">#:timeAgo(created)#</a></span>
+    						#}else{#
+    							#:timeAgo(created)#
+    						#}#
+    				</div>  
+    						
     			</div>
     				
     			<div class="post-text">
@@ -25,7 +31,13 @@
     			#if(picture){#
                     	<!--<span class="post-image">-->
     					<div class="letterboxed-image">
-    					<img class="post-image" src="#:picture#"/>
+    					#if(link){#
+    						<a class="post-link" onClick="window.open('#:link#', '_system')">
+    					#}#
+    						<img class="post-image" src="#:picture#"/>
+    					#if(link){#
+    						</a>
+    					#}#
     					</div>
     					<!--</span>-->
         			#}#
