@@ -112,6 +112,7 @@ body, html {
 
 div.events-title,
 div.news-title,
+div.post-title,
 div.tweets-title {
     margin: 0.6em 0.8em 0.2em 0.9em;
     font-size: 1.3em;
@@ -119,7 +120,8 @@ div.tweets-title {
 
 div.event-item,
 div.news-item,
-div.tweet-item {
+div.tweet-item,
+div.post-item {
     padding:0px;
     margin:0px;
     font-size:1em;
@@ -127,14 +129,16 @@ div.tweet-item {
 
 ul#pull-eventslistview li,
 ul#pull-newslistview li,
-ul#pull-twitterlistview li {
+ul#pull-twitterlistview li,
+ul#pull-friendfacelistview li {
     padding: .4em .2em;
     
 }
 
 div.news-item a,
 div.event-item a,
-div.tweet-item a {
+div.tweet-item a,
+div.post-item a {
     font-weight:normal;
     text-decoration: none;
 }
@@ -190,8 +194,68 @@ div.tweet-item span.tweet-title {
     display:block;
 }
 
+ul#pull-friendfacelistview {
+    background-color: #eee;
+	padding-top: 6px;
+}
+
+ul#pull-friendfacelistview li {
+    background-color: #fff;
+	margin: 6px;    
+}
+
+div.post-item span.post-title {
+	padding-right: 16px;	    
+    font-weight:bold;
+}
+
+div.post-item span.post-text,
+div.post-item span.post-likes {
+	padding-right: 16px;	    
+    
+}
+
+div.post-item span.post-likes {
+    font-size:11px;
+    color:gray;
+    padding-top: 4px;
+display: block;
+}
+
+div.post-header {
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 5px;
+    padding-bottom: 14px;
+}
+
+a.profile_image_link {
+    
+    margin-right: 8px;
+    float: left;
+    color: #3b5998;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+a.profile_link {
+    
+    color: #3b5998;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+span.post-time {
+    color: gray;
+	font-size:11px;
+}
+
+div.nameDate h5 {
+    margin:0px;
+}
+
 div.event-item a.event-link,
 div.news-item a.news-link,
+div.post-item a.post-link,
 div.tweet-item a.tweet-link {
     padding-right:0;
     margin-right:0;
@@ -232,11 +296,12 @@ div.tweet-item a.tweet-link {
     	width: 74%;
     }
 
-#pull-twitterlistview div.tweet-text {
+#pull-twitterlistview div.tweet-text,
+#pull-friendfacelistview div.post-text {
         display: inline-block;
         margin: .5em;
         font-size: 0.8em;
-    padding-right: 2em;
+    padding-right: 2.2em;
     }
     
     .km-android #hierarchical-listview .parent:after {

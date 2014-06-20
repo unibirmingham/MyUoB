@@ -610,7 +610,7 @@ function timeAgo(created) {
                 if (days>1) {
                 	dayUnit = "days";
                 }
-                timeStr = '' + days + ' ' + dayUnit + '';
+                timeStr = '' + days + ' ' + dayUnit + ' ago';
             }
             else {
             	if (hours<1) {

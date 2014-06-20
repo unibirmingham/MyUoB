@@ -1,10 +1,24 @@
-    <script type="text/x-kendo-tmpl" id="friendface-template">
+    
+<script type="text/x-kendo-tmpl" id="friendface-template">
         <div class="post-item">
-                <div class="post-text">
-                    <span class="post-title">#:message#</span>
+                <div class="post-header">
+    				<a class="profile_image_link profile_link" href="\#"><img class="_s0 _50c7 _54rt img" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/t1.0-1/p43x43/1383981_10151883344553608_722443765_n.jpg" alt=""></a>
+    				<div class="nameDate">
+    					<h5><a class="profile_link">University of Birmingham</a> <!--shared a link, and statuses --></h5>
+    					<span class="post-time">#:timeAgo(created)#</span>
+    				</div>
+    			</div>
+    			<div class="post-text">
+    				#if(name){#
+    					<span class="post-title">#:name#</span>
+        				<br/>
+    				#}#
+    				<span class="post-text">#:message#</span>
         			<br/>
-        			<span class="post-time">#:created#</span>
-                </div>
-        		<a class="post-link" onClick="window.open('http://www.facebook.com/unibirmingham/posts/#:object_id#', '_system')" data-role="detailbutton" data-style="detaildisclose"></a>
-        </div>
+                	<span class="post-likes">\# Likes</span>
+    			</div>
+        		<a class="post-link" onClick="window.open('https://m.facebook.com/unibirmingham/posts/#:object_id#', '_system')" data-role="detailbutton" data-style="detaildisclose"></a>
+        		<br/>
+    			
+    	</div>
     </script>
