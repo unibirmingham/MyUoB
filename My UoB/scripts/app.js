@@ -8,7 +8,6 @@
                 
 function initialize() {
     document.addEventListener("deviceready", onDeviceReady, true);
-    
 }
    
 
@@ -53,6 +52,18 @@ function onDeviceReady() {
         log('gaPlugin initialised');
     }
     
+    log("stored(push):" + localStorage.getItem('allowPushNotifications'));
+    //if no variable stored locally, create one and set value as undefined
+    if (!localStorage.getItem('allowPushNotifications')) {
+        localStorage.setItem('allowPushNotifications','unset');
+    }
+    log("allowPushNotifications: " + localStorage.getItem('allowPushNotifications'));
+    
+    //if no variable stored locally, create one and set value as undefined
+    if (!localStorage.getItem('alerts')) {
+        localStorage.setItem('alerts','[]');
+    }
+    
     //News and Events preferences
     if (!localStorage.getItem('newspreferences')) {
         	localStorage.setItem('student-news',true);
@@ -71,16 +82,12 @@ function onDeviceReady() {
         log('setting events prefernces');
 	}
     
-    
-
     $('#clearLog').on('click', function() {
         $('#log').val('');
     });
     
     
     
-    
-                          
 }
 
 //GA plugin
@@ -415,6 +422,59 @@ function newsItemView(e) {
 //    log("stored:" + localStorage.getItem('allowUsageTracking') + ": NEWSITEM");
 }
 
+function alertListView(e) {
+    
+    	if (localStorage.getItem("allowPushNotifications")=="deny") {
+            	$("#alertlistview").kendoMobileListView({
+        			dataSource:new kendo.data.DataSource({
+    					data: [
+        					{ title: "You currently have push notifications disabled.", message: "", date: "" }
+    					]
+					}),
+  		      	template: $("#alerts-template").text(),
+     		  	 pullToRefresh: false
+    			});
+            
+            }
+    else {
+        app.application.showLoading();
+        var dataSource = null;
+        
+        	dataSource = new kendo.data.DataSource({
+        		transport: {
+            	    read: function(operation) {
+	       	     	var alertsData = localStorage.getItem("alerts");
+           	         operation.success(JSON.parse(alertsData));
+           	     }
+        		},
+        	    change: function (data) {
+        	        app.application.hideLoading();
+                    
+        	    }
+        	});
+    		
+    		if (dataSource.total()==0) {
+                $("#alertlistview").kendoMobileListView({
+        			dataSource:new kendo.data.DataSource({
+    					data: [
+        					{ title: "You currently have no alerts.", message: "", date: "" }
+    					]
+					}),
+  		      	template: $("#alerts-template").text(),
+     		  	 pullToRefresh: false
+    			});
+            }
+    		else {
+				$("#alertlistview").kendoMobileListView({
+        			dataSource: dataSource,
+  		  	    template: $("#alerts-template").text(),
+     			   pullToRefresh: false
+    			});
+			}
+        }
+}
+
+
 //HOME view
 function homeInit() {
     
@@ -448,6 +508,14 @@ function settingsInit() {
         change: onTrackingChange
     });
     
+    pushVal = true;
+    if (localStorage.getItem('allowPushNotifications')==="deny") {
+        pushVal = false;    
+    }
+    $("#push-notifications-switch").kendoMobileSwitch({
+        checked: pushVal,
+        change: onPushChange
+    });
 }
 
 function settingsShow() {
@@ -482,7 +550,7 @@ function guideAdviceCounsellingShow() {
 
 
 
-//Manage change of user preferences (GA tracking)
+//Manage change of user preferences (GA tracking & Push Notifications)
 function onTrackingChange(e) {
     log("Change");
     var allowTrackingVal;
@@ -501,6 +569,23 @@ function onTrackingChange(e) {
         gaPlugin.init(nativePluginResultHandler, nativePluginErrorHandler, "UA-47250154-2", 5);
         log("start");
     }
+}
+function onPushChange(e) {
+    log("Change");
+    var allowPushVal;
+    if (e.checked) {
+        allowPushVal = "allow";
+        enablePushNotifications();
+    }
+    else {
+        allowPushVal = "deny";
+    }
+    localStorage.setItem('allowPushNotifications', allowPushVal);
+    //alertListView();
+}
+
+function enablePushNotifications() {
+    alert("enabled");
 }
 
 function onNewsPrefChange(e) {

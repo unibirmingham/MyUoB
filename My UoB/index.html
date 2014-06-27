@@ -9,12 +9,14 @@
     <link href="styles/guide.css" rel="stylesheet" />
     <link href="styles/location.css" rel="stylesheet" />
     <script src="cordova.js"></script>
+    
     <script src="kendo/js/jquery.min.js"></script>
     <script src="kendo/js/kendo.mobile.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?sensor=true&region=GB"></script>
     <script type="text/javascript" src="Plugins/GAPlugin-master/www/GAPlugin.js"></script>
     <script src="scripts/location.js"></script>
     <script src="scripts/app.js"></script>
+
     
 </head>
 <body onload="initialize();" onunload="goingAway();">
@@ -42,7 +44,7 @@
     <!--Settings view-->
     <div id="tabstrip-settings" data-after-show="settingsShow" data-init="settingsInit" data-role="view" data-title="Settings">
         <div class="view-content">
-            <h2 class="settings-title">App Settings</h2>
+            <!--<h2 class="settings-title">App Settings</h2>-->
         <!--
         <h3>Privacy settings</h3>
         <p>This app tracks usage, using Google Analytics so that we can learn from user behaviour and provide a better app in the future. No personal or user identifiable data will be collected, but if you would prefer for the app not to collect such data please select OFF below.</p>    
@@ -60,6 +62,10 @@
                     		<ul>
         						<li class="info">This app tracks usage, using Google Analytics so that we can learn from user behaviour and provide a better app in the future. No personal or user identifiable data will be collected, but if you would prefer for the app not to collect such data please select OFF below.</li>
                                 <li>Usage tracking <input id="usage-tracking-switch" /></li>
+        					</ul>
+                    		<ul>
+        						<li class="info">This app makes use of alerts/push notifications. These will be used only for important announcements so we would urge you to enable them, but if you would prefer not to receive them please select OFF below.</li>
+                                <li>Alerts/Push Notifications <input id="push-notifications-switch" /></li>
         					</ul>
         			<!--	</li>
                     </ul>-->
@@ -101,6 +107,15 @@
              </div>
 
         </div>
+    </div>
+    
+    <!-- Alerts screen-->
+    <div id="tabstrip-alerts" data-role="view" data-title="My Alerts" data-show="alertListView">
+        
+        <ul id="alertlistview" class="alerts-list">
+            
+        </ul>
+
     </div>
                 
     <!--Events screen-->
@@ -348,6 +363,7 @@
         <div data-role="footer">
             <div data-role="tabstrip">
                 <a href="#tabstrip-home" data-icon="home">Home</a>
+                <a href="#tabstrip-alerts" data-icon="exclamation">Alerts</a>
                 <a href="#tabstrip-settings" data-icon="settings" data-transition="slide">Settings</a>
                 <a href="#tabstrip-info" data-icon="info" data-transition="slide">Info</a>
             </div>
@@ -402,6 +418,8 @@
         templateLoader.loadExtTemplate("templates/tweets.tmpl.html");
         templateLoader.loadExtTemplate("templates/friendface.tmpl.html");
         templateLoader.loadExtTemplate("templates/buildings.tmpl.html");
+        templateLoader.loadExtTemplate("templates/alerts.tmpl.html");
+        
     </script>
     
     <script>

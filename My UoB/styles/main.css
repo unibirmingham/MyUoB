@@ -449,6 +449,11 @@ div.offlineMessage {
     
 }
 
+.km-exclamation:after,
+.km-exclamation:before {
+    content: "\e0fa";
+}
+
 
 .km-flat .building-text a.km-button {
     background:none!important;
