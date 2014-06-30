@@ -1,10 +1,19 @@
 (function (global) {
     
- var app = global.app = global.app || {};
- var gaPlugin;
- var offLine;
-    
-    })(window);
+	var app = global.app = global.app || {};
+	var gaPlugin;
+	var offLine;
+	
+    //This is your Telerik BackEnd Services API key.
+	//var baasApiKey = 'BAAS_API_KEY';
+
+	//This is the scheme (http or https) to use for accessing Telerik BackEnd Services.
+	//var baasScheme = 'http';
+
+	//This is your Android project number. It is required by Google in order to enable push notifications for your app. You do not need it for iPhone.
+	//var androidProjectNumber = 'GOOGLE_PROJECT_NUMBER';   
+
+	})(window);
                 
 function initialize() {
     document.addEventListener("deviceready", onDeviceReady, true);
@@ -79,7 +88,7 @@ function onDeviceReady() {
         	localStorage.setItem('sport-events',true);
         	localStorage.setItem('student-events',true);
         	localStorage.setItem('eventspreferences','set');
-        log('setting events prefernces');
+        log('setting events preferences');
 	}
     
     $('#clearLog').on('click', function() {
@@ -239,8 +248,6 @@ function eventListViewPullWithEndless(e) {
             app.application.hideLoading();
         }
        
-//        ScreenButtonClicked("events");
-//        log("stored:" + localStorage.getItem('allowUsageTracking'));
     }
     else {
           
@@ -282,8 +289,8 @@ function eventItemView(e) {
     
     eventSource.read();
     
-//    ScreenButtonClicked("event item:");
-//    log("stored:" + localStorage.getItem('allowUsageTracking') + ": EVENTITEM");
+    ScreenButtonClicked("event item:");
+    log("stored:" + localStorage.getItem('allowUsageTracking') + ": EVENTITEM");
 }
 
 //NEWS
@@ -378,8 +385,8 @@ function newsListViewPullWithEndless(e) {
             $("#pull-newslistview").kendoMobileListView().html("<li><div class='news-item'>No news currently available - have you disabled all news sources in your <a href='#tabstrip-settings'>settings</a>?</div></li>");
             app.application.hideLoading();
         }
-//        ScreenButtonClicked("news");
-//        log("stored:" + localStorage.getItem('allowUsageTracking'));
+        ScreenButtonClicked("news");
+        log("stored:" + localStorage.getItem('allowUsageTracking'));
     }
     else {
 		$("#pull-newslistview").kendoMobileListView().html("<li><div class='news-item'>News feed requires network connection</div></li>");        
@@ -418,8 +425,8 @@ function newsItemView(e) {
     
     newsSource.read();
     
-//    ScreenButtonClicked("news item:");
-//    log("stored:" + localStorage.getItem('allowUsageTracking') + ": NEWSITEM");
+    ScreenButtonClicked("news item:");
+    log("stored:" + localStorage.getItem('allowUsageTracking') + ": NEWSITEM");
 }
 
 function alertListView(e) {
@@ -584,9 +591,16 @@ function onPushChange(e) {
     //alertListView();
 }
 
+//Initializes the device for push notifications.
 function enablePushNotifications() {
     alert("enabled");
+    //Initialization settings
+    
+
+    
 }
+
+
 
 function onNewsPrefChange(e) {
     
