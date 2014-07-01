@@ -1,0 +1,62 @@
+{
+  "ProjectGuid": "0b65d60d-a1c5-4863-9fac-f86932a08edb",
+  "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
+  "AppIdentifier": "uk.ac.birmingham.m.MyUoB",
+  "ProjectName": "My UoB",
+  "IsRunnable": "true",
+  "FrameworkVersion": "3.2.0",
+  "AndroidPermissions": [
+    "android.permission.ACCESS_COARSE_LOCATION",
+    "android.permission.ACCESS_FINE_LOCATION",
+    "android.permission.ACCESS_LOCATION_EXTRA_COMMANDS",
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.BROADCAST_STICKY",
+    "android.permission.INTERNET",
+    "android.permission.VIBRATE",
+    "android.permission.WRITE_EXTERNAL_STORAGE"
+  ],
+  "CorePlugins": [
+    "org.apache.cordova.console",
+    "org.apache.cordova.contacts",
+    "org.apache.cordova.device",
+    "org.apache.cordova.device-motion",
+    "org.apache.cordova.device-orientation",
+    "org.apache.cordova.file",
+    "org.apache.cordova.file-transfer",
+    "org.apache.cordova.geolocation",
+    "org.apache.cordova.globalization",
+    "org.apache.cordova.inappbrowser",
+    "org.apache.cordova.media",
+    "org.apache.cordova.network-information",
+    "org.apache.cordova.dialogs",
+    "com.phonegap.plugins.PushPlugin",
+    "org.apache.cordova.splashscreen",
+    "org.apache.cordova.statusbar",
+    "org.apache.cordova.vibration"
+  ],
+  "DeviceOrientations": [
+    "Portrait",
+    "Landscape"
+  ],
+  "iOSStatusBarStyle": "Default",
+  "AndroidHardwareAcceleration": "false",
+  "BundleVersion": "3.1",
+  "iOSDisplayName": "",
+  "iOSDeviceFamily": [
+    "1",
+    "2"
+  ],
+  "iOSBackgroundMode": [],
+  "AndroidVersionCode": "4",
+  "DisplayName": "My UoB",
+  "Author": "",
+  "Description": "My UoB",
+  "WP8Requirements": [],
+  "WP8Capabilities": [],
+  "WP8TileTitle": "",
+  "WP8ProductID": "{0b65d60d-a1c5-4863-9fac-f86932a08edb}",
+  "WP8PublisherID": "{91150956-9c72-4785-bde5-48aee3640b87}",
+  "WP8Publisher": "",
+  "WP8SupportedResolutions": [],
+  "Framework": "Cordova"
+}
