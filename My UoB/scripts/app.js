@@ -112,7 +112,8 @@ function ScreenButtonClicked(page) {
     var lsi = localStorage.getItem('allowUsageTracking');
     if (lsi == "allow" || lsi == "unset") {
         gaPlugin.trackPage( nativePluginResultHandler, nativePluginErrorHandler, page);        
-    }                            
+    }
+    log("analytic log:" + page);
 }
                         
 function goingAway() {
@@ -247,6 +248,8 @@ function eventListViewPullWithEndless(e) {
             $("#pull-eventslistview").kendoMobileListView().html("<li><div class='news-item'>No events currently available - have you disabled all events sources in your <a href='#tabstrip-settings'>settings</a>?</div></li>");
             app.application.hideLoading();
         }
+        ScreenButtonClicked("events");
+        //log("stored:" + localStorage.getItem('allowUsageTracking'));
        
     }
     else {
@@ -290,7 +293,6 @@ function eventItemView(e) {
     eventSource.read();
     
     ScreenButtonClicked("event item:");
-    log("stored:" + localStorage.getItem('allowUsageTracking') + ": EVENTITEM");
 }
 
 //NEWS
@@ -324,9 +326,7 @@ function newsInit() {
 }
 
 function newsListViewPullWithEndless(e) {
-    
-    
-    
+
     //determine what's required: limit needed as is order by
     var keyStr = "";
     //var newsurl = "http://www.bhamlive2.bham.ac.uk/web_services/News.svc/?days=10";
@@ -386,7 +386,7 @@ function newsListViewPullWithEndless(e) {
             app.application.hideLoading();
         }
         ScreenButtonClicked("news");
-        log("stored:" + localStorage.getItem('allowUsageTracking'));
+        //log("stored:" + localStorage.getItem('allowUsageTracking'));
     }
     else {
 		$("#pull-newslistview").kendoMobileListView().html("<li><div class='news-item'>News feed requires network connection</div></li>");        
@@ -426,12 +426,13 @@ function newsItemView(e) {
     newsSource.read();
     
     ScreenButtonClicked("news item:");
-    log("stored:" + localStorage.getItem('allowUsageTracking') + ": NEWSITEM");
+    //log("stored:" + localStorage.getItem('allowUsageTracking') + ": NEWSITEM");
 }
 
 function alertListView(e) {
     
-    	if (localStorage.getItem("allowPushNotifications")=="deny") {
+	if (!offLine) {
+ 	   if (localStorage.getItem("allowPushNotifications")=="deny") {
             	$("#alertlistview").kendoMobileListView({
         			dataSource:new kendo.data.DataSource({
     					data: [
@@ -442,10 +443,10 @@ function alertListView(e) {
      		  	 pullToRefresh: false
     			});
             
-            }
-    else {
-        app.application.showLoading();
-        var dataSource = null;
+    	}
+    	else {
+        	app.application.showLoading();
+        	var dataSource = null;
         
         	dataSource = new kendo.data.DataSource({
         		transport: {
@@ -479,6 +480,10 @@ function alertListView(e) {
     			});
 			}
         }
+        ScreenButtonClicked("alerts");
+	} else {
+        $("#alertlistview").kendoMobileListView().html("<li><div class='tweet-item'>Alerts list requires network connection</div></li>");
+    }   
 }
 
 
@@ -492,14 +497,15 @@ function homeShow() {
 
 //INFO view
 function infoShow() {
-    //ScreenButtonClicked("info");
-    //log("stored:" + localStorage.getItem('allowUsageTracking'));
+    //check for network...
+    if (!offLine) {
+    	ScreenButtonClicked("info");
+    }
 }
 
 //MAP view
 function mapInit() {
-//        ScreenButtonClicked("map");
-//        log("stored:" + localStorage.getItem('allowUsageTracking'));
+
 }
 
 
@@ -526,36 +532,21 @@ function settingsInit() {
 }
 
 function settingsShow() {
-   // ScreenButtonClicked("settings");
-   // log("stored:" + localStorage.getItem('allowUsageTracking'));
-    
-       //news
-    
+	if (!offLine) {
+    	ScreenButtonClicked("settings");
+    }
 }
 
 
 //Guide view
 function guideShow() {
-//    ScreenButtonClicked("pocket-guide");
+	//check for network
+    ScreenButtonClicked("pocket-guide");
 //    log("stored:" + localStorage.getItem('allowUsageTracking'));
 }
 function guideInit() {
     
 }
-function guideAdviceShow() {
-//    ScreenButtonClicked("AdviceAndGuidanceIndex");
-//    log("stored:" + localStorage.getItem('allowUsageTracking'));    
-}
-function guideAdviceRepShow() {
-//    ScreenButtonClicked("AdviceAndRepresentation");
-//    log("stored:" + localStorage.getItem('allowUsageTracking'));
-}
-function guideAdviceCounsellingShow() {
-//    ScreenButtonClicked("CounsellingAndGuidance");
-//    log("stored:" + localStorage.getItem('allowUsageTracking'));
-}
-
-
 
 //Manage change of user preferences (GA tracking & Push Notifications)
 function onTrackingChange(e) {
@@ -627,57 +618,65 @@ function onEventsPrefChange(e) {
 }
 
 function getFriendFacePosts() {
-    app.application.showLoading();
     
-    var dataSource = new kendo.data.DataSource({
-            	transport: {
+    if (!offLine) {
+    	app.application.showLoading();
+    	var dataSource = new kendo.data.DataSource({
+        	transport: {
                 	read: {
                 	    //url: "data/facebook.json",
                         //url: "http://winterbourn.co.uk:3000/feed.json",
                         url: "http://www.friendface.butler.bham.ac.uk/feed.json",
                 	    dataType: "json"
                 	}
-            	},
-            	change: function (data) {
-                	app.application.hideLoading();
-            	}
-        	});
+            },
+            change: function (data) {
+            	app.application.hideLoading();
+            }
+     	});
 
-        	$("#pull-friendfacelistview").kendoMobileListView({
+     	$("#pull-friendfacelistview").kendoMobileListView({
         	    dataSource: dataSource,
         	    template: $("#friendface-template").text(),
         	    pullToRefresh: true
-        	});    
+     	});    
+		//log with analytics
+		ScreenButtonClicked("facebook posts");        
+    } else {
+		$("#pull-friendfacelistview").kendoMobileListView().html("<li><div class='post-item'>Facebook feed requires network connection</div></li>");        
+    }
 }
 
 
 function getTweets() {    
-    //$.mobile.showPageLoadingMsg();
-    app.application.showLoading();
-    var twitter_user  = "unibirmingham";
-    //pull-twitterlistview
-    var dataSource = new kendo.data.DataSource({
-            	transport: {
-                	read: {
-                	    url: "http://www.butler.bham.ac.uk/twitter-api/index.php?screenname=" + twitter_user,
-                	    dataType: "json"
-                	}
-            	},
-            	//serverPaging: true,
-            	//pageSize: 10,
-            	change: function (data) {
-                	app.application.hideLoading();
-            	}
-        	});
+	//check network
+    if (!offLine) {
+        
+    	app.application.showLoading();
+    	var twitter_user  = "unibirmingham";
+    	//pull-twitterlistview
+    	var dataSource = new kendo.data.DataSource({
+        	transport: {
+            	read: {
+                    url: "http://www.butler.bham.ac.uk/twitter-api/index.php?screenname=" + twitter_user,
+                    dataType: "json"
+                }
+            },
+            change: function (data) {
+            	app.application.hideLoading();
+            }
+		});
 
-        	$("#pull-twitterlistview").kendoMobileListView({
-        	    dataSource: dataSource,
-        	    template: $("#tweets-template").text(),
-        	    pullToRefresh: true
-        	});
+		$("#pull-twitterlistview").kendoMobileListView({
+        	dataSource: dataSource,
+        	template: $("#tweets-template").text(),
+        	pullToRefresh: true
+        });
+        ScreenButtonClicked("Tweets");
+	} else {
+        $("#pull-twitterlistview").kendoMobileListView().html("<li><div class='tweet-item'>Twitter feed requires network connection</div></li>");
+    }
 }
-
-
 
 //LOGGING    
 function log(msg) {

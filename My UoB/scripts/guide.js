@@ -44,6 +44,10 @@
 function guideShow(e) {
     var myFilter = { logic: "and", filters: [{field: "ParentId", operator: "eq", value: 1}] };
     guide.filter(myFilter);
+    //analytics
+    if (navigator.onLine) {
+        ScreenButtonClicked("Pocket Guide");
+    }
 };
 
 

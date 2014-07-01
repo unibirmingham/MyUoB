@@ -664,6 +664,7 @@
             
             
             
+            
             $("#filterable-buildings").kendoMobileListView({
             dataSource: buildings,
             template: $("#buildings-template").text(),
@@ -706,6 +707,9 @@
             //show loading mask in case the location is not loaded yet 
             //and the user returns to the same tab
             app.locationService.viewModel.showLoading();
+            
+            //log with analytics
+			ScreenButtonClicked("Location");
 
             //resize the map in case the orientation has been changed while showing other tab
             google.maps.event.trigger(map, "resize");
