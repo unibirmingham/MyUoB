@@ -40,14 +40,14 @@
   ],
   "iOSStatusBarStyle": "Default",
   "AndroidHardwareAcceleration": "false",
-  "BundleVersion": "3.1",
+  "BundleVersion": "3.2",
   "iOSDisplayName": "",
   "iOSDeviceFamily": [
     "1",
     "2"
   ],
   "iOSBackgroundMode": [],
-  "AndroidVersionCode": "4",
+  "AndroidVersionCode": "5",
   "DisplayName": "My UoB",
   "Author": "",
   "Description": "My UoB",
