@@ -4,22 +4,13 @@
 	var gaPlugin;
 	var offLine;
 	
-    //This is your Telerik BackEnd Services API key.
-	//var baasApiKey = 'BAAS_API_KEY';
-
-	//This is the scheme (http or https) to use for accessing Telerik BackEnd Services.
-	//var baasScheme = 'http';
-
-	//This is your Android project number. It is required by Google in order to enable push notifications for your app. You do not need it for iPhone.
-	//var androidProjectNumber = 'GOOGLE_PROJECT_NUMBER';   
-
-	})(window);
+})(window);
                 
 function initialize() {
+    "use strict";
     document.addEventListener("deviceready", onDeviceReady, true);
 }
    
-
 function onDeviceReady() {
     
  	window.addEventListener("offline", function() {        
@@ -46,7 +37,18 @@ function onDeviceReady() {
     	hideNetworkDependentItems();    
         offLine = true;
     }
+
+    //PUSH NOTIFICATIONS
+    el = new Everlive({
+    	apiKey: 'tAgMU0P9nOfiJMF2',
+    	scheme: 'https'
+	});
+    //enablePushNotifications: enablePushNotifications;
+    //registerInEverlive: registerInEverlive;
+    //disablePushNotifications: disablePushNotifications;
+	//updateRegistration: updateRegistration;
    
+    //GA
     gaPlugin = window.plugins.gaPlugin;
     log("stored:" + localStorage.getItem('allowUsageTracking'));
                                 
@@ -71,6 +73,7 @@ function onDeviceReady() {
     //if no variable stored locally, create one and set value as undefined
     if (!localStorage.getItem('alerts')) {
         localStorage.setItem('alerts','[]');
+
     }
     
     //News and Events preferences
@@ -94,8 +97,6 @@ function onDeviceReady() {
     $('#clearLog').on('click', function() {
         $('#log').val('');
     });
-    
-    
     
 }
 
@@ -435,7 +436,8 @@ function alertListView(e) {
  	   if (localStorage.getItem("allowPushNotifications")=="deny") {
             	$("#alertlistview").kendoMobileListView({
         			dataSource:new kendo.data.DataSource({
-    					data: [
+    					
+                        data: [
         					{ title: "You currently have push notifications disabled.", message: "", date: "" }
     					]
 					}),
@@ -573,7 +575,7 @@ function onPushChange(e) {
     var allowPushVal;
     if (e.checked) {
         allowPushVal = "allow";
-        enablePushNotifications();
+        PushNotificationsOn();
     }
     else {
         allowPushVal = "deny";
@@ -583,13 +585,15 @@ function onPushChange(e) {
 }
 
 //Initializes the device for push notifications.
-function enablePushNotifications() {
-    alert("enabled");
+function PushNotificationsOn() {
+    alert("enabling Push");
     //Initialization settings
-    
-
-    
+	var successText = "SUCCESS!<br /><br />The device has been initialized for push notifications.<br /><br />";
+    enablePushNotifications();
+    alert(successText);
+	registerInEverlive();
 }
+
 
 
 

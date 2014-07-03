@@ -9,16 +9,24 @@
     <link href="styles/guide.css" rel="stylesheet" />
     <link href="styles/location.css" rel="stylesheet" />
     <script src="cordova.js"></script>
-    
+    <!--
+    <script>
+        if (window.navigator.simulator)
+        {
+                cordova.define("cordova/base64", function(require, exports, module) {
+                        exports.fromArrayBuffer = function(argument) { return argument; };           
+                });
+        }
+    </script>
+    -->
     <script src="kendo/js/jquery.min.js"></script>
     <script src="kendo/js/kendo.mobile.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?sensor=true&region=GB"></script>
     <script type="text/javascript" src="Plugins/GAPlugin-master/www/GAPlugin.js"></script>
     <script src="scripts/location.js"></script>
+    <script src="scripts/lib/everlive.all.js"></script>
+    <script src="scripts/push.js"></script>
     <script src="scripts/app.js"></script>
-    <!--<script src="scripts/lib/everlive.all.js"></script>-->
-	<script src="scripts/push.js"></script>
-
     
 </head>
 <body onload="initialize();" onunload="goingAway();">
@@ -46,21 +54,8 @@
     <!--Settings view-->
     <div id="tabstrip-settings" data-after-show="settingsShow" data-init="settingsInit" data-role="view" data-title="Settings">
         <div class="view-content">
-            <!--<h2 class="settings-title">App Settings</h2>-->
-        <!--
-        <h3>Privacy settings</h3>
-        <p>This app tracks usage, using Google Analytics so that we can learn from user behaviour and provide a better app in the future. No personal or user identifiable data will be collected, but if you would prefer for the app not to collect such data please select OFF below.</p>    
-        <ul data-role="listview" data-style="inset" >
-        	<li>Usage tracking <input id="usage-tracking-switch" />
-        </ul>
-        -->
-            
-            
             <ul id="settingsOptions" data-role="listview" data-style="inset" data-type="group">
                 <li id="privacySettings">Privacy Settings
-                    <!--<ul>
-                        <li>This app tracks usage, using Google Analytics so that we can learn from user behaviour and provide a better app in the future. No personal or user identifiable data will be collected, but if you would prefer for the app not to collect such data please select OFF below.</li>
-        					<ul data-role="listview" >-->
                     		<ul>
         						<li class="info">This app tracks usage, using Google Analytics so that we can learn from user behaviour and provide a better app in the future. No personal or user identifiable data will be collected, but if you would prefer for the app not to collect such data please select OFF below.</li>
                                 <li>Usage tracking <input id="usage-tracking-switch" /></li>
@@ -69,22 +64,8 @@
         						<li class="info">This app makes use of alerts/push notifications. These will be used only for important announcements so we would urge you to enable them, but if you would prefer not to receive them please select OFF below.</li>
                                 <li>Alerts/Push Notifications <input id="push-notifications-switch" /></li>
         					</ul>
-        			<!--	</li>
-                    </ul>-->
                 </li>
-                <!--
-                <li id="newsSettings">News
-                	<ul>
-                        <li><label><input id="student-news-switch" />Student News</label></li>
-                        <li><label><input id="research-news-switch" />Research News</label></li>
-                        <li><label><input id="sport-news-switch" />Sport News</label></li>
-                    </ul>
-                </li>
-                -->
-                
             </ul>
-            
-                                    
         </div>
     </div>
     
@@ -96,13 +77,6 @@
             <ul><li><a onClick="window.open('http://www.birmingham.ac.uk/contact/app-store.aspx', '_system')" href="#tabstrip-info">www.birmingham.ac.uk/contact/app-store.aspx</a></li></ul>
             <h3>Feedback</h3>
             <p>If you have any feedback on My UoB app or need help then either:</p>
-
-                <!--
-            	<ul data-role="listview" datatype="group" class="">
-                    <li><a data-icon="reply" href="feedback.html">Complete our feedback form</a></li>
-                    <li><a data-icon="email" href="mailto:webservices@lists.bham.ac.uk">webservices@lists.bham.ac.uk</a></li>
-                </ul>
-            	-->
             <div data-role="buttongroup" class="feedback_options">
                         <a data-role="button" data-icon="reply" data-iconpos="left" href="feedback.html">Complete a form</a>
                         <a data-role="button" data-icon="email" data-iconpos="left" href="mailto:webservices@lists.bham.ac.uk?subject=MyUob App Feedback" data-rel="external">Send an email</a>
@@ -112,17 +86,33 @@
     </div>
     
     <!-- Alerts screen-->
-    <div id="tabstrip-alerts" data-role="view" data-title="My Alerts" data-show="alertListView">
+    <div id="tabstrip-alerts"
+        data-role="view"
+        data-title="My Alerts"
+        data-show="alertListView">
+        <!--data-source="alertsData">-->
+        <!--data-model="app.alertService.alertModel">-->
         
-        <ul id="alertlistview" class="alerts-list">
-            
-        </ul>
-
+        <ul id="alertlistview" class="alerts-list"></ul>
+        <!--
+        <h1><b>Telerik BackEnd Services</b> sample application</h1>
+            <p id="messageParagraph">
+                Welcome to the Telerik BackEnd Services push notifications sample hybrid app.<br />
+                <br />
+                Tap on the button below to enable push notifications on the device.
+            </p>
+            <p><a id="tokenLink" style="display: none;">send token</a></p>
+            <div>
+                <a id="initializeButton" data-role="button" data-bind="events: { click: enablePushNotifications }" class="btn-big">Enable Notifications</a>
+                <a id="registerButton" style="display: none;" data-role="button" data-bind="events: { click: registerInEverlive }" class="btn-big">Register</a>
+                <a id="updateRegistrationButton" style="display: none;" data-role="button" data-bind="events: { click: updateRegistration }" class="btn-big">Update Registration</a>
+                <a id="unregisterButton" style="display: none;" data-role="button" data-bind="events: { click: disablePushNotifications }" class="btn-big">Disable Notifications</a>
+            </div>
+		-->
     </div>
                 
     <!--Events screen-->
     <div id="tabstrip-events" data-role="view" data-show="eventListViewPullWithEndless" data-title="Events" data-init="eventsInit" data-layout="tabstrip-layout-events">
-        
         <ul id="pull-eventslistview" class="events-list"></ul>
     </div>
     
@@ -134,8 +124,6 @@
     
     <!--News screen-->
     <div id="tabstrip-news" data-role="view" data-title="News" data-show="newsListViewPullWithEndless" data-init="newsInit" data-layout="tabstrip-layout-news">
-        
-                
         <ul id="pull-newslistview" class="news-list"></ul>
         <!--<p>News goes here...</p>-->
     </div>

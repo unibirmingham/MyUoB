@@ -78,10 +78,6 @@
         filter: { field: "BuildingName", operator: "eq", value: "baloney" }
     })
     
-    
-    
-    
-    
     categories = new kendo.data.DataSource({
 		transport: {
             read: function(operation) {
@@ -125,17 +121,12 @@
         	}
         }   
     })
-    	
-	
-    
-    
     
     LocationViewModel = kendo.data.ObservableObject.extend({
         _lastMarker: null,
         _isLoading: false,
         _buildingName: "building",
         _buildingCode: "",
-         
         address: "",
         isGoogleMapsInitialized: false,
 
