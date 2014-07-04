@@ -700,12 +700,24 @@ function htmlDecode(value){
   return $('<div/>').html(value).text();
 }
 
-function timeAgo(created) {
-			var date_tweet = new Date(created);
+function timeAgo(created, source) {
+    		var date_str = created;
+    		
+    		if (source && source =="facebook") {
+                var created_new = created.replace(/-/g, '/').replace('T', ' ').replace('+0000','');
+                date_str = new Date(created_new);
+            } else {
+                
+            }
+    		//
+    		
+			//alert(created + " : " + created_new);
+    		
+    		var date_tweet = new Date(date_str);
             var date_now   = new Date();
             var date_diff  = date_now - date_tweet;
             var hours      = Math.round(date_diff/(1000*60*60));
-            var days = 0;
+            var days = 0; 
             var timeStr = '';
             if (hours>=24) {
             	days =Math.round(hours/24);

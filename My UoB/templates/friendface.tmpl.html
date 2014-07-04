@@ -10,9 +10,9 @@
     					</h5>
     					<span class="post-time">
     						#if(type!="link"){#
-    							<a class="post-link" onClick="window.open('#:link#', '_system')">#:timeAgo(created)#</a></span>
+    							<a class="post-link" onClick="window.open('#:link#', '_system')">#:timeAgo(created, "facebook")#</a></span>
     						#}else{#
-    							#:timeAgo(created)#
+    							#:timeAgo(created, "facebook")#
     						#}#
     				</div>  
     						
