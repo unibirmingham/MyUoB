@@ -38,16 +38,7 @@ function onDeviceReady() {
         offLine = true;
     }
 
-    //PUSH NOTIFICATIONS
-    el = new Everlive({
-    	apiKey: 'tAgMU0P9nOfiJMF2',
-    	scheme: 'https'
-	});
-    //enablePushNotifications: enablePushNotifications;
-    //registerInEverlive: registerInEverlive;
-    //disablePushNotifications: disablePushNotifications;
-	//updateRegistration: updateRegistration;
-   
+    
     //GA
     gaPlugin = window.plugins.gaPlugin;
     log("stored:" + localStorage.getItem('allowUsageTracking'));
@@ -73,8 +64,57 @@ function onDeviceReady() {
     //if no variable stored locally, create one and set value as undefined
     if (!localStorage.getItem('alerts')) {
         localStorage.setItem('alerts','[]');
-
     }
+
+        //PUSH NOTIFICATIONS
+    el = new Everlive({
+    	apiKey: 'tAgMU0P9nOfiJMF2',
+    	scheme: 'https'
+	});
+   
+	//push settings
+    var pushSettings = {
+    	android: {
+        	senderID: "577074892731"
+        },
+        iOS: {
+        	badge: "true",
+            sound: "true",
+            alert: "true"
+        },
+        notificationCallbackAndroid : function(args) {
+            var data = localStorage.getItem("alerts");
+            alert(data);
+          
+        	//alert('Android notification received: ' + JSON.stringify(args));
+            
+            $("#modalview-notification span#notification_message").html(args.message);
+			//date
+            alertDate = new Date();
+            $("#modalview-notification span#notification_date").html(alertDate.toDateString());
+            //item = "\"message\": \"" + args.message + "\", \"date\": \"" + alertDate.toDateString() + "\"";
+			//data.push({"message":args.message,"date":alertDate.toDateString()});
+            localStorage.setItem("alerts", "[{ \"message\": \"Test 1\", \"date\": \"\" },{ \"message\": \"Test 3\", \"date\": \"\" }]");           
+            openModalViewNotification();
+            log(localStorage.getItem("alerts"));
+        },
+        notificationCallbackIOS: function(args) {
+        	alert('iOS notification received: ' + JSON.stringify(args)); 
+        }
+	}
+    
+    el.push.currentDevice().enableNotifications(pushSettings, successCallback, errorCallback);
+   
+    
+    //register, if not already registered, not offline, and enabled
+    if (!offLine && !localStorage.getItem('allowPushNotifications')=="deny") {
+        
+        el.push.currentDevice().getRegistration(successCallback, function() {
+    		alert("Registering the device.");
+    		currentDevice = el.push.currentDevice();
+    	});
+    }
+
     
     //News and Events preferences
     if (!localStorage.getItem('newspreferences')) {
@@ -431,14 +471,15 @@ function newsItemView(e) {
 }
 
 function alertListView(e) {
-    
+    //alert(offLine);
+    //alert(localStorage.getItem("allowPushNotifications"));
 	if (!offLine) {
  	   if (localStorage.getItem("allowPushNotifications")=="deny") {
             	$("#alertlistview").kendoMobileListView({
         			dataSource:new kendo.data.DataSource({
     					
                         data: [
-        					{ title: "You currently have push notifications disabled.", message: "", date: "" }
+        					{ message: "You currently have push notifications disabled.", date: "" }
     					]
 					}),
   		      	template: $("#alerts-template").text(),
@@ -454,7 +495,8 @@ function alertListView(e) {
         		transport: {
             	    read: function(operation) {
 	       	     	var alertsData = localStorage.getItem("alerts");
-           	         operation.success(JSON.parse(alertsData));
+           	         //alert(alertsData);
+                        operation.success(JSON.parse(alertsData));
            	     }
         		},
         	    change: function (data) {
@@ -462,12 +504,12 @@ function alertListView(e) {
                     
         	    }
         	});
-    		
-    		if (dataSource.total()==0) {
+    		alert(dataSource.total());
+    		if (dataSource.total()===0) {
                 $("#alertlistview").kendoMobileListView({
         			dataSource:new kendo.data.DataSource({
     					data: [
-        					{ title: "You currently have no alerts.", message: "", date: "" }
+        					{ message: "You currently have no alerts.", date: "" }
     					]
 					}),
   		      	template: $("#alerts-template").text(),
@@ -478,7 +520,7 @@ function alertListView(e) {
 				$("#alertlistview").kendoMobileListView({
         			dataSource: dataSource,
   		  	    template: $("#alerts-template").text(),
-     			   pullToRefresh: false
+     			   pullToRefresh: true
     			});
 			}
         }
@@ -756,4 +798,25 @@ function prettyTime(dateStr) {
 function closeModalView() {
         $("#modalview-search").kendoMobileModalView("close");
     	$("#modalview-buildings").kendoMobileModalView("close");
+}
+
+function successCallback() {
+    
+}
+
+function errorCallback() {
+    
+}
+
+function closeModalViewNotification() {
+	$("#modalview-notification").kendoMobileModalView("close");
+}
+
+function openModalViewNotification() {
+   $("#modalview-notification").data("kendoMobileModalView").open();
+}
+
+function clearAlerts() {
+    localStorage.setItem("alerts", "[]");
+    alert("Cleared");
 }

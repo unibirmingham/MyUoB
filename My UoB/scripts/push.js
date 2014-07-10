@@ -1,11 +1,11 @@
-var _onDeviceIsRegistered = function() {
-	$("#initializeButton").hide();
-    $("#registerButton").hide();
-    $("#unregisterButton").show();
-    $("#messageParagraph").html(successText + "Device is registered in Telerik BackEnd Services and can receive push notifications.");
-};
+		var _onDeviceIsRegistered = function() {
+			//$("#initializeButton").hide();
+    		//$("#registerButton").hide();
+    		//$("#unregisterButton").show();
+    		//$("#messageParagraph").html(successText + "Device is registered in Telerik BackEnd Services and can receive push notifications.");
+		};
 
-var _onDeviceIsNotRegistered = function() {
+		var _onDeviceIsNotRegistered = function() {
             $("#unregisterButton").hide();
             $("#registerButton").show();
             $("#messageParagraph").html(successText + "Device is not registered in Telerik BackEnd Services. Tap the button below to register it.");
@@ -20,12 +20,20 @@ var _onDeviceIsNotRegistered = function() {
         var _onDeviceRegistrationUpdated = function() {
             $("#messageParagraph").html("Device registration updated.");
         };
+
+		var onAndroidPushReceived = function(args) {
+            alert('Android notification received: ' + JSON.stringify(args)); 
+        };
+        
+        var onIosPushReceived = function(args) {
+            alert('iOS notification received: ' + JSON.stringify(args)); 
+        };
         
       
         //Initializes the device for push notifications.
         var enablePushNotifications = function () {
             //Initialization settings
-            //alert("enablePushNotifications");
+            alert("enablePushNotifications");
             var pushSettings = {
                 android: {
                     senderID: "577074892731"
@@ -36,9 +44,11 @@ var _onDeviceIsNotRegistered = function() {
                     alert: "true"
                 },
                 notificationCallbackAndroid : function(args) {
-            		var data = JSON.parse(localStorage.getItem("alerts"));
-                    data.push("[" + args = "]");
-                    localStorage.setItem("alerts", data);
+            		//var data = JSON.parse(localStorage.getItem("alerts"));
+                    //alert(data);
+                    //data.push("[" + args + "]");
+                    //data.push(args);
+                    //localStorage.setItem("alerts", data);
                     //add to alertsData
                     //move to Alerts View (if open)
                     //kendoMobileApp.navigate('#tabstrip-alerts');
@@ -53,12 +63,13 @@ var _onDeviceIsNotRegistered = function() {
             //$("#initializeButton").hide();
             //alert("Initializing push notifications...");
             
-        //    var currentDevice = el.push.currentDevice();
+	        //var currentDevice = el.push.currentDevice();
             //alert(currentDevice);
             //el.push.currentDevice("false");
             
             el.push.currentDevice().enableNotifications(pushSettings, function() {alert('Initialized successfully');}, function() {alert('Initialization error');});
-         	/*
+         
+            /*
             currentDevice.enableNotifications(pushSettings)
                 .then(
                     function(initResult) {

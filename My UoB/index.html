@@ -9,6 +9,7 @@
     <link href="styles/guide.css" rel="stylesheet" />
     <link href="styles/location.css" rel="stylesheet" />
     <script src="cordova.js"></script>
+    
     <!--
     <script>
         if (window.navigator.simulator)
@@ -25,8 +26,9 @@
     <script type="text/javascript" src="Plugins/GAPlugin-master/www/GAPlugin.js"></script>
     <script src="scripts/location.js"></script>
     <script src="scripts/lib/everlive.all.js"></script>
-    <script src="scripts/push.js"></script>
     <script src="scripts/app.js"></script>
+    <!--<script src="scripts/push.js"></script>-->
+    
     
 </head>
 <body onload="initialize();" onunload="goingAway();">
@@ -94,22 +96,22 @@
         <!--data-model="app.alertService.alertModel">-->
         
         <ul id="alertlistview" class="alerts-list"></ul>
-        <!--
-        <h1><b>Telerik BackEnd Services</b> sample application</h1>
-            <p id="messageParagraph">
-                Welcome to the Telerik BackEnd Services push notifications sample hybrid app.<br />
-                <br />
-                Tap on the button below to enable push notifications on the device.
-            </p>
-            <p><a id="tokenLink" style="display: none;">send token</a></p>
-            <div>
-                <a id="initializeButton" data-role="button" data-bind="events: { click: enablePushNotifications }" class="btn-big">Enable Notifications</a>
-                <a id="registerButton" style="display: none;" data-role="button" data-bind="events: { click: registerInEverlive }" class="btn-big">Register</a>
-                <a id="updateRegistrationButton" style="display: none;" data-role="button" data-bind="events: { click: updateRegistration }" class="btn-big">Update Registration</a>
-                <a id="unregisterButton" style="display: none;" data-role="button" data-bind="events: { click: disablePushNotifications }" class="btn-big">Disable Notifications</a>
-            </div>
-		-->
+        <p><a data-click="clearAlerts" data-role="button">Clear Alerts</a></p>
     </div>
+    
+    <!-- Notification modal -->
+    <div data-role="modalview" id="modalview-notification" style="width: 90%;" data-modal="false">
+	    <div data-role="header">
+      	  <div data-role="navbar">
+          	  <span>UoB Alert</span>
+            	<a data-click="closeModalViewNotification" data-role="button" data-align="right">Cancel</a>
+        	</div>
+    	</div>
+	    <ul data-role="listview" data-style="inset">
+    	    <li><span id="notification_message"></span></li>
+            <li><span id="notification_date"></span></li>
+    	</ul>
+	</div>
                 
     <!--Events screen-->
     <div id="tabstrip-events" data-role="view" data-show="eventListViewPullWithEndless" data-title="Events" data-init="eventsInit" data-layout="tabstrip-layout-events">

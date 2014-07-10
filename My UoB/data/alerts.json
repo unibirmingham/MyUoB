@@ -1,3 +1,1 @@
-[
-	{ title: "You currently have blabla bla.", message: "", date: "" }
-]
+[{ "message": "Test 1", "date": "" },{ "message": "Test 3", "date": "" }]
