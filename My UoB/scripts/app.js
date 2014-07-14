@@ -83,8 +83,13 @@ function onDeviceReady() {
             alert: "true"
         },
         notificationCallbackAndroid : function(args) {
+            //var data = new Array();
             var data = localStorage.getItem("alerts");
+            if (data==="[]") {
+                data = new Array();
+            }
             alert(data);
+            //data(stored_data);
           
         	//alert('Android notification received: ' + JSON.stringify(args));
             
@@ -93,10 +98,12 @@ function onDeviceReady() {
             alertDate = new Date();
             $("#modalview-notification span#notification_date").html(alertDate.toDateString());
             //item = "\"message\": \"" + args.message + "\", \"date\": \"" + alertDate.toDateString() + "\"";
-			//data.push({"message":args.message,"date":alertDate.toDateString()});
-            localStorage.setItem("alerts", "[{ \"message\": \"Test 1\", \"date\": \"\" },{ \"message\": \"Test 3\", \"date\": \"\" }]");           
+			data[data.length] = '[{"message": "' + args.message + '","date": "' + alertDate.toDateString() + '"}]';
+            //localStorage.setItem('alerts', '[{ \"message\": \"Test 1\", \"date\": \"\" },{ \"message\": \"Test 3\", \"date\": \"\" }]');           
             openModalViewNotification();
-            log(localStorage.getItem("alerts"));
+            alert(data);
+            localStorage.setItem("alerts", data);
+            //log(localStorage.getItem("alerts"));
         },
         notificationCallbackIOS: function(args) {
         	alert('iOS notification received: ' + JSON.stringify(args)); 
@@ -490,22 +497,21 @@ function alertListView(e) {
     	else {
         	app.application.showLoading();
         	var dataSource = null;
-        
+        	var alertsData = localStorage.getItem("alerts");
         	dataSource = new kendo.data.DataSource({
         		transport: {
             	    read: function(operation) {
-	       	     	var alertsData = localStorage.getItem("alerts");
            	         //alert(alertsData);
                         operation.success(JSON.parse(alertsData));
            	     }
         		},
         	    change: function (data) {
         	        app.application.hideLoading();
-                    
         	    }
         	});
-    		alert(dataSource.total());
-    		if (dataSource.total()===0) {
+    		
+    		//if (dataSource.total()===0) {
+            if (alertsData==="[]") {
                 $("#alertlistview").kendoMobileListView({
         			dataSource:new kendo.data.DataSource({
     					data: [
@@ -818,5 +824,7 @@ function openModalViewNotification() {
 
 function clearAlerts() {
     localStorage.setItem("alerts", "[]");
+    
     alert("Cleared");
+    alertListView();
 }
