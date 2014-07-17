@@ -113,7 +113,7 @@ body, html {
 div.events-title,
 div.news-title,
 div.post-title,
-div.tweets-title {
+div.tweet-title {
     margin: 0.6em 0.8em 0.2em 0.9em;
     font-size: 1.3em;
 }
@@ -130,6 +130,7 @@ div.post-item {
 ul#pull-eventslistview li,
 ul#pull-newslistview li,
 ul#pull-twitterlistview li,
+ul#alertlistview li,
 ul#pull-friendfacelistview li {
     padding: .4em .2em;
     
@@ -195,14 +196,16 @@ div.tweet-item span.tweet-title {
 }
 
 ul#pull-friendfacelistview,
-ul#pull-twitterlistview {
+ul#pull-twitterlistview,
+ul#alertlistview {
     background-color: #eee;
 	/*padding-top: 4px;*/
     
 }
 
 ul#pull-friendfacelistview li,
-ul#pull-twitterlistview li {
+ul#pull-twitterlistview li,
+ul#alertlistview li {
     background-color: #fff;
 	margin: 6px;    
 }
@@ -322,7 +325,8 @@ div.letterboxed-image {
     }
 
 #pull-twitterlistview div.tweet-text,
-#pull-friendfacelistview div.post-text {
+#pull-friendfacelistview div.post-text,
+#alertlistview div.tweet-text {
         display: inline-block;
         margin: .5em;
         font-size: 0.8em;

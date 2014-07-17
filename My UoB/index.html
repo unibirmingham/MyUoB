@@ -94,9 +94,8 @@
         data-show="alertListView">
         <!--data-source="alertsData">-->
         <!--data-model="app.alertService.alertModel">-->
-        
-        <ul id="alertlistview" class="alerts-list"></ul>
-        <p><a data-click="clearAlerts" data-role="button">Clear Alerts</a></p>
+        <ul id="alertlistview" data-role="listview" class="alerts-list"></ul> <!--  -->
+        <p><a data-click="clearAlerts" data-role="button">Clear Alerts</a> <a data-icon="refresh" data-role="button" onClick="refreshAlertsList();">Refresh</a></p>
     </div>
     
     <!-- Notification modal -->

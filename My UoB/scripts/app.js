@@ -84,26 +84,28 @@ function onDeviceReady() {
         },
         notificationCallbackAndroid : function(args) {
             //var data = new Array();
-            var data = localStorage.getItem("alerts");
-            if (data==="[]") {
-                data = new Array();
-            }
-            alert(data);
+            //var data = localStorage.getItem("alerts");
+            //if (data==="[]") {
+            //    data = new Array();
+            //}
+            //alert(data);
             //data(stored_data);
           
         	//alert('Android notification received: ' + JSON.stringify(args));
-            
             $("#modalview-notification span#notification_message").html(args.message);
 			//date
             alertDate = new Date();
             $("#modalview-notification span#notification_date").html(alertDate.toDateString());
             //item = "\"message\": \"" + args.message + "\", \"date\": \"" + alertDate.toDateString() + "\"";
-			data[data.length] = '[{"message": "' + args.message + '","date": "' + alertDate.toDateString() + '"}]';
+			//alert(data.length);
+            //data.push = '{"message": "' + args.message + '","date": "' + alertDate.toDateString() + '"}';
+            //alert(data.length);
             //localStorage.setItem('alerts', '[{ \"message\": \"Test 1\", \"date\": \"\" },{ \"message\": \"Test 3\", \"date\": \"\" }]');           
             openModalViewNotification();
-            alert(data);
-            localStorage.setItem("alerts", data);
+            //alert(data);
+            //localStorage.setItem("alerts", data.join);
             //log(localStorage.getItem("alerts"));
+            dao.addItem(args.message, alertDate.toDateString());
         },
         notificationCallbackIOS: function(args) {
         	alert('iOS notification received: ' + JSON.stringify(args)); 
@@ -478,13 +480,10 @@ function newsItemView(e) {
 }
 
 function alertListView(e) {
-    //alert(offLine);
-    //alert(localStorage.getItem("allowPushNotifications"));
 	if (!offLine) {
  	   if (localStorage.getItem("allowPushNotifications")=="deny") {
             	$("#alertlistview").kendoMobileListView({
         			dataSource:new kendo.data.DataSource({
-    					
                         data: [
         					{ message: "You currently have push notifications disabled.", date: "" }
     					]
@@ -492,26 +491,17 @@ function alertListView(e) {
   		      	template: $("#alerts-template").text(),
      		  	 pullToRefresh: false
     			});
-            
     	}
     	else {
-        	app.application.showLoading();
-        	var dataSource = null;
-        	var alertsData = localStorage.getItem("alerts");
-        	dataSource = new kendo.data.DataSource({
-        		transport: {
-            	    read: function(operation) {
-           	         //alert(alertsData);
-                        operation.success(JSON.parse(alertsData));
-           	     }
-        		},
-        	    change: function (data) {
-        	        app.application.hideLoading();
-        	    }
-        	});
-    		
-    		//if (dataSource.total()===0) {
-            if (alertsData==="[]") {
+//            app.application.showLoading();
+//        	dataSource = null;
+        	//var alertsData = localStorage.getItem("alerts");
+        	//var alerts = getAlerts();
+            dao.findAll(function(alerts) {
+			var l = alerts.length;
+//            alert(l);
+            
+            if (l==0) {
                 $("#alertlistview").kendoMobileListView({
         			dataSource:new kendo.data.DataSource({
     					data: [
@@ -523,17 +513,36 @@ function alertListView(e) {
     			});
             }
     		else {
-				$("#alertlistview").kendoMobileListView({
-        			dataSource: dataSource,
-  		  	    template: $("#alerts-template").text(),
-     			   pullToRefresh: true
-    			});
-			}
-        }
-        ScreenButtonClicked("alerts");
+				$('#alertlistview').empty();
+                for (var i = 0; i < l; i++) {
+            		var a = alerts[i];
+            		$("#alertlistview").append('<li id="' + a.id  + '">' + 
+                    //$("#alertlistview").kendoMobileListView().html('<li id="' + a.id  + '">' + 
+                    		//+'"' + a.message.trim() + '" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c">' +
+                    		//'<div class="ui-btn-inner ui-li">' +
+                			'<div class="tweet-item">' +
+                    		//'<div class="ui-btn-text">' +
+                			'<div class="tweet-text">' +
+                    		//'<h3 class="ui-li-heading">' + a.message + '</h3>' +
+                    		'<span class="tweet-title">' + a.message + '</span><br/>' +
+                			//'<p class="ui-li-desc">' + a.date + '</p>' +
+                    		'<span class="tweet_hours">' + a.date + '</span>' +
+                			'</div>' +
+                			//'<span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>' +
+                			'</div>' +
+                			'</li>'); 
+                }
+							//$("#alertlistview").kendoMobileListView().refresh();
+            }
+        
+        	});
+            }
 	} else {
-        $("#alertlistview").kendoMobileListView().html("<li><div class='tweet-item'>Alerts list requires network connection</div></li>");
+			$("#alertlistview").kendoMobileListView().html("<li><div class='tweet-item'>Alerts list requires network connection</div></li>");
     }   
+
+		
+/*            renderList(); */
 }
 
 
@@ -641,9 +650,6 @@ function PushNotificationsOn() {
     alert(successText);
 	registerInEverlive();
 }
-
-
-
 
 function onNewsPrefChange(e) {
     
@@ -823,8 +829,155 @@ function openModalViewNotification() {
 }
 
 function clearAlerts() {
-    localStorage.setItem("alerts", "[]");
-    
+    //localStorage.setItem("alerts", "[]");
+    dao.dropTable(function() {
+           dao.createTable();
+    });
     alert("Cleared");
-    alertListView();
+    resetAlertsList();
+ 
+}
+
+window.dao =  {
+    initialize: function(callback) {
+        var self = this;
+        this.db = window.openDatabase("myuobdb", "1.0", "My UoB DB", 20000000);
+
+        this.db.transaction(
+            function(tx) {
+                tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' AND name='alerts'", this.txErrorHandler,
+                    function(tx, results) {
+                        if (results.rows.length == 1) {
+                            log('Using existing Alerts table in local SQLite database');
+                        }
+                        else
+                        {
+                            log('Alerts table does not exist in local SQLite database');
+                            self.createTable(callback);
+                        }
+                    });
+            }
+        )
+    },
+        
+    createTable: function(callback) {
+        this.db.transaction(
+            function(tx) {
+                var sql = 
+                    "CREATE TABLE IF NOT EXISTS alerts ( " +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "message VARCHAR(300), " +
+                    "date VARCHAR(300))";
+                tx.executeSql(sql);
+            },
+            this.txErrorHandler,
+            function() {
+                log('Table alerts successfully CREATED in local SQLite database');
+            }
+        );
+    },
+
+    dropTable: function(callback) {
+        this.db.transaction(
+            function(tx) {
+                tx.executeSql('DROP TABLE IF EXISTS alerts');
+            },
+            this.txErrorHandler,
+            function() {
+                log('Table alerts successfully DROPPED in local SQLite database');
+                callback();
+            }
+        );
+    },
+
+    findAll: function(callback) {
+        this.db.transaction(
+            function(tx) {
+                var sql = "SELECT * FROM alerts order by id desc";
+                console.log('Local SQLite database: ' + sql);
+                tx.executeSql(sql, this.txErrorHandler,
+                    function(tx, results) {
+                        var len = results.rows.length,
+                            alerts = [],
+                            i = 0;
+                        for (; i < len; i = i + 1) {
+                            alerts[i] = results.rows.item(i);
+                        }
+                        log(len + ' rows found');
+//                        alert(len + ' rows found');
+                        callback(alerts);
+                    }
+                );
+            }
+        );
+    },
+/*    
+    findDuplicate: function(itemMessage, itemDate, callback) {
+         this.db.transaction(function(tx) {
+            var sql = "Select * from alerts WHERE message='" + itemMessage + "' AND date='" + itemDate + "'";
+        	log('Local SQLite database: "Check for duplicate"');
+            tx.executeSql(sql, this.txErrorHandler, function(tx, results) {
+                        var len = results.rows.length;
+                        var x;
+                		if (len>0) {
+                            x= true;
+                            
+                        }
+                		x=false;
+                        callback(x);
+            });
+		});
+	},
+*/    
+    addItem: function(itemMessage, itemDate) {
+        ourDb = this.db;
+        ourDb.transaction(function(tx) {
+            //var itemMessage2 = itemMessage.replace(/'/g, "''");
+        	var sql2 = "Select * from alerts WHERE message=? and date=?"; //'" + itemMessage2 + "' AND date='" + itemDate + "'";
+			console.log(sql2);            
+            var params = [itemMessage, itemDate];
+            tx.executeSql(sql2, params, function(tx, results) {
+                var len = results.rows.length;
+                console.log(len);
+                if (len!==1) {
+                    ourDb.transaction(function(tx) {
+                        var sql = "INSERT INTO alerts(message, date) VALUES (?,?)"
+						//var params = [itemMessage, itemDate];
+                        console.log('Local SQLite database: "INSERT INTO ALERTS"');
+						console.log(sql);
+                        tx.executeSql(sql, params, function(tx) {
+                            console.log("swee");
+                        	refreshAlertsList();
+                        }, function(e) {
+							console.log("ERROR: " + e.message);
+    					});
+	        		}
+                    );      
+				}
+			}, function(e) {
+							console.log("ERROR: " + e.message);
+    					}); 
+		});	
+	},
+  
+    txErrorHandler: function(tx) {
+        //alert("error:" + tx.message);
+		console.log("ERROR: " + tx.message);
+    }
+};
+
+dao.initialize(function() {
+    console.log('database initialized');
+});
+
+function refreshAlertsList() {
+   dao.db.close;
+   dao.db = window.openDatabase("myuobdb", "1.0", "My UoB DB", 20000000);
+   alertListView();
+   //$('ul#alertlistview').listview('refresh');
+}
+
+function resetAlertsList() {
+
+   alertListView();
 }

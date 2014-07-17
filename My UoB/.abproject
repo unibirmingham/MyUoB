@@ -31,6 +31,7 @@
     "org.apache.cordova.dialogs",
     "com.phonegap.plugins.PushPlugin",
     "org.apache.cordova.splashscreen",
+    "com.phonegap.plugins.sqlite",
     "org.apache.cordova.statusbar",
     "org.apache.cordova.vibration"
   ],
