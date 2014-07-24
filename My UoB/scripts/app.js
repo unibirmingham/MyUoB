@@ -41,7 +41,7 @@ function onDeviceReady() {
     
     //GA
     gaPlugin = window.plugins.gaPlugin;
-    log("stored:" + localStorage.getItem('allowUsageTracking'));
+    console.log("stored:" + localStorage.getItem('allowUsageTracking'));
                                 
     //if no variable stored locally, create one and set value as undefined
     if (!localStorage.getItem('allowUsageTracking')) {
@@ -51,22 +51,22 @@ function onDeviceReady() {
                             
     if (localStorage.getItem('allowUsageTracking')!="deny") {
         gaPlugin.init(nativePluginResultHandler, nativePluginErrorHandler, "UA-47250154-2", 5);
-        log('gaPlugin initialised');
+        console.log('gaPlugin initialised');
     }
     
-    log("stored(push):" + localStorage.getItem('allowPushNotifications'));
+    console.log("stored(push):" + localStorage.getItem('allowPushNotifications'));
     //if no variable stored locally, create one and set value as undefined
     if (!localStorage.getItem('allowPushNotifications')) {
         localStorage.setItem('allowPushNotifications','unset');
     }
-    log("allowPushNotifications: " + localStorage.getItem('allowPushNotifications'));
+    console.log("allowPushNotifications: " + localStorage.getItem('allowPushNotifications'));
     
     //if no variable stored locally, create one and set value as undefined
     if (!localStorage.getItem('alerts')) {
         localStorage.setItem('alerts','[]');
     }
 
-        //PUSH NOTIFICATIONS
+    //PUSH NOTIFICATIONS
     el = new Everlive({
     	apiKey: 'tAgMU0P9nOfiJMF2',
     	scheme: 'https'
@@ -108,18 +108,19 @@ function onDeviceReady() {
             dao.addItem(args.message, alertDate.toDateString());
         },
         notificationCallbackIOS: function(args) {
-        	alert('iOS notification received: ' + JSON.stringify(args)); 
+        	console.log('iOS notification received: ' + JSON.stringify(args)); 
         }
 	}
     
     el.push.currentDevice().enableNotifications(pushSettings, successCallback, errorCallback);
    
+    console.log("offline: " + offLine + "; pushSetting: " + localStorage.getItem('allowPushNotifications'));
     
     //register, if not already registered, not offline, and enabled
     if (!offLine && !localStorage.getItem('allowPushNotifications')=="deny") {
         
         el.push.currentDevice().getRegistration(successCallback, function() {
-    		alert("Registering the device.");
+    		console.log("Registering the device.");
     		currentDevice = el.push.currentDevice();
     	});
     }
@@ -131,7 +132,7 @@ function onDeviceReady() {
         	localStorage.setItem('research-news',true);
         	localStorage.setItem('sport-news',true);
         	localStorage.setItem('newspreferences','set');
-        log('setting news preferences');
+        console.log('setting news preferences');
 	}
     if (!localStorage.getItem('eventspreferences')) {
        	localStorage.setItem('performance-events',true);
@@ -140,7 +141,7 @@ function onDeviceReady() {
         	localStorage.setItem('sport-events',true);
         	localStorage.setItem('student-events',true);
         	localStorage.setItem('eventspreferences','set');
-        log('setting events preferences');
+        console.log('setting events preferences');
 	}
     
     $('#clearLog').on('click', function() {
@@ -151,11 +152,11 @@ function onDeviceReady() {
 
 //GA plugin
 function nativePluginResultHandler (result) {
-    log('nativePluginResultHandler: '+result);
+    console.log('nativePluginResultHandler: '+result);
 }
         
 function nativePluginErrorHandler (error) {
-    log('nativePluginErrorHandler: '+error);
+    console.log('nativePluginErrorHandler: '+error);
 }
                         
 function ScreenButtonClicked(page) {
@@ -163,7 +164,7 @@ function ScreenButtonClicked(page) {
     if (lsi == "allow" || lsi == "unset") {
         gaPlugin.trackPage( nativePluginResultHandler, nativePluginErrorHandler, page);        
     }
-    log("analytic log:" + page);
+    //console.log("analytic log:" + page);
 }
                         
 function goingAway() {
@@ -187,9 +188,6 @@ function showNetworkDependentItems() {
 
 
 //VIEW Init/Change Events
-
-
-
 
 //EVENTS
 
@@ -275,7 +273,7 @@ function eventListViewPullWithEndless(e) {
             } else {
             	eventsurl += "&keywords=" + ekeyStr + "";
             }
-        	log("Events URL: " + eventsurl);
+        	console.log("Events URL: " + eventsurl);
         	dataSource = new kendo.data.DataSource({
         	    transport: {
         	        read: {
@@ -315,7 +313,7 @@ function eventItemView(e) {
     $("#event-detail").html('');
     app.application.showLoading();
     var contentId = parseInt(e.view.params.contentId);
-    log(contentId);
+    //console.log(contentId);
     
     var eventSource = new kendo.data.DataSource({
         transport: {
@@ -334,7 +332,6 @@ function eventItemView(e) {
         change: function (data) {
             var template = kendo.template($("#event-template").text());
             var event = kendo.render(template, this.view());
-            //log(event);
             $("#event-detail").html(event);
             app.application.hideLoading();
         }
@@ -392,7 +389,7 @@ function newsListViewPullWithEndless(e) {
         keyStr += "sport"
     }
     keyStr = $.trim(keyStr)
-    log("Offline:" + offLine);
+    //console.log("Offline:" + offLine);
     
     if (!offLine) {
     
@@ -405,7 +402,7 @@ function newsListViewPullWithEndless(e) {
             } else {
             	newsurl += "&keywords=" + keyStr + "";   
             }
-		log("News URL: " + newsurl);
+		//console.log("News URL: " + newsurl);
         dataSource = new kendo.data.DataSource({
             	transport: {
                 	read: {
@@ -419,7 +416,7 @@ function newsListViewPullWithEndless(e) {
                 	app.application.hideLoading();
             	},
             	error: function (e) {
-                    log("error:" + e.errors);
+                    console.log("error:" + e.errors);
 
                 }
         	});
@@ -448,7 +445,7 @@ function newsItemView(e) {
     $("#news-detail").html('');
     app.application.showLoading();
     var contentId = parseInt(e.view.params.contentId);
-    log(contentId);
+    //console.log(contentId);
     
     var newsSource = new kendo.data.DataSource({
         transport: {
@@ -467,7 +464,7 @@ function newsItemView(e) {
         change: function (data) {
             var template = kendo.template($("#news-item-template").text());
             var newsitem = kendo.render(template, this.view());
-            //log(newsitem);
+            //console.log(newsitem);
             $("#news-detail").html(newsitem);
             app.application.hideLoading();
         }
@@ -476,7 +473,7 @@ function newsItemView(e) {
     newsSource.read();
     
     ScreenButtonClicked("news item:");
-    //log("stored:" + localStorage.getItem('allowUsageTracking') + ": NEWSITEM");
+    //console.log("stored:" + localStorage.getItem('allowUsageTracking') + ": NEWSITEM");
 }
 
 function alertListView(e) {
@@ -628,7 +625,7 @@ function onTrackingChange(e) {
     }
 }
 function onPushChange(e) {
-    log("Change");
+    console.log("Change Push Val : checked - " + e.checked + "");
     var allowPushVal;
     if (e.checked) {
         allowPushVal = "allow";
@@ -637,30 +634,38 @@ function onPushChange(e) {
     else {
         allowPushVal = "deny";
     }
+    console.log("New value : " + allowPushVal);
     localStorage.setItem('allowPushNotifications', allowPushVal);
     //alertListView();
 }
 
 //Initializes the device for push notifications.
 function PushNotificationsOn() {
-    alert("enabling Push");
+    console.log("enabling Push");
     //Initialization settings
 	var successText = "SUCCESS!<br /><br />The device has been initialized for push notifications.<br /><br />";
-    enablePushNotifications();
-    alert(successText);
+    //enablePushNotifications();
+    console.log("el" + el);
+    console.log("dev" + el.push.currentDevice());
+    console.log("pushSettings:");
+    console.log(pushSettings);
+    console.log("successCallback:" + successCallback);
+    console.log("errorCallback:" + errorCallback);
+    el.push.currentDevice().enableNotifications(pushSettings, successCallback, errorCallback);
+    console.log(successText);
 	registerInEverlive();
 }
 
 function onNewsPrefChange(e) {
     
     //alert(e + ": " + e.target + ": " + e.checked + ": " + this.element.attr("id") )
-    log(e);
+    console.log(e);
     var newsVar = this.element.attr("id");
     var newsVal = e.checked;
     var localStor = newsVar.replace("-switch", "");
-    log(localStor + " : " + newsVal);
+    console.log(localStor + " : " + newsVal);
     localStorage.setItem(localStor, newsVal);
-    log(localStor + " | " + localStorage.getItem(localStor));
+    console.log(localStor + " | " + localStorage.getItem(localStor));
     newsListViewPullWithEndless();
 
 }
@@ -746,7 +751,7 @@ function cleanOutHtmlTags(content) {
     var myString =  content.replace("&lt;p&gt;","<p>").replace("&lt;/p&gt;","</p>");
     myString =  content.replace("&amp;","&");
     
-    log("here")
+    console.log("here")
     return myString;
 }
 
@@ -848,11 +853,11 @@ window.dao =  {
                 tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' AND name='alerts'", this.txErrorHandler,
                     function(tx, results) {
                         if (results.rows.length == 1) {
-                            log('Using existing Alerts table in local SQLite database');
+                            console.log('Using existing Alerts table in local SQLite database');
                         }
                         else
                         {
-                            log('Alerts table does not exist in local SQLite database');
+                            console.log('Alerts table does not exist in local SQLite database');
                             self.createTable(callback);
                         }
                     });
@@ -872,7 +877,7 @@ window.dao =  {
             },
             this.txErrorHandler,
             function() {
-                log('Table alerts successfully CREATED in local SQLite database');
+                console.log('Table alerts successfully CREATED in local SQLite database');
             }
         );
     },
@@ -884,7 +889,7 @@ window.dao =  {
             },
             this.txErrorHandler,
             function() {
-                log('Table alerts successfully DROPPED in local SQLite database');
+                console.log('Table alerts successfully DROPPED in local SQLite database');
                 callback();
             }
         );
@@ -903,7 +908,7 @@ window.dao =  {
                         for (; i < len; i = i + 1) {
                             alerts[i] = results.rows.item(i);
                         }
-                        log(len + ' rows found');
+                        console.log(len + ' rows found');
 //                        alert(len + ' rows found');
                         callback(alerts);
                     }
@@ -911,24 +916,7 @@ window.dao =  {
             }
         );
     },
-/*    
-    findDuplicate: function(itemMessage, itemDate, callback) {
-         this.db.transaction(function(tx) {
-            var sql = "Select * from alerts WHERE message='" + itemMessage + "' AND date='" + itemDate + "'";
-        	log('Local SQLite database: "Check for duplicate"');
-            tx.executeSql(sql, this.txErrorHandler, function(tx, results) {
-                        var len = results.rows.length;
-                        var x;
-                		if (len>0) {
-                            x= true;
-                            
-                        }
-                		x=false;
-                        callback(x);
-            });
-		});
-	},
-*/    
+    
     addItem: function(itemMessage, itemDate) {
         ourDb = this.db;
         ourDb.transaction(function(tx) {
@@ -981,3 +969,56 @@ function resetAlertsList() {
 
    alertListView();
 }
+
+var pushSettings = {
+    	android: {
+        	senderID: "577074892731"
+        },
+        iOS: {
+        	badge: "true",
+            sound: "true",
+            alert: "true"
+        },
+        notificationCallbackAndroid : function(args) {
+            //var data = new Array();
+            //var data = localStorage.getItem("alerts");
+            //if (data==="[]") {
+            //    data = new Array();
+            //}
+            //alert(data);
+            //data(stored_data);
+          
+        	//alert('Android notification received: ' + JSON.stringify(args));
+            $("#modalview-notification span#notification_message").html(args.message);
+			//date
+            alertDate = new Date();
+            $("#modalview-notification span#notification_date").html(alertDate.toDateString());
+            //item = "\"message\": \"" + args.message + "\", \"date\": \"" + alertDate.toDateString() + "\"";
+			//alert(data.length);
+            //data.push = '{"message": "' + args.message + '","date": "' + alertDate.toDateString() + '"}';
+            //alert(data.length);
+            //localStorage.setItem('alerts', '[{ \"message\": \"Test 1\", \"date\": \"\" },{ \"message\": \"Test 3\", \"date\": \"\" }]');           
+            openModalViewNotification();
+            //alert(data);
+            //localStorage.setItem("alerts", data.join);
+            //log(localStorage.getItem("alerts"));
+            dao.addItem(args.message, alertDate.toDateString());
+        },
+        notificationCallbackIOS: function(args) {
+        	console.log('iOS notification received: ' + JSON.stringify(args)); 
+        }
+	}
+
+var registerInEverlive = function() {
+            var currentDevice = el.push.currentDevice();
+            
+            if (!currentDevice.pushToken) currentDevice.pushToken = "some token";
+            el.push.currentDevice()
+                .register({ Age: 15 })
+                .then(
+                    _onDeviceIsRegistered,
+                    function(err) {
+                        alert('REGISTER ERROR: ' + JSON.stringify(err));
+                    }
+                );
+        };
