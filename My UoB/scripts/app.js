@@ -112,8 +112,9 @@ function onDeviceReady() {
         }
 	}
     
-    el.push.currentDevice().enableNotifications(pushSettings, successCallback, errorCallback);
-   
+     var currentDevice = el.push.currentDevice(false);
+    //el.push.currentDevice().enableNotifications(pushSettings, successCallback, errorCallback);
+    currentDevice.enableNotifications(pushSettings, function() {alert('Initialized successfully');}, function() {alert('Initialization error');});
     console.log("offline: " + offLine + "; pushSetting: " + localStorage.getItem('allowPushNotifications'));
     
     //register, if not already registered, not offline, and enabled
@@ -818,11 +819,11 @@ function closeModalView() {
 }
 
 function successCallback() {
-    
+    alert("success");
 }
 
-function errorCallback() {
-    
+function errorCallback(e) {
+    alert("error: " + e);
 }
 
 function closeModalViewNotification() {
