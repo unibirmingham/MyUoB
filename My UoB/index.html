@@ -27,9 +27,7 @@
     <script src="scripts/location.js"></script>
     <script src="scripts/lib/everlive.all.js"></script>
     <script src="scripts/app.js"></script>
-    <!--<script src="scripts/push.js"></script>-->
-    
-    
+    <script src="scripts/alerts.js"></script>    
 </head>
 <body onload="initialize();" onunload="goingAway();">
     <!--Home-->
@@ -88,18 +86,19 @@
     </div>
     
     <!-- Alerts screen-->
-    <div id="tabstrip-alerts"
-        data-role="view"
-        data-title="My Alerts"
-        data-show="alertListView">
-        <!--data-source="alertsData">-->
-        <!--data-model="app.alertService.alertModel">-->
-        <ul id="alertlistview" data-role="listview" class="alerts-list"></ul> <!--  -->
-        <p><a data-click="clearAlerts" data-role="button">Clear Alerts</a> <a data-icon="refresh" data-role="button" onClick="refreshAlertsList();">Refresh</a></p>
+
+    <div id="tabstrip-alerts" data-role="view" data-title="Past Alerts" data-after-show="alertListView">
+            <ul class="alerts-list" id="alertlistview"
+                    data-role="listview">
+                <!--data-source="pastAlerts"
+                    data-template="alerts-template"
+                	data-pull-to-refresh="true"
+                	use-native-scrolling="true" -->
+            </ul>
     </div>
     
     <!-- Notification modal -->
-    <div data-role="modalview" id="modalview-notification" style="width: 90%;" data-modal="false">
+    <div data-role="modalview" id="modalview-notification" style="width: 90%; display:none;" data-modal="false">
 	    <div data-role="header">
       	  <div data-role="navbar">
           	  <span>UoB Alert</span>
@@ -180,14 +179,13 @@
 
     </div>
 
-    <div data-model="app.locationService.viewModel" data-role="modalview" id="modalview-search" style="width: 80%; height: 200px;">
+    <div data-model="app.locationService.viewModel" data-role="modalview" id="modalview-search" style="width: 80%; height: 200px; display:none;">
     	<div data-role="header">
         	<div data-role="navbar">
         	    <span>Search</span>
         	    <a data-click="closeModalView" data-role="button" data-align="right">Cancel</a>
         	</div>
     	</div>
-
     
 		<form onsubmit="return false;">
                 <input id="map-address" type="search" data-bind="value: address" placeholder="Address" />
