@@ -1,0 +1,183 @@
+
+div.homeTiles {
+	background-color: #00a1be;
+    min-height:1000px;
+	/* may need to set this per device */
+}
+div.homeTiles .wrap {
+   overflow: hidden;
+   /*margin: 10px;*/
+   /*background-color: #5facf8;*/
+   /*display: block;*/
+	/*margin: 2px auto;*/
+	width: 100%; 
+    height:100%;
+    background-color: #00a1be;
+    /*color: rgba(0,0,0,0.1);*/
+}
+        
+div.homeTiles .container {
+           width: 94%;
+            margin: 2px auto;
+            display:block;
+ /*           float:right;*/
+        }
+div.homeTiles .box {
+   float: left;
+   position: relative;
+   width: 20%;
+   padding-bottom: 20%;
+}
+        
+div.homeTiles .white-box {
+    background-color: #fff;
+    
+}
+        
+div.homeTiles .bigbox {
+   float: left;
+   position: relative;
+   width: 40%;
+   padding-bottom: 20%;
+}  
+        
+div.homeTiles .boxInner {
+   
+   position: absolute;
+   /*
+   left: 10px;
+   right: 10px;
+   top: 10px;
+   bottom: 10px;
+   */
+    overflow: hidden;
+	/*display: table-cell; vertical-align: middle; text-align: center;*/
+    height: 100%;
+    
+    width: 100%;
+    
+}
+        
+       
+ div.homeTiles .boxInner img {
+ 	margin: auto auto;
+    width: 100%;
+     width: 90%;
+	margin: 1% 5% 3% 5%;
+
+}
+
+div.homeTiles .boxInner img.me {
+    width:100%;
+ 	/*width: 152px;  
+    height:152px;*/
+	display:block;
+
+	margin: 1% 2% 3% 2%;
+
+}
+        
+div.homeTiles .boxInner .titleBox {
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   /*margin-bottom: -50px;*/
+   background: #000;
+   background: rgba(0, 0, 0, 0.5);
+    background: none;
+   color: #FFF;
+   /*padding: 10px;*/
+    padding: 4px;
+   text-align: center;
+   -webkit-transition: all 0.3s ease-out;
+   -moz-transition: all 0.3s ease-out;
+   -o-transition: all 0.3s ease-out;
+   transition: all 0.3s ease-out;
+    font-size: 0.7em;
+    padding: 2px 2px 1px 2px;
+}
+        
+div.homeTiles div.white-box .boxInner .titleBox {
+
+            color: #00a1be;
+}
+
+div.homeTiles body.no-touch .boxInner:hover .titleBox, body.touch .boxInner.touchFocus .titleBox {
+   margin-bottom: 0;
+}
+        
+div.homeTiles .box {
+      width: 19%;
+      padding-bottom: 19%;
+   }
+
+div.homeTiles .bigbox {
+      width: 38%;
+      padding-bottom: 36%;
+   }
+        
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) {
+
+div.homeTiles .box {
+      width: 16%;
+      padding-bottom: 18%;
+   }
+    
+div.homeTiles .bigbox {
+      width: 36%;
+      padding-bottom: 36%;
+   }
+}
+        
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) {
+
+	div.homeTiles .box {
+    	width: 29%;
+    	padding-bottom: 29%;
+        /*width: 29.5%;
+    	padding-bottom: 29.5%;*/
+	}
+
+	div.homeTiles .bigbox {
+    	width: 58%;
+    	padding-bottom: 58%;
+        /*width: 59%;
+    	padding-bottom: 59%;*/
+   }
+}
+        
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape) {
+	div.homeTiles .boxInner .titleBox {
+    	font-size: 0.9em;
+	}
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-width : 600px) and (max-width : 991px) and (orientation : portrait) {
+    /*media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait) {*/
+	div.homeTiles .box {
+      width: 29%;
+      padding-bottom: 29%;
+    }
+    
+	div.homeTiles .bigbox {
+    	width: 58%;
+    	padding-bottom: 56%;
+	}
+    
+    div.homeTiles .boxInner .titleBox {
+    	font-size: 0.9em;
+	}
+}
+        
+/* iPhone 4 ----------- */
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+/* Styles */
+}

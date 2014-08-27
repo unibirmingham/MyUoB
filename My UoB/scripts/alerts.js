@@ -35,13 +35,17 @@
     					},
                    	 dataType: "json",
                    	 success: function(response) {
-                   	     //store response, if online 
-                   	     if (navigator.onLine) {
-                                localStorage.setItem("pastAlerts", JSON.stringify(response.Result));
-                            }
+                   	     //store response, if online
                    	     //pass the pass response to the DataSource
-                   	     operation.success(response.Result);
-                   	 }
+                            if (response.Count == 0) {
+                            	var resultStr = [{ Message: "No past alerts currently available.", ModifiedAt: "" }];
+                            	localStorage.setItem("pastAlerts", JSON.stringify([{ Message: "No past alerts currently available.", ModifiedAt: "" }]));
+                                operation.success(resultStr);
+                            } else {
+                                localStorage.setItem("pastAlerts", JSON.stringify(response.Result));
+                                operation.success(response.Result);
+                            }
+                        }   
                 	});
             	}
         	}

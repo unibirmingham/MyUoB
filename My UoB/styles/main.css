@@ -506,7 +506,10 @@ ul#settingsOptions li.info {
 /* change flat theme colors */
 /* UNI Green */
 .km-flat .km-switch-handle,.km-flat .k-slider-selection,.km-flat .km-switch-background{
-color: #66A300;
+/*color: #66A300;*/
+    color: #00a1be;
+    /*color: #4c5356;
+    color: #f4f4f4;*/
 }
 .km-flat .km-loader,
 .km-flat .km-rowinsert,
@@ -529,12 +532,27 @@ color: #66A300;
 .km-flat .km-listview-label input[type=radio]:checked,
 .km-flat .km-listview-label input[type=checkbox]:checked
 {
-    background: #66A300;
+    /*background: #66A300;*/
+    background: #00a1be;
 }
 .km-flat .km-filter-wrap > input:focus
 {
-    border-color: #66A300;
+    /*border-color: #66A300;*/
+    border-color: #00a1be;
 }
+/*homepage footer only */
+div#tabstrip-home .km-tabstrip .km-button {
+    background: #f4f4f4;
+    
+    color: #4c5356;
+}
+div#tabstrip-home .km-tabstrip .km-state-active {
+    background: #f4f4f4;
+    /*color: rgba(0,0,0,0.1);*/
+    color: #00a1be;
+}
+
+
 /* FUSCIA
 .km-flat .km-switch-handle,
 .km-flat .k-slider-selection,

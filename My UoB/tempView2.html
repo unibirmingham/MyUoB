@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        
+        <div data-role="view" data-title="Home" data-layout="main" data-model="APP.models.home">
+
+	<style type="text/css">
+
+.km-flat .km-content,
+        body{
+    background-color: #00a1be;
+}
+        
+div.homeTiles .wrap {
+   overflow: hidden;
+   /*margin: 10px;*/
+   /*background-color: #5facf8;*/
+   /*display: block;*/
+	/*margin: 2px auto;*/
+	width: 100%; 
+    background-color: #00a1be;
+}
+        
+div.homeTiles .container {
+           width: 94%;
+            margin: 2px auto;
+            display:block;
+ /*           float:right;*/
+        }
+div.homeTiles .box {
+   float: left;
+   position: relative;
+   width: 20%;
+   padding-bottom: 20%;
+}
+        
+div.homeTiles .white-box {
+    background-color: #fff;
+    
+}
+        
+div.homeTiles .bigbox {
+   float: left;
+   position: relative;
+   width: 40%;
+   padding-bottom: 20%;
+}  
+        
+div.homeTiles .boxInner {
+   
+   position: absolute;
+   /*
+   left: 10px;
+   right: 10px;
+   top: 10px;
+   bottom: 10px;
+   */
+    overflow: hidden;
+	/*display: table-cell; vertical-align: middle; text-align: center;*/
+    height: 100%;
+    
+    width: 100%;
+    
+}
+        
+       
+ div.homeTiles .boxInner img {
+ 	margin: auto auto;
+    width: 100%;
+     width: 90%;
+	margin: 1% 5% 3% 5%;
+
+}
+
+div.homeTiles .boxInner img.me {
+    width:100%;
+ 	/*width: 152px;  
+    height:152px;*/
+	display:block;
+
+	margin: 1% 2% 3% 2%;
+
+}
+        
+div.homeTiles .boxInner .titleBox {
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   /*margin-bottom: -50px;*/
+   background: #000;
+   background: rgba(0, 0, 0, 0.5);
+    background: none;
+   color: #FFF;
+   /*padding: 10px;*/
+    padding: 4px;
+   text-align: center;
+   -webkit-transition: all 0.3s ease-out;
+   -moz-transition: all 0.3s ease-out;
+   -o-transition: all 0.3s ease-out;
+   transition: all 0.3s ease-out;
+    font-size: 0.7em;
+    padding: 2px 2px 1px 2px;
+}
+        
+div.homeTiles div.white-box .boxInner .titleBox {
+
+            color: #00a1be;
+}
+
+div.homeTiles body.no-touch .boxInner:hover .titleBox, body.touch .boxInner.touchFocus .titleBox {
+   margin-bottom: 0;
+}
+        
+div.homeTiles .box {
+      width: 19%;
+      padding-bottom: 19%;
+   }
+
+div.homeTiles .bigbox {
+      width: 38%;
+      padding-bottom: 36%;
+   }
+        
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) {
+
+div.homeTiles .box {
+      width: 16%;
+      padding-bottom: 18%;
+   }
+    
+div.homeTiles .bigbox {
+      width: 36%;
+      padding-bottom: 36%;
+   }
+}
+        
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) {
+
+	div.homeTiles .box {
+    	width: 29%;
+    	padding-bottom: 29%;
+	}
+
+	div.homeTiles .bigbox {
+    	width: 58%;
+    	padding-bottom: 58%;
+   }
+}
+        
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape) {
+	
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-width : 600px) and (max-width : 991px) and (orientation : portrait) {
+    /*media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait) {*/
+	div.homeTiles .box {
+      width: 29%;
+      padding-bottom: 29%;
+    }
+    
+	div.homeTiles .bigbox {
+    	width: 58%;
+    	padding-bottom: 56%;
+	}
+}
+        
+/* iPhone 4 ----------- */
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+/* Styles */
+}
+
+</style>
+            
+ <div id="wrap" class="wrap">
+ <div class="container">
+     <!-- Define all of the tiles: -->
+    <div class="bigbox">
+        <div class="boxInner">
+        		<img class="me" src="images/home-icons/9890-App-icon-152x152-ME.png" />
+        </div>
+    </div> 
+  <div class="box white-box">
+    <div class="boxInner">
+      <img src="images/home-icons/9890-HP-icons-ME-300dpi-72x72-guide.png" />
+      <div class="titleBox">Pocket Guide</div>
+    </div>
+  </div>
+  <div class="box white-box">
+    <div class="boxInner">
+      <img src="images/home-icons/9890-HP-icons-ME-300dpi-72x72-maps.png" />
+      <div class="titleBox">Location</div>
+    </div>
+  </div>
+  <div class="box">
+    <div class="boxInner">
+      <img src="images/home-icons/9890-HP-icons-white-300dpi-72x72-news.png" />
+      <div class="titleBox">News</div>
+    </div>
+  </div>
+  <div class="box white-box">
+    <div class="boxInner">
+      <img src="images/home-icons/9890-HP-icons-ME-300dpi-72x72-events.png" />
+      <div class="titleBox">Events</div>
+    </div>
+  </div>
+  <div class="box">
+    <div class="boxInner">
+      <img src="images/home-icons/9890-HP-icons-white-300dpi-72x72-twitter.png" />
+      <div class="titleBox">Twitter Feed</div>
+    </div>
+  </div>
+  <div class="box white-box">
+    <div class="boxInner">
+      <img src="images/home-icons/9890-HP-icons-ME-300dpi-72x72-alert.png" />
+      <div class="titleBox">Alerts</div>
+    </div>
+  </div>
+  <div class="box">
+    <div class="boxInner">
+      <img src="images/home-icons/9890-HP-icons-white-300dpi-72x72-store.png" />
+      <div class="titleBox">App Store</div>
+    </div>
+  </div>
+  <div class="box white-box">
+    <div class="boxInner">
+      
+    </div>
+  </div>  
+    
+    </div>
+</div>
+</div>
+    </body>
+</html>

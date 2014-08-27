@@ -33,10 +33,7 @@
         	}
         }   
     })
-    
             
-
-        
 })(window);
 
 
@@ -85,5 +82,3 @@ function guidePageShow(e) {
 function onPageSectionClick(e) {
     
 };
-
-

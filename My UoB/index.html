@@ -6,10 +6,10 @@
     <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
     <link href="fonts/font-awesome.min.css" rel="stylesheet" />
     <link href="styles/main.css" rel="stylesheet" />
+    <link href="styles/home.css" rel="stylesheet" />
     <link href="styles/guide.css" rel="stylesheet" />
     <link href="styles/location.css" rel="stylesheet" />
     <script src="cordova.js"></script>
-    
     <!--
     <script>
         if (window.navigator.simulator)
@@ -37,17 +37,95 @@
         	<p>Much of this app depends on network availability. Please check network connection and try again.
                 <br/>Unavailable functions will be greyed out.</p>
         </div>
-        <div class="view-content">
+        <div class="view-content homeTiles">
+<!--    		        
             <ul data-role="listview" datatype="group">
-                
                 <li><a data-icon="justify" href="#tabstrip-news" class="networkDependent" data-transition="slide">News</a></li>
                 <li><a data-icon="cal" href="#tabstrip-events" class="networkDependent" data-transition="slide">Events</a></li>
                 <li><a data-icon="twitter" href="#tabstrip-twitter" class="fa networkDependent" data-transition="slide">UoB Twitter Feed</a></li>
                 <li><a data-icon="facebook" href="#tabstrip-face" class="fa networkDependent" data-transition="slide">UoB Facebook Posts</a></li>
                 <li><a data-icon="globe" href="#tabstrip-location" class="networkDependent" data-transition="slide">Location</a></li>
                 <li><a data-icon="organize" href="autopocket.html" data-transition="slide">Pocket Guide</a></li>
-                
             </ul>
+-->
+            <!-- tiles -->
+            
+            
+            <div id="wrap" class="wrap">
+				<div class="container">
+    				<!-- Define all of the tiles: -->
+
+		            <div class="bigbox">
+        				<div class="boxInner">
+        					<img class="me" src="images/home-icons/9890-App-icon-152x152-ME.png" />
+        				</div>
+    				</div> 
+					<div class="box white-box">
+						<div class="boxInner">
+							<a href="autopocket.html" data-role="listview-link" data-transition="slide">
+                                <img src="images/home-icons/9890-HP-icons-ME-300dpi-72x72-guide.png" />
+								<div class="titleBox">Pocket Guide</div>
+                            </a>
+						</div>
+					</div>
+                    <div class="box white-box">
+                    	<div class="boxInner">
+                            <a href="#tabstrip-location" data-role="listview-link" class="networkDependent" data-transition="slide">
+                            	<img src="images/home-icons/9890-HP-icons-ME-300dpi-72x72-maps.png" />
+                        		<div class="titleBox">Location</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="boxInner">
+                        	<a href="#tabstrip-news" data-role="listview-link" class="networkDependent" data-transition="slide">
+                            	<img src="images/home-icons/9890-HP-icons-white-300dpi-72x72-news.png" />
+                            	<div class="titleBox">News</div>
+                            </a>
+                    	</div>
+                    </div>
+                    <div class="box white-box">
+                    <div class="boxInner">
+                    	<a href="#tabstrip-events" data-role="listview-link" class="networkDependent" data-transition="slide">
+                        	<img src="images/home-icons/9890-HP-icons-ME-300dpi-72x72-events.png" />
+                    		<div class="titleBox">Events</div>
+                    	</a>
+                    </div>
+                    </div>
+                    <div class="box">
+                    	<div class="boxInner">
+                        	<a href="#tabstrip-twitter" data-role="listview-link" class="networkDependent" data-transition="slide">
+                            	<img src="images/home-icons/9890-HP-icons-white-300dpi-72x72-twitter.png" />
+                            	<div class="titleBox">Twitter Feed</div>
+                    		</a>
+                        </div>
+                    </div>
+                    <div class="box white-box">
+                    	<div class="boxInner">
+                        	<a href="#tabstrip-face" data-role="listview-link" class="networkDependent" data-transition="slide">
+                            	<img src="images/home-icons/9890-HP-icons-ME-300dpi-72x72-facebook.png" />
+                            	<div class="titleBox">Facebook</div>
+                        	</a>
+                    	</div>
+                    </div>
+                    <div class="box">
+                        <div class="boxInner">
+                            <a href="#tabstrip-store" data-role="listview-link" class="networkDependent" data-transition="slide">
+                            	<img src="images/home-icons/9890-HP-icons-white-300dpi-72x72-store.png" />
+                            	<div class="titleBox">App Store</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="box white-box">
+                            <div class="boxInner">
+                              
+                            </div>
+                    </div>  
+    
+				</div>
+			</div>
+            <!-- end tiles -->
+    		
         </div>
     </div>
     
@@ -70,17 +148,29 @@
     </div>
     
     <!--Info view-->
-    <div id="tabstrip-info" data-role="view" data-after-show="infoShow" data-title="About My UoB">
+    <div id="tabstrip-info" data-role="view" data-after-show="infoShow" data-title="About UoB Me">
         <div class="view-content">
-            <h2>My UoB Mobile App</h2>
-            <p>My UoB is one of a number of official mobile apps from the University of Birmingham, replacing UoB Student.<br/>A full list of University apps is availble on our app store page:</p>
+            <h2>UoB Me Mobile App</h2>
+            <p>UoB Me is one of a number of official mobile apps from the University of Birmingham, replacing UoB Student.<br/>A full list of University apps is availble on our app store page:</p>
             <ul><li><a onClick="window.open('http://www.birmingham.ac.uk/contact/app-store.aspx', '_system')" href="#tabstrip-info">www.birmingham.ac.uk/contact/app-store.aspx</a></li></ul>
             <h3>Feedback</h3>
-            <p>If you have any feedback on My UoB app or need help then either:</p>
+            <p>If you have any feedback on UoB Me app or need help then either:</p>
             <div data-role="buttongroup" class="feedback_options">
                         <a data-role="button" data-icon="reply" data-iconpos="left" href="feedback.html">Complete a form</a>
                         <a data-role="button" data-icon="email" data-iconpos="left" href="mailto:webservices@lists.bham.ac.uk?subject=MyUob App Feedback" data-rel="external">Send an email</a>
              </div>
+
+        </div>
+    </div>
+    
+    
+    <!--App Store view-->
+    <div id="tabstrip-store" data-role="view" data-after-show="storeShow" data-title="UoB App Store">
+        <div class="view-content">
+            
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cur ipse Pythagoras et Aegyptum lustravit et Persarum magos adiit? An dolor longissimus quisque miserrimus, voluptatem non optabiliorem diuturnitas facit? Et ille ridens: Video, inquit, quid agas; Cum praesertim illa perdiscere ludus esset.</p>
+			<p>Duo Reges: constructio interrete. Itaque nostrum est-quod nostrum dico, artis est-ad ea principia, quae accepimus. Verba tu fingas et ea dicas, quae non sentias? Hic ambiguo ludimur. Videamus igitur sententias eorum, tum ad verba redeamus. </p>
+			<p>Que Manilium, ab iisque M. Illa videamus, quae a te de amicitia dicta sunt. Aperiendum est igitur, quid sit voluptas; Dicimus aliquem hilare vivere; Cenasti in vita numquam bene, cum omnia in ista Consumis squilla atque acupensere cum decimano.</p>
 
         </div>
     </div>
