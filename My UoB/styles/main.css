@@ -493,6 +493,11 @@ ul.feedback_options {
   content: "\F09a";
 }
 
+.km-:after,
+.km-question-circle:before {
+    content: "";
+}
+
 /* settings */
 
 ul#settingsOptions li.info {
@@ -591,3 +596,6 @@ div#tabstrip-home .km-tabstrip .km-state-active {
 }
 */
 
+ul.guide-list li span.km-icon {
+    /*color: #00a1be;*/ /*change guide icons to home blue*/
+}
