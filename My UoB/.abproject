@@ -16,17 +16,12 @@
     "android.permission.WRITE_EXTERNAL_STORAGE"
   ],
   "CorePlugins": [
-    "org.apache.cordova.console",
-    "org.apache.cordova.contacts",
-    "org.apache.cordova.device",
     "org.apache.cordova.device-motion",
     "org.apache.cordova.device-orientation",
     "org.apache.cordova.file",
-    "org.apache.cordova.file-transfer",
     "org.apache.cordova.geolocation",
     "org.apache.cordova.globalization",
     "org.apache.cordova.inappbrowser",
-    "org.apache.cordova.media",
     "org.apache.cordova.network-information",
     "org.apache.cordova.dialogs",
     "com.phonegap.plugins.PushPlugin",
@@ -41,16 +36,16 @@
   ],
   "iOSStatusBarStyle": "Default",
   "AndroidHardwareAcceleration": "false",
-  "BundleVersion": "3.6",
+  "BundleVersion": "7.0",
   "iOSDisplayName": "",
   "iOSDeviceFamily": [
     "1",
     "2"
   ],
   "iOSBackgroundMode": [],
-  "AndroidVersionCode": "6",
+  "AndroidVersionCode": "7",
   "DisplayName": "UoB Me",
-  "Author": "",
+  "Author": "University of Birmingham",
   "Description": "UoB Me",
   "WP8Requirements": [],
   "WP8Capabilities": [],
@@ -59,5 +54,10 @@
   "WP8PublisherID": "{91150956-9c72-4785-bde5-48aee3640b87}",
   "WP8Publisher": "",
   "WP8SupportedResolutions": [],
-  "Framework": "Cordova"
+  "Framework": "Cordova",
+  "CordovaPluginVariables": {
+    "com.telerik.Cordova-MobileTestingExtension": {
+      "IOS_APP_URL": ""
+    }
+  }
 }
