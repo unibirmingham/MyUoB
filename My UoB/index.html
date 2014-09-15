@@ -38,7 +38,8 @@
                 <br/>Unavailable functions will be greyed out.</p>
         </div>
         <div class="view-content homeTiles">
-<!--    		        
+            
+            <!--    		        
             <ul data-role="listview" datatype="group">
                 <li><a data-icon="justify" href="#tabstrip-news" class="networkDependent" data-transition="slide">News</a></li>
                 <li><a data-icon="cal" href="#tabstrip-events" class="networkDependent" data-transition="slide">Events</a></li>
@@ -49,7 +50,6 @@
             </ul>
 -->
             <!-- tiles -->
-            
             
             <div id="wrap" class="wrap">
 				<div class="container">
@@ -180,10 +180,6 @@
     <div id="tabstrip-alerts" data-role="view" data-title="Past Alerts" data-after-show="alertListView">
             <ul class="alerts-list" id="alertlistview"
                     data-role="listview">
-                <!--data-source="pastAlerts"
-                    data-template="alerts-template"
-                	data-pull-to-refresh="true"
-                	use-native-scrolling="true" -->
             </ul>
     </div>
     
@@ -258,12 +254,7 @@
             <button id="map-navigate-home" data-bind="click: onNavigateHome" title="My location"></button>
             <button id="map-navigate-campus" data-bind="click: onCampusHome" title="Go to Campus"></button>
             <button id="map-clear" data-bind="click: deleteAllMarkers" title="Clear Markers"></button>
-            <!--<button id="map-search" data-bind="click: showSearch" title="Search for Building/Address"></button>-->
-            <!--<a data-role="button" data-rel="modalview" href="#modalview-search" id="map-search"></a>-->
             <a data-role="button" data-rel="modalview" href="#modalview-buildings" id="map-search-building"></a>
-            
-            
-            
         </div>
         <div id="map-canvas" data-bind="visible: isGoogleMapsInitialized"></div>
 
@@ -324,7 +315,6 @@
             <li>
             	<label>
                 	<input class="filterFeature" name="Learning and Teaching" id="map-feature-learning" type="checkbox" />
-                    <!--<input type="checkbox" id="map-feature-learning" name="Learning and Teaching" data-bind="value: featureType, events: { change: onSearchAddress}" />-->
                 	Learning
             	</label>
         	</li>
