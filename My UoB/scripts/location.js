@@ -230,7 +230,6 @@
 		deleteMarkers: function (category) {
 			var that = this;
             if (category) {
-                //alert(category);
                 switch (category) {
                 case "Culture":
                     that.clearMarkers(cultureMarkers);
@@ -284,12 +283,7 @@
             
         },
         
-        
-            
-
-        
-        
-        
+      
         getBuilding: function(id) {
             that = this;
             if (id === 0) {
@@ -317,8 +311,6 @@
             }
         },
         
- 
-        
         mapBuilding: function (contentId) {
             var that = this;
             
@@ -327,7 +319,6 @@
                 $.each(data, function() {
 
                         if (this.ContentId == contentId) {
-                            //alert("boom" + contentId);
                             var myLatlng = new google.maps.LatLng(parseFloat(this.PolygonCoordinatesAsArrayList[0][0]),parseFloat(this.PolygonCoordinatesAsArrayList[0][1]));
                             //alert(myLatlng);
                             that.createMarker(myLatlng, this.BuildingName, this.BuildingName + ";" + this.BuildingCode, "building", this.BuildingCode.substr(0,1));
@@ -415,9 +406,6 @@
 		},
 
         onSearchAddress: function () {
-            //var that = this;
-            //var ft = that.get("featureType");
-            //that.mapFacilities(ft);
 
             var that = this;
             
@@ -605,7 +593,9 @@
                 	descripDiv = descripDiv + "<br/><span class='facilityLocation'>Building: " + bui[0] + " " + "(" + bui[1] + ")</span>";
             	}
 				//get distance
-                descripDiv = descripDiv + "<br/><span class='distance'>Distance: " + distance(position.lat(), position.lng(),me.lat(),me.lng()) + " (approx)</span>";
+                if (me) {
+                    descripDiv = descripDiv + "<br/><span class='distance'>Distance: " + distance(position.lat(), position.lng(),me.lat(),me.lng()) + " (approx)</span>";   
+                }
                 //alert(position.lat());
                 //descripDiv = descripDiv + "<br/><span class='distance'>Distance: " + distance(52.356522,-1.998138,52.454217648033463,-1.9306327754630956) + "</span>";
             }

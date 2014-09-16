@@ -628,7 +628,7 @@ function getFriendFacePosts() {
     	var dataSource = new kendo.data.DataSource({
         	transport: {
                 	read: {
-                        url: "http://www.friendface.butler.bham.ac.uk/feed.json",
+                        url: "http://www.friendface.alfred.bham.ac.uk/facebook/feed.json",
                 	    dataType: "json"
                 	}
             },
@@ -660,7 +660,7 @@ function getTweets() {
     	var dataSource = new kendo.data.DataSource({
         	transport: {
             	read: {
-                    url: "http://www.butler.bham.ac.uk/twitter-api/index.php?screenname=" + twitter_user,
+                    url: "http://www.alfred.bham.ac.uk/twitter-api/index.php?screenname=" + twitter_user,
                     dataType: "json"
                 }
             },
@@ -751,6 +751,11 @@ function prettyDate(dateStr) {
         pDate = new Date(dateStr).toLocaleString();
 	}
     return pDate;
+}
+
+function cleanUpFacebookUrls(facebookurl) {
+    cleanUrl = facebookurl.replace(/&amp;/g, "&")
+    return cleanUrl;
 }
 
 

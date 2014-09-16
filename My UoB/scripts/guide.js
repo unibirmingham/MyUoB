@@ -1,7 +1,7 @@
 (function (global) {
     
     if (navigator.onLine) {
-        guideUrl = "http://www.butler.bham.ac.uk/pocket_guides/index.json";
+        guideUrl = "http://www.alfred.bham.ac.uk/pocket_guides/index.json";
     }
     else {
         if (!localStorage.getItem('pocketguide')) {
@@ -67,10 +67,11 @@ function guidePageShow(e) {
     
     $(".guide-page-content a").click(function(e){
     	//alert(this.href.substring(0,4));
-    	if (this.href.substring(0,4)==="http") {
-            e.preventDefault();
-    	    window.open(this.href, '_system');
+    	if (this.href.substring(0,4)==="http" && this.href.indexOf("#tabstrip-location") < 0 ) {
+            //e.preventDefault();
+    	    //window.open(this.href, '_system');
             //alert("stop");
+            alert(this.href);
     	}
     	else {
     	    //alert("go");

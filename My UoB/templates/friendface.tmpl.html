@@ -30,6 +30,7 @@
     			</div>
     			#if(picture){#
                     	<!--<span class="post-image">-->
+                        #picture = cleanUpFacebookUrls(picture)#
     					<div class="letterboxed-image">
     					#if(link){#
     						<a class="post-link" onClick="window.open('#:link#', '_system')">
