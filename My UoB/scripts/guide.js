@@ -68,10 +68,10 @@ function guidePageShow(e) {
     $(".guide-page-content a").click(function(e){
     	//alert(this.href.substring(0,4));
     	if (this.href.substring(0,4)==="http" && this.href.indexOf("#tabstrip-location") < 0 ) {
-            //e.preventDefault();
-    	    //window.open(this.href, '_system');
+            e.preventDefault();
+    	    window.open(this.href, '_system');
             //alert("stop");
-            alert(this.href);
+            //alert(this.href);
     	}
     	else {
     	    //alert("go");
