@@ -1,7 +1,7 @@
 {
   "ProjectGuid": "0b65d60d-a1c5-4863-9fac-f86932a08edb",
   "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
-  "AppIdentifier": "uk.ac.birmingham.m.MyUoB",
+  "AppIdentifier": "uk.ac.birmingham.m.UoBMe",
   "ProjectName": "My UoB",
   "IsRunnable": "true",
   "FrameworkVersion": "3.2.0",
@@ -36,14 +36,14 @@
   ],
   "iOSStatusBarStyle": "Default",
   "AndroidHardwareAcceleration": "false",
-  "BundleVersion": "7.0",
+  "BundleVersion": "1.0",
   "iOSDisplayName": "",
   "iOSDeviceFamily": [
     "1",
     "2"
   ],
   "iOSBackgroundMode": [],
-  "AndroidVersionCode": "7",
+  "AndroidVersionCode": "1",
   "DisplayName": "UoB Me",
   "Author": "University of Birmingham",
   "Description": "UoB Me",
