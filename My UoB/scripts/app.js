@@ -37,7 +37,28 @@ function onDeviceReady() {
     	hideNetworkDependentItems();    
         offLine = true;
     }
-
+    
+    //News and Events preferences
+    if (!localStorage.getItem('newspreferences')) {
+        	localStorage.setItem('student-news',true);
+        	localStorage.setItem('research-news',true);
+        	localStorage.setItem('sport-news',true);
+        	localStorage.setItem('newspreferences','set');
+        console.log('setting news preferences');
+	}
+    if (!localStorage.getItem('eventspreferences')) {
+       	localStorage.setItem('performance-events',true);
+        	localStorage.setItem('exhibition-events',true);
+        	localStorage.setItem('lecture-events',true);
+        	localStorage.setItem('sport-events',true);
+        	localStorage.setItem('student-events',true);
+        	localStorage.setItem('eventspreferences','set');
+        console.log('setting events preferences');
+	}
+    
+    $('#clearLog').on('click', function() {
+        $('#log').val('');
+    });
     
     //GA
     gaPlugin = window.plugins.gaPlugin;
@@ -113,27 +134,7 @@ function onDeviceReady() {
         console.log("NOT registering the device.");
     }
     
-    //News and Events preferences
-    if (!localStorage.getItem('newspreferences')) {
-        	localStorage.setItem('student-news',true);
-        	localStorage.setItem('research-news',true);
-        	localStorage.setItem('sport-news',true);
-        	localStorage.setItem('newspreferences','set');
-        console.log('setting news preferences');
-	}
-    if (!localStorage.getItem('eventspreferences')) {
-       	localStorage.setItem('performance-events',true);
-        	localStorage.setItem('exhibition-events',true);
-        	localStorage.setItem('lecture-events',true);
-        	localStorage.setItem('sport-events',true);
-        	localStorage.setItem('student-events',true);
-        	localStorage.setItem('eventspreferences','set');
-        console.log('setting events preferences');
-	}
     
-    $('#clearLog').on('click', function() {
-        $('#log').val('');
-    });
     
 }
 
