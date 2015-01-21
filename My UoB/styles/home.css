@@ -118,7 +118,7 @@ div.homeTiles .bigbox {
    }
         
 /* Smartphones (landscape) ----------- */
-@media only screen and (min-width : 321px) {
+@media only screen and (min-width : 441px) { /*321*/
 
 div.homeTiles .box {
       width: 16%;
@@ -132,7 +132,7 @@ div.homeTiles .bigbox {
 }
         
 /* Smartphones (portrait) ----------- */
-@media only screen and (max-width : 320px) {
+@media only screen and (max-width : 440px) { /*320*/
 
 	div.homeTiles .box {
     	width: 29%;
