@@ -36,14 +36,14 @@
   ],
   "iOSStatusBarStyle": "Default",
   "AndroidHardwareAcceleration": "false",
-  "BundleVersion": "1.1",
+  "BundleVersion": "1.11",
   "iOSDisplayName": "",
   "iOSDeviceFamily": [
     "1",
     "2"
   ],
   "iOSBackgroundMode": [],
-  "AndroidVersionCode": "4",
+  "AndroidVersionCode": "5",
   "DisplayName": "UoB Me",
   "Author": "University of Birmingham",
   "Description": "UoB Me",
@@ -55,9 +55,5 @@
   "WP8Publisher": "",
   "WP8SupportedResolutions": [],
   "Framework": "Cordova",
-  "CordovaPluginVariables": {
-    "com.telerik.mobiletesting": {
-      "IOS_APP_URL": ""
-    }
-  }
+  "projectVersion": "1"
 }
