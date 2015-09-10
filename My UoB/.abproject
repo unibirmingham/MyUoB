@@ -16,17 +16,17 @@
     "android.permission.WRITE_EXTERNAL_STORAGE"
   ],
   "CorePlugins": [
+    "com.phonegap.plugins.PushPlugin",
+    "com.phonegap.plugins.sqlite",
     "org.apache.cordova.device-motion",
     "org.apache.cordova.device-orientation",
+    "org.apache.cordova.dialogs",
     "org.apache.cordova.file",
     "org.apache.cordova.geolocation",
     "org.apache.cordova.globalization",
     "org.apache.cordova.inappbrowser",
     "org.apache.cordova.network-information",
-    "org.apache.cordova.dialogs",
-    "com.phonegap.plugins.PushPlugin",
     "org.apache.cordova.splashscreen",
-    "com.phonegap.plugins.sqlite",
     "org.apache.cordova.statusbar",
     "org.apache.cordova.vibration"
   ],
@@ -36,7 +36,7 @@
   ],
   "iOSStatusBarStyle": "Default",
   "AndroidHardwareAcceleration": "false",
-  "BundleVersion": "1.11",
+  "BundleVersion": "1.2",
   "iOSDisplayName": "",
   "iOSDeviceFamily": [
     "1",
@@ -55,5 +55,9 @@
   "WP8Publisher": "",
   "WP8SupportedResolutions": [],
   "Framework": "Cordova",
-  "projectVersion": "1"
+  "projectVersion": "1",
+  "WP8WindowsPublisherName": "CN=Telerik",
+  "WP8PackageIdentityName": "1234Telerik.uk.ac.birmingham.m.UoBMe",
+  "iOSDeploymentTarget": "6.0",
+  "WPSdk": "8.0"
 }
