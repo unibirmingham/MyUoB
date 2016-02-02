@@ -362,13 +362,14 @@
         },
         
         mapFacility: function (contentId, category) {
+            
             var that = this;
             $.getJSON("data/map-facilities.json", function(data) {
  
                 	$.each(data, function() {
 
                         if (this.ContentId == contentId) {
-                            //alert("boom" + contentId);
+                            
                             var cat = "";
                         	if (category) {
                                 cat = category;
@@ -698,12 +699,16 @@
             
             var cid = e.view.params.contentId;
             var cat = e.view.params.category;
+            
             if (cid) {
+                
                 if (cat === "building") {
                  	app.locationService.viewModel.mapBuilding(cid);   
                 }
                 else {
-                	app.locationService.viewModel.mapFacility(cid, cat);
+                	
+                    app.locationService.viewModel.mapFacility(cid, cat);
+                    
                 }
             }
 

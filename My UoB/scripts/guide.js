@@ -1,7 +1,8 @@
 (function (global) {
     
     if (navigator.onLine) {
-        guideUrl = "http://www.alfred.bham.ac.uk/pocket_guides/index.json";
+        //guideUrl = "http://www.alfred.bham.ac.uk/pocket_guides/index.json";
+        guideUrl = "http://www.pocketguide-cm-test.bham.ac.uk/pages.json";
     }
     else {
         if (!localStorage.getItem('pocketguide')) {
@@ -70,11 +71,8 @@ function guidePageShow(e) {
     	if (this.href.substring(0,4)==="http" && this.href.indexOf("#tabstrip-location") < 0 ) {
             e.preventDefault();
     	    window.open(this.href, '_system');
-            //alert("stop");
-            //alert(this.href);
     	}
     	else {
-    	    //alert("go");
             return true;
     	}
 	});

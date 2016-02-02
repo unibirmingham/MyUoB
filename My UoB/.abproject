@@ -36,14 +36,14 @@
   ],
   "iOSStatusBarStyle": "Default",
   "AndroidHardwareAcceleration": "false",
-  "BundleVersion": "1.2",
+  "BundleVersion": "1.21",
   "iOSDisplayName": "",
   "iOSDeviceFamily": [
     "1",
     "2"
   ],
   "iOSBackgroundMode": [],
-  "AndroidVersionCode": "5",
+  "AndroidVersionCode": "6",
   "DisplayName": "UoB Me",
   "Author": "University of Birmingham",
   "Description": "UoB Me",

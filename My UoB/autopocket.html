@@ -69,7 +69,7 @@
     <!-- templates -->
     <!--guide template-->
     <script type="text/x-kendo-tmpl" id="guide-index-template">
-        #if (PageFunction === "page") {#
+        #if (PageFunction === "page" || !hasChildren) {#
             <span data-icon="${icon}"><a href="\#guide-page?id=${id}">${PageTitle}</a></span>
         #} else {#
             <span data-icon="${icon}"><a href="\#guide-section?id=${id}">${PageTitle}</a></span>
@@ -78,7 +78,7 @@
     
     <!--guide section template-->
     <script type="text/x-kendo-tmpl" id="guide-section-template">
-        #if (PageFunction === "page") {#
+        #if (PageFunction === "page" && !hasChildren) {#
 	        <span data-icon="${icon}"><a href="\#guide-page?id=${id}">${PageTitle}</a></span>
         #} else {#
             <span data-icon="${icon}"><a href="\#guide-section?id=${id}">${PageTitle}</a></span>
