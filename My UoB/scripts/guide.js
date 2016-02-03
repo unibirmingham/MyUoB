@@ -2,7 +2,7 @@
     
     if (navigator.onLine) {
         //guideUrl = "http://www.alfred.bham.ac.uk/pocket_guides/index.json";
-        guideUrl = "http://www.pocketguide-cm-test.bham.ac.uk/pages.json";
+        guideUrl = "http://www.pocketguide-cm.bham.ac.uk/pages.json";
     }
     else {
         if (!localStorage.getItem('pocketguide')) {
